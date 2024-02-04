@@ -9,40 +9,36 @@ public class BackendTest : MonoBehaviour
     {
         //AttemptRegister(_username, _password);
 
-        AttemptGetItems(2);
-        AttemptGetRetailers();
-        AttemptGetItemCategories();
+        AttemptLogin(_username, _password);
+
+        //AttemptGetItems(2);
+        //AttemptGetRetailers();
+        //AttemptGetItemCategories();
     }
 
     private void AttemptRegister(string username, string password)
     {
-        Debug.Log($"Trying register with user: {username}, pw: {password}");
-
         StartCoroutine(UserService.Instance.Register(username, password, (success, message) =>
         {
-            Debug.Log("Register response: " + message);
             if (success)
             {
-                Debug.Log("Successful registration");
+                Debug.Log("Successful registration: " + message);
                 AttemptLogin(username, password);
             }
             else
             {
-                Debug.Log("Log In FAILED: " + message);
+                Debug.Log("Registration failed: " + message);
             }
         }));
     }
 
     private void AttemptLogin(string username, string password)
     {
-        Debug.Log($"Trying login with user: {username}, pw: {password}");
-
         StartCoroutine(UserService.Instance.Login(username, password, (success, message) =>
         {
-            Debug.Log("Login response: " + message);
             if (success)
             {
-                Debug.Log("Successful Log In");
+                Debug.Log("Successful Log In: " + message);
                 UserData.Instance.UpdateLoginStatus(username, true);
             }
         }));

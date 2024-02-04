@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using Newtonsoft.Json;
 public class UserService : IUserService
 {
     private const string BASE_URL = "https://exordiumgames.com/unity_backend_assignment/";
@@ -12,10 +12,14 @@ public class UserService : IUserService
 
     public IEnumerator Register(string username, string password, Action<bool, string> callback)
     {
-        Debug.Log("LOGGING FROM REGISTER: " + username + " " + password);
+        var userCredentials = new UserCredentials
+        {
+            username = username,
+            password = password
+        };
+
         var form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
+        form.AddField("json", JsonConvert.SerializeObject(userCredentials));
 
         using UnityWebRequest request = UnityWebRequest.Post(BASE_URL + "register.php", form);
         yield return request.SendWebRequest();
@@ -34,8 +38,12 @@ public class UserService : IUserService
     public IEnumerator Login(string username, string password, Action<bool, string> callback)
     {
         var form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
+        var userCredentials = new UserCredentials
+        {
+            username = username,
+            password = password
+        };
+        form.AddField("json", JsonConvert.SerializeObject(userCredentials));
 
         using UnityWebRequest request = UnityWebRequest.Post(BASE_URL + "login.php", form);
         yield return request.SendWebRequest();
@@ -49,5 +57,12 @@ public class UserService : IUserService
         {
             callback(false, request.error);
         }
+    }
+
+    [Serializable]
+    public class UserCredentials
+    {
+        public string username;
+        public string password;
     }
 }
