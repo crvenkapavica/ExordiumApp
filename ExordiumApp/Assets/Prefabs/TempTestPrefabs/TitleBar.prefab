@@ -191,22 +191,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleBackground
       objectReference: {fileID: 0}
-    - target: {fileID: 2864775106806684326, guid: 074ce47253991894384934d7f150e788, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2864775106806684326, guid: 074ce47253991894384934d7f150e788, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2864775106806684326, guid: 074ce47253991894384934d7f150e788, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2864775106806684326, guid: 074ce47253991894384934d7f150e788, type: 3}
-      propertyPath: m_PixelsPerUnitMultiplier
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
