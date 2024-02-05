@@ -366,7 +366,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238366381588139960, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1435368424893047809, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_Name
@@ -476,7 +476,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238366381588139960, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1435368424893047809, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_Name
@@ -586,7 +586,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238366381588139960, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1435368424893047809, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_Name
@@ -696,7 +696,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238366381588139960, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1435368424893047809, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_Name
@@ -806,7 +806,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238366381588139960, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1435368424893047809, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_Name
@@ -916,7 +916,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1238366381588139960, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1435368424893047809, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_Name
