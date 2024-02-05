@@ -10,8 +10,7 @@ public class AdjustVerticalLayoutSpacing : MonoBehaviour
 
     private void AdjustSpacingRecursive(Transform parent)
     {
-        var layoutGroup = parent.GetComponent<VerticalLayoutGroup>();
-        if (layoutGroup != null)
+        if (parent.TryGetComponent<VerticalLayoutGroup>(out var layoutGroup))
         {
             layoutGroup.spacing = Screen.height * 0.035f;
         }
