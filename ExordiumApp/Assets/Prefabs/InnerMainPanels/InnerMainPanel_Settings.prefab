@@ -94,7 +94,7 @@ MonoBehaviour:
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
-  m_FlexibleHeight: 0.82
+  m_FlexibleHeight: 0.72
   m_LayoutPriority: 1
 --- !u!1 &590465275564540078
 GameObject:
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
-  m_FlexibleHeight: 0.04
+  m_FlexibleHeight: 0.11
   m_LayoutPriority: 1
 --- !u!1 &4785088986248989415
 GameObject:
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
-  m_FlexibleHeight: 0.04
+  m_FlexibleHeight: 0.11
   m_LayoutPriority: 1
 --- !u!1001 &8679733373172061027
 PrefabInstance:
