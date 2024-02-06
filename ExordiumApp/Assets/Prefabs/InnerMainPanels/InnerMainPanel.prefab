@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: 1
   m_FlexibleHeight: 0.06
-  m_LayoutPriority: 5
+  m_LayoutPriority: 1
 --- !u!114 &8245498316293164415
 MonoBehaviour:
   m_ObjectHideFlags: 0
