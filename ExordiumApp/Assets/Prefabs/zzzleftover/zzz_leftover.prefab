@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4659614729642654161}
   - component: {fileID: 6028586376841938134}
   m_Layer: 5
-  m_Name: Overlay_Language(new)
+  m_Name: zzz_leftover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
