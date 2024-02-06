@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 6061294322455052874}
   - component: {fileID: 5994611545448932364}
   m_Layer: 5
-  m_Name: EmptyPanel
+  m_Name: SpacerPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
