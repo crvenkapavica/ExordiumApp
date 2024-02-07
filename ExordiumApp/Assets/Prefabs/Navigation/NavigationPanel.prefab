@@ -646,6 +646,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7195916417081418007, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
+      propertyPath: m_Name
+      value: Items
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -787,6 +791,10 @@ PrefabInstance:
     - target: {fileID: 6187534759650107444, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195916417081418007, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
+      propertyPath: m_Name
+      value: Settings
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -930,6 +938,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7195916417081418007, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
+      propertyPath: m_Name
+      value: Category
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1071,6 +1083,10 @@ PrefabInstance:
     - target: {fileID: 6187534759650107444, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195916417081418007, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
+      propertyPath: m_Name
+      value: Retailer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1214,6 +1230,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7195916417081418007, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
+      propertyPath: m_Name
+      value: Favorites
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1355,6 +1375,10 @@ PrefabInstance:
     - target: {fileID: 6187534759650107444, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7195916417081418007, guid: b8c921f0a1e432242a80fa15bd5f6cd7, type: 3}
+      propertyPath: m_Name
+      value: Account
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

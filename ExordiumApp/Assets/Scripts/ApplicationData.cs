@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class ApplicationData
 {
-    public static ApplicationData Instance { get; private set; } = new ApplicationData();
+    public static ApplicationData Instance { get; private set; } = new();
 
     public List<Item> Items { get; private set; } = new();
     public List<Retailer> Retailers { get; private set; } = new();

@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 8497878218636762926}
   - component: {fileID: 4151040498131458759}
   m_Layer: 5
-  m_Name: Label
+  m_Name: Cancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 2570097041699504830}
   - component: {fileID: 1749539550027251683}
   m_Layer: 5
-  m_Name: Label
+  m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

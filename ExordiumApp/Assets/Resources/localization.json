@@ -1,0 +1,100 @@
+{
+  "translations": [
+    {
+      "name": "Items",
+      "english": "Items",
+      "croatian": "Artikli"
+    },
+    {
+      "name": "Category",
+      "english": "Category",
+      "croatian": "Kategorija"
+    },
+    {
+      "name": "Account",
+      "english": "Account",
+      "croatian": "Račun"
+    },
+    {
+      "name": "Retailer",
+      "english": "Retailer",
+      "croatian": "Trgovac"
+    },
+    {
+      "name": "Favorites",
+      "english": "Favorites",
+      "croatian": "Favoriti"
+    },
+    {
+      "name": "Settings",
+      "english": "Settings",
+      "croatian": "Postavke"
+    },
+    {
+      "name": "Language",
+      "english": "Language",
+      "croatian": "Jezik"
+    },
+    {
+      "name": "LanguageName",
+      "english": "Language Name",
+      "croatian": "Ime Jezika"
+    },
+    {
+      "name": "Theme",
+      "english": "Theme",
+      "croatian": "Tema"
+    },
+    {
+      "name": "ThemeName",
+      "english": "Theme Name",
+      "croatian": "Ime Teme"
+    },
+    {
+      "name": "Email",
+      "english": "Email",
+      "croatian": "E-pošta"
+    },
+    {
+      "name": "Password",
+      "english": "Password",
+      "croatian": "Zaporka"
+    },
+    {
+      "name": "Register",
+      "english": "Register",
+      "croatian": "Registriraj Se"
+    },
+    {
+      "name": "Login",
+      "english": "Login",
+      "croatian": "Prijavi Se"
+    },
+    {
+      "name": "Retry",
+      "english": "Retry",
+      "croatian": "Pokušaj Ponovo"
+    },
+    {
+      "name": "Confirm",
+      "english": "Confirm",
+      "croatian": "Potvrdi"
+    },
+    {
+      "name": "Cancel",
+      "english": "Cancel",
+      "croatian": "Otkaži"
+    },
+    {
+      "name": "DarkTheme",
+      "english": "Dark Theme",
+      "croatian": "Tamna tema"
+    },
+    {
+      "name": "LightTeme",
+      "english": "Light Teme",
+      "croatian": "Svijetla tema"
+    }
+  ]
+}
+  

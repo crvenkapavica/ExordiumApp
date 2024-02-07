@@ -26,7 +26,7 @@ public class UserService : IUserService
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            var response = JsonUtility.FromJson<RegisterLoginResponse>(request.downloadHandler.text);
+            var response = JsonUtility.FromJson<CredentialResponse>(request.downloadHandler.text);
             callback(response.isSuccessful, response.message);
         }
         else
@@ -50,19 +50,12 @@ public class UserService : IUserService
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            var response = JsonUtility.FromJson<RegisterLoginResponse>(request.downloadHandler.text);
+            var response = JsonUtility.FromJson<CredentialResponse>(request.downloadHandler.text);
             callback(response.isSuccessful, response.message);
         }
         else
         {
             callback(false, request.error);
         }
-    }
-
-    [Serializable]
-    public class UserCredentials
-    {
-        public string username;
-        public string password;
     }
 }
