@@ -34,8 +34,8 @@ public class LocalizationManager : MonoBehaviour
 
     private void Start()
     {
-        string json = Resources.Load<TextAsset>("localization").text;
-        TranslationItems translationItems = JsonUtility.FromJson<TranslationItems>(json);
+        var json = Resources.Load<TextAsset>("localization").text;
+        var translationItems = JsonUtility.FromJson<TranslationItems>(json);
 
         foreach (var item in translationItems.translations)
         {
