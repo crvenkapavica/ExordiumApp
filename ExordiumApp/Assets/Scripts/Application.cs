@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,19 +22,64 @@ public class Application : MonoBehaviour
     [SerializeField] private Toggle _categoryTogglePrefab;
     [SerializeField] private Toggle _retailerTogglePrefab;
     [SerializeField] private Toggle _languageTogglePrefab;
+    
+    
+    //fetch the following from the backend
+    //retailer data
+    //item category data
+    //items
+    //and while fetching(waiting for the response) display an overlay screen with a “Fetching data…” text
+
 
 
     private void Start()
     {
-        _mainPanelAccount.SetActive(true);
+        StartCoroutine(FetchData());
 
-        _mainPanelAccount.SetActive(false);
+        Debug.Log(ApplicationData.Instance.Items);
+    }
 
-        _mainPanelSettings.SetActive(true);
+    private IEnumerator FetchData()
+    {
+        Debug.Log(_overlayFetching.activeSelf);
+        OverlayManager.Instance.ShowOverlay(_overlayFetching);
+        Debug.Log(_overlayFetching.activeSelf);
 
-        _overlayPanel.SetActive(true);
-        _overlayTheme.SetActive(true);
-        _overlayTheme.SetActive(false);
-        _overlayLanguage.SetActive(true);
+        Debug.Log("Starting Fetch");
+        yield return StartCoroutine(AttemptFetchRetailerData());
+        yield return StartCoroutine(AttemptFetchItemCategoryData());
+        yield return StartCoroutine(AttemptFetchItemData());
+        Debug.Log("Ending Fetch");
+
+        Debug.Log(_overlayFetching.activeSelf);
+        //OverlayManager.Instance.HideOverlays();
+        Debug.Log(_overlayFetching.activeSelf);
+    }
+
+    private IEnumerator AttemptFetchRetailerData()
+    {
+        yield return StartCoroutine(ItemService.Instance.FetchRetailerData(retailers =>
+        {
+            ApplicationData.Instance.UpdateRetailerData(retailers);
+            Debug.Log(retailers);
+        }));
+    }
+
+    private IEnumerator AttemptFetchItemCategoryData()
+    {
+        yield return StartCoroutine(ItemService.Instance.FetchCategoryData(categories =>
+        {
+            ApplicationData.Instance.UpdateCategoryData(categories);
+            Debug.Log(categories);
+        }));
+    }
+
+    private IEnumerator AttemptFetchItemData()
+    {
+        yield return StartCoroutine(ItemService.Instance.FetchItemData(items =>
+        {
+            ApplicationData.Instance.UpdateItemData(items);
+            Debug.Log(items);
+        }));
     }
 }

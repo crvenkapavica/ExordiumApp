@@ -10,7 +10,7 @@ public interface IUserService
 
 public interface IItemService
 {
-    IEnumerator GetItems(int pageNumber, Action<List<Item>> callback);
-    IEnumerator GetRetailers(Action<List<Retailer>> callback);
-    IEnumerator GetItemCategories(Action<List<ItemCategory>> callback);
+    IEnumerator FetchRetailerData(Action<List<Retailer>> callback);
+    IEnumerator FetchCategoryData(Action<List<ItemCategory>> callback);
+    IEnumerator FetchItemData(Action<List<Item>> callback);
 }

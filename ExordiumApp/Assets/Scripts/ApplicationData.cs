@@ -6,20 +6,20 @@ public class ApplicationData
 
     public List<Item> Items { get; private set; } = new();
     public List<Retailer> Retailers { get; private set; } = new();
-    public List<ItemCategory> ItemCategories { get; private set; } = new();
+    public List<ItemCategory> Categories { get; private set; } = new();
 
-    public void UpdateItems(List<Item> items)
+    public void UpdateItemData(List<Item> items)
     {
         Items = items;
     }
 
-    public void UpdateRetailers(List<Retailer> retailers)
+    public void UpdateRetailerData(List<Retailer> retailers)
     {
         Retailers = retailers;
     }
 
-    public void UpdateItemCategories(List<ItemCategory> itemCategories)
+    public void UpdateCategoryData(List<ItemCategory> categories)
     {
-        ItemCategories = itemCategories;
+        Categories = categories;
     }
 }

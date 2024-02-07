@@ -11,34 +11,7 @@ public class ItemService : IItemService
 
     public static ItemService Instance => s_instance ??= new ItemService();
 
-    public IEnumerator GetItems(int pageNumber, Action<List<Item>> callback)
-    {
-        var url = $"{BASE_URL}getitems.php?pageNumber={pageNumber}";
-        using UnityWebRequest request = UnityWebRequest.Get(url);
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            var json = "{\"items\":" + request.downloadHandler.text + "}";
-            var response = JsonUtility.FromJson<ItemsResponse>(json);
-            if (response.items != null)
-            {
-                callback?.Invoke(new List<Item>(response.items));
-            }
-            else
-            {
-                Debug.LogError("Failed to fetch items: Response contained no items.");
-                callback?.Invoke(new List<Item>());
-            }
-        }
-        else
-        {
-            Debug.LogError($"Failed to fetch items: {request.error}");
-            callback?.Invoke(new List<Item>());
-        }
-    }
-
-    public IEnumerator GetRetailers(Action<List<Retailer>> callback)
+    public IEnumerator FetchRetailerData(Action<List<Retailer>> callback)
     {
         var url = BASE_URL + "getretailers.php";
         using UnityWebRequest request = UnityWebRequest.Get(url);
@@ -54,18 +27,16 @@ public class ItemService : IItemService
             }
             else
             {
-                Debug.LogError("Failed to fetch retailers: Response contained no retailers.");
                 callback?.Invoke(new List<Retailer>());
             }
         }
         else
         {
-            Debug.LogError($"Failed to fetch retailers: {request.error}");
             callback?.Invoke(new List<Retailer>());
         }
     }
 
-    public IEnumerator GetItemCategories(Action<List<ItemCategory>> callback)
+    public IEnumerator FetchCategoryData(Action<List<ItemCategory>> callback)
     {
         var url = BASE_URL + "getitemcategories.php";
         using UnityWebRequest request = UnityWebRequest.Get(url);
@@ -81,14 +52,55 @@ public class ItemService : IItemService
             }
             else
             {
-                Debug.LogError("Failed to fetch item categories: Response contained no item categories.");
                 callback?.Invoke(new List<ItemCategory>());
             }
         }
         else
         {
-            Debug.LogError($"Failed to fetch item categories: {request.error}");
             callback?.Invoke(new List<ItemCategory>());
         }
+    }
+
+    public IEnumerator FetchItemData(Action<List<Item>> callback)
+    {
+        var items = new List<Item>();
+        var pageNumber = 1;
+        var bMoreItemsAvailable = true;
+
+        while (bMoreItemsAvailable)
+        {
+            var url = $"{BASE_URL}getitems.php?pageNumber={pageNumber}";
+            using UnityWebRequest request = UnityWebRequest.Get(url);
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string responseText = request.downloadHandler.text;
+                if (responseText.Contains("No records found") || string.IsNullOrEmpty(responseText))
+                {
+                    bMoreItemsAvailable = false;
+                }
+                else
+                {
+                    var json = "{\"items\":" + responseText + "}";
+                    ItemsResponse response = JsonUtility.FromJson<ItemsResponse>(json);
+                    if (response.items != null && response.items.Length > 0)
+                    {
+                        items.AddRange(response.items);
+                        ++pageNumber;
+                    }
+                    else
+                    {
+                        bMoreItemsAvailable = false;
+                    }
+                }
+            }
+            else
+            {
+                bMoreItemsAvailable = false; 
+            }
+        }
+
+        callback?.Invoke(items);
     }
 }
