@@ -23,6 +23,11 @@ public class OverlayManager : MonoBehaviour
     public void ShowOverlay(GameObject overlay)
     {
         _outterOverlayPanel.SetActive(true);
+
+        //for mBOX
+        var rect = _outterOverlayPanel.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(rect.sizeDelta.x, Screen.height * 0.15f);
+
         _innerOverlayPanel.SetActive(true);
         foreach (var o in _overlays)
         {

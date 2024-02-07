@@ -40,14 +40,14 @@ public class Application : MonoBehaviour
 
     private IEnumerator FetchData()
     {
-        OverlayManager.Instance.ShowOverlay(_overlayFetching);
+        OverlayManager.Instance.ShowOverlay(_overlayMessageBox);
 
         yield return StartCoroutine(AttemptFetchRetailerData());
         yield return StartCoroutine(AttemptFetchItemCategoryData());
         yield return StartCoroutine(AttemptFetchItemData());
 
         // remove
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
 
         OverlayManager.Instance.HideOverlays();
     }
