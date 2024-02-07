@@ -11,7 +11,6 @@ public class Application : MonoBehaviour
     [SerializeField] private GameObject _navigationPanel;
 
     // Overlays
-    [SerializeField] private GameObject _overlayPanel;
     [SerializeField] private GameObject _overlayLanguage;
     [SerializeField] private GameObject _overlayTheme;
     [SerializeField] private GameObject _overlayMessageBox;
@@ -41,19 +40,16 @@ public class Application : MonoBehaviour
 
     private IEnumerator FetchData()
     {
-        Debug.Log(_overlayFetching.activeSelf);
         OverlayManager.Instance.ShowOverlay(_overlayFetching);
-        Debug.Log(_overlayFetching.activeSelf);
 
-        Debug.Log("Starting Fetch");
         yield return StartCoroutine(AttemptFetchRetailerData());
         yield return StartCoroutine(AttemptFetchItemCategoryData());
         yield return StartCoroutine(AttemptFetchItemData());
-        Debug.Log("Ending Fetch");
 
-        Debug.Log(_overlayFetching.activeSelf);
-        //OverlayManager.Instance.HideOverlays();
-        Debug.Log(_overlayFetching.activeSelf);
+        // remove
+        yield return new WaitForSeconds(2);
+
+        OverlayManager.Instance.HideOverlays();
     }
 
     private IEnumerator AttemptFetchRetailerData()

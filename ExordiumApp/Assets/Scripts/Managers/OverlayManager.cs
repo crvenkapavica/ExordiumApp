@@ -4,8 +4,9 @@ public class OverlayManager : MonoBehaviour
 {
     public static OverlayManager Instance { get; private set; }
 
-    [SerializeField] private GameObject _overlayPanel;
-    [SerializeField] private GameObject[] overlays;
+    [SerializeField] private GameObject _outterOverlayPanel;
+    [SerializeField] private GameObject _innerOverlayPanel;
+    [SerializeField] private GameObject[] _overlays;
 
     private void Awake()
     {
@@ -21,8 +22,9 @@ public class OverlayManager : MonoBehaviour
 
     public void ShowOverlay(GameObject overlay)
     {
-        _overlayPanel.SetActive(true);
-        foreach (var o in overlays)
+        _outterOverlayPanel.SetActive(true);
+        _innerOverlayPanel.SetActive(true);
+        foreach (var o in _overlays)
         {
             o.SetActive(o == overlay);
         }
@@ -30,10 +32,11 @@ public class OverlayManager : MonoBehaviour
 
     public void HideOverlays()
     {
-        foreach (var overlay in overlays)
+        foreach (var overlay in _overlays)
         {
             overlay.SetActive(false);
         }
-        _overlayPanel.SetActive(false); 
+        _innerOverlayPanel.SetActive(false);
+        _outterOverlayPanel.SetActive(false);
     }
 }
