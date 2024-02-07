@@ -1300,7 +1300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915028297273653845, guid: 77e50be1feb1a9d4da8b221932e97164, type: 3}
       propertyPath: m_ChildScaleWidth
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6915028297273653845, guid: 77e50be1feb1a9d4da8b221932e97164, type: 3}
       propertyPath: m_ChildControlWidth

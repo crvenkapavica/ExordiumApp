@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OverlayManager : MonoBehaviour
 {
@@ -22,21 +23,32 @@ public class OverlayManager : MonoBehaviour
 
     public void ShowOverlay(GameObject overlay)
     {
-        _outterOverlayPanel.SetActive(true);
+        HideOverlays();
 
-        //for mBOX
+        _outterOverlayPanel.SetActive(true);
         var rect = _outterOverlayPanel.GetComponent<RectTransform>();
-        //rect.sizeDelta = new Vector2(rect.sizeDelta.x, rect.sizeDelta.y - Screen.height * 0.9f);
-        //rect.sizeDelta = new Vector2(Screen.width, Screen.height);
-        rect.anchorMin = new Vector2(0.075f, 0.425f);
-        rect.anchorMax = new Vector2(0.925f, 0.575f);
-        //rect.sizeDelta = new Vector2(1, Screen.height * 0.4f);
+
+        // MessageBox panel - smallest panel - 15%
+        if (overlay.name.Contains("MessageBox"))
+        {
+            rect.anchorMin = new Vector2(0.075f, 0.425f);
+            rect.anchorMax = new Vector2(0.925f, 0.575f);
+        }
+        // Theme and Language panels - 40%
+        else if (overlay.name.Contains("Language") || overlay.name.Contains("Theme"))
+        {
+            rect.anchorMin = new Vector2(0, 0.3f);
+            rect.anchorMax = new Vector2(1, 0.7f);
+        }
+        // Fetching panel - 50%
+        else if (overlay.name.Contains("Fetching"))
+        {
+            rect.anchorMin = new Vector2(0, 0.25f);
+            rect.anchorMax = new Vector2(1, 0.75f);
+        }
 
         _innerOverlayPanel.SetActive(true);
-        foreach (var o in _overlays)
-        {
-            o.SetActive(o == overlay);
-        }
+        overlay.SetActive(true);
     }
 
     public void HideOverlays()

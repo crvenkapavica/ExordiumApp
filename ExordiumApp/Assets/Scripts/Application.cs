@@ -22,32 +22,18 @@ public class Application : MonoBehaviour
     [SerializeField] private Toggle _retailerTogglePrefab;
     [SerializeField] private Toggle _languageTogglePrefab;
     
-    
-    //fetch the following from the backend
-    //retailer data
-    //item category data
-    //items
-    //and while fetching(waiting for the response) display an overlay screen with a “Fetching data…” text
-
-
-
     private void Start()
     {
         StartCoroutine(FetchData());
-
-        Debug.Log(ApplicationData.Instance.Items);
     }
 
     private IEnumerator FetchData()
     {
-        OverlayManager.Instance.ShowOverlay(_overlayMessageBox);
+        OverlayManager.Instance.ShowOverlay(_overlayFetching);
 
         yield return StartCoroutine(AttemptFetchRetailerData());
         yield return StartCoroutine(AttemptFetchItemCategoryData());
         yield return StartCoroutine(AttemptFetchItemData());
-
-        // remove
-        yield return new WaitForSeconds(5);
 
         OverlayManager.Instance.HideOverlays();
     }
