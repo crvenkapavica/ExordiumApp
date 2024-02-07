@@ -34,12 +34,14 @@ public class ThemeManager : MonoBehaviour
 
     private void Start()
     {
+        // check playerPrefs, if exists use that one, if not use default - _darkTheme
         Theme = _lightTheme;
     }
 
     private void ApplyThemeRecursive(Transform parent)
     {
-        if (parent.name.Contains("Panel") && parent.TryGetComponent<Image>(out Image background))
+        if ((parent.name.Contains("Panel") || parent.name.Contains("Overlay")) 
+            && parent.TryGetComponent<Image>(out Image background))
         {
             background.color = Theme.panelBackgroundColor;
         }
