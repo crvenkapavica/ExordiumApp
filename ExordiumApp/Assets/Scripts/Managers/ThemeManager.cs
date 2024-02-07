@@ -46,7 +46,7 @@ public class ThemeManager : MonoBehaviour
         {
             background.color = Theme.panelBackgroundColor;
 
-            if (parent.name.Contains("Main"))
+            if (parent.name.Contains("Main") || parent.name.Contains("Transparent"))
             {
                 Color color = background.color;
                 color.a = 0f;
@@ -76,8 +76,5 @@ public class ThemeManager : MonoBehaviour
         {
             ApplyThemeRecursive(child);
         }
-
-        // TODO
-        // if InnerMainPanel and lightTheme, apply alpha 0
     }
 }

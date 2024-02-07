@@ -195,7 +195,7 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
-  m_FlexibleWidth: 0
+  m_FlexibleWidth: 0.06
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!1 &1930822546672027089
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 4732742794347977025}
   - component: {fileID: 6978738132393891086}
   m_Layer: 5
-  m_Name: ButtonPanel
+  m_Name: ButtonPanelTransparent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
-  m_FlexibleWidth: 0.05
+  m_FlexibleWidth: 0
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!1 &5366322055377341260
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
-  m_FlexibleWidth: 0.05
+  m_FlexibleWidth: 0
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!1 &5948863059378803888
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
-  m_FlexibleWidth: 0
+  m_FlexibleWidth: 0.06
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!1 &6583557671567091329
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 406502887408196126}
   - component: {fileID: 492397417145085784}
   m_Layer: 5
-  m_Name: SpacerPanel
+  m_Name: SpacerPanelTransparent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1590,7 +1590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3876097311313856492, guid: 82e110bd7b7c29d48b7aa333b5ea445e, type: 3}
       propertyPath: m_Name
-      value: TitleBarPanel
+      value: TitleBarPanelTransparent
       objectReference: {fileID: 0}
     - target: {fileID: 4844773095019635881, guid: 82e110bd7b7c29d48b7aa333b5ea445e, type: 3}
       propertyPath: m_AnchorMax.y

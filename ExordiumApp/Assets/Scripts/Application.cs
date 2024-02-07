@@ -30,7 +30,7 @@ public class Application : MonoBehaviour
     {
         _mainPanelAccount.SetActive(true);
 
-        //_overlayPanel.SetActive(true);
-        //_overlayTheme.SetActive(true);
+        _overlayPanel.SetActive(true);
+        _overlayTheme.SetActive(true);
     }
 }

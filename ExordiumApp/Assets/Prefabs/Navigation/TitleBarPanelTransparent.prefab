@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 1286872767484325929}
   - component: {fileID: 916482379891070952}
   m_Layer: 5
-  m_Name: TitleBarPanel
+  m_Name: TitleBarPanelTransparent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
