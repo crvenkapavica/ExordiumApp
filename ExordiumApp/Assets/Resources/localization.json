@@ -63,12 +63,12 @@
     {
       "name": "Register",
       "english": "Register",
-      "croatian": "Registriraj Se"
+      "croatian": "Registracija"
     },
     {
       "name": "Login",
       "english": "Login",
-      "croatian": "Prijavi Se"
+      "croatian": "Prijava"
     },
     {
       "name": "Retry",
@@ -94,6 +94,11 @@
       "name": "LightTeme",
       "english": "Light Teme",
       "croatian": "Svijetla tema"
+    },
+    {
+      "name": "Fetching...",
+      "english": "Fetching data...",
+      "croatian": "Dohvaćam podatke.."
     }
   ]
 }
