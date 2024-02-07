@@ -36,6 +36,7 @@ public class ThemeManager : MonoBehaviour
     {
         // check playerPrefs, if exists use that one, if not use default - _darkTheme
         Theme = _lightTheme;
+        //Theme = _darkTheme;
     }
 
     private void ApplyThemeRecursive(Transform parent)
@@ -44,6 +45,13 @@ public class ThemeManager : MonoBehaviour
             && parent.TryGetComponent<Image>(out Image background))
         {
             background.color = Theme.panelBackgroundColor;
+
+            if (parent.name.Contains("Main"))
+            {
+                Color color = background.color;
+                color.a = 0f;
+                background.color = color;
+            }
         }
         else if (parent.name.Contains("Checkmark"))
         {

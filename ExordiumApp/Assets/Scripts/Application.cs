@@ -7,18 +7,17 @@ using UnityEngine.UI;
 public class Application : MonoBehaviour
 {
     // Main paneles
-    [SerializeField] private GameObject _mainPanelBasePrefab;
-    [SerializeField] private GameObject _mainPanelAccountPrefab;
-    [SerializeField] private GameObject _mainPanelSettingsPrefab;
-    [SerializeField] private GameObject _navigationPanelPrefab;
-
-    [SerializeField] private GameObject _titleBarPrefab;
+    [SerializeField] private GameObject _mainPanelBase;
+    [SerializeField] private GameObject _mainPanelAccount;
+    [SerializeField] private GameObject _mainPanelSettings;
+    [SerializeField] private GameObject _navigationPanel;
 
     // Overlays
-    [SerializeField] private GameObject _overlayLanguagePrefab;
-    [SerializeField] private GameObject _overlayThemePrefab;
-    [SerializeField] private GameObject _messageBoxPrefab;
-    [SerializeField] private GameObject _overlayFetchingPrefab;
+    [SerializeField] private GameObject _overlayPanel;
+    [SerializeField] private GameObject _overlayLanguage;
+    [SerializeField] private GameObject _overlayTheme;
+    [SerializeField] private GameObject _overlayMessageBox;
+    [SerializeField] private GameObject _overlayFetching;
 
     // Entries
     [SerializeField] private GameObject _itemEntryPrefab;
@@ -27,14 +26,11 @@ public class Application : MonoBehaviour
     [SerializeField] private Toggle _languageTogglePrefab;
 
 
-
     private void Start()
     {
-        if (_overlayFetchingPrefab.TryGetComponent(out RectTransform overlay))
-        {
-            overlay.sizeDelta = new Vector2(overlay.sizeDelta.x, Screen.height * 0.4f);
-        }
+        _mainPanelAccount.SetActive(true);
 
-        Instantiate(_overlayFetchingPrefab, transform);
+        //_overlayPanel.SetActive(true);
+        //_overlayTheme.SetActive(true);
     }
 }
