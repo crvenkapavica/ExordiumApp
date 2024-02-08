@@ -1,6 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class ItemDisplay : MonoBehaviour
 {
@@ -11,18 +13,28 @@ public class ItemDisplay : MonoBehaviour
     [SerializeField] private Image _retailerImage;
     [SerializeField] private Toggle _favoritesToggle;
     
-    // Assuming your Item class has these properties
-    public void Setup(Item item)
+
+    public void Setup(ItemEntry itemEntry)
     {
-        // Load image from URL async
-        // _itemImage.sprite = 
-        _itemImage.color = Color.green;
+        StartCoroutine(LoadImage(itemEntry.ItemImageUrl, _itemImage));
+        StartCoroutine(LoadImage(itemEntry.RetailerImageUrl, _retailerImage));
 
-        _price.text = item.price.ToString();
-        _itemName.text = item.name;
-        _category.text = item.item_category_id.ToString();
+        _price.text = itemEntry.Price.ToString("C");
+        _itemName.text = itemEntry.ItemName;
+        _category.text = itemEntry.CategoryName;
 
-        _retailerImage.color = Color.red;
         //_favoritesToggle = 
+    }
+
+    private IEnumerator LoadImage(string imageUrl, Image targetImage)
+    {
+        using UnityWebRequest request = UnityWebRequestTexture.GetTexture(imageUrl);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Texture2D texture = DownloadHandlerTexture.GetContent(request);
+            targetImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        }
     }
 }

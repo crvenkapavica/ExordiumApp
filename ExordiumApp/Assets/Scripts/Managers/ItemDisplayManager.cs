@@ -28,8 +28,9 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log(_scrollRect.verticalNormalizedPosition);
         // Check if the scroll view is at the bottom
-        if (_scrollRect.verticalNormalizedPosition <= 0.05f && !_bIsFetching && _bCanFetchMore)
+        if (_scrollRect.verticalNormalizedPosition <= 0.1f/* && !_bIsFetching && _bCanFetchMore*/)
         {
             FetchMoreItems();
         }
@@ -37,37 +38,39 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 
     private void FetchMoreItems()
     {
-        if (!_bCanFetchMore) return;
+        if (!_bCanFetchMore || _bIsFetching) return;
 
         _bIsFetching = true;
         StartCoroutine(
-            ItemService.Instance.FetchItemData(items =>
+            ItemService.Instance.FetchItemEntries(itemEntries =>
             {
-                if (items.Count == 0)
+                if (itemEntries.Count == 0)
                 {
-                    _bCanFetchMore = false;
+                    _bCanFetchMore = false;          
                 }
                 else
                 {
-                    ApplicationData.Instance.UpdateItemData(items);
-                    UpdateItemDisplay(items);
+                    UpdateItemDisplay(itemEntries);
                 }
                 _bIsFetching = false;
             })
         );
     }
 
-    public void UpdateItemDisplay(List<Item> items)
+    public void UpdateItemDisplay(List<ItemEntry> itemEntries)
     {
-        foreach (var item in items)
+        foreach (var itemEntry in itemEntries)
         {
             GameObject itemObject = Instantiate(_itemEntryPrefab, _itemsParent);
 
-            float height = _itemsParent.GetComponent<RectTransform>().rect.height / 5;
+            float contentHeight = _itemsParent.GetComponent<RectTransform>().rect.height;
+            float height = (contentHeight - Screen.height * 0.035f * 5) / 5;
             var rect = itemObject.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, height);
 
-            itemObject.GetComponent<ItemDisplay>().Setup(item);
+            itemObject.GetComponent<ItemDisplay>().Setup(itemEntry);
         }
+
+        _itemsParent.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
     }
 }
