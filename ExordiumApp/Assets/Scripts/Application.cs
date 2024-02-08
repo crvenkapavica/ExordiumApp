@@ -25,15 +25,15 @@ public class Application : MonoBehaviour
     private void Start()
     {
         InitialFetch();
+        //StartCoroutine(PopulateItems());
     }
 
     private void InitialFetch()
     {
         OverlayManager.Instance.ShowOverlay(_overlayFetching);
         StartCoroutine(
-            ItemService.Instance.FetchItemEntries(itemEntries =>
+            ItemService.Instance.FetchData(() =>
             {
-                ItemDisplayManager.Instance.UpdateItemDisplay(itemEntries);
                 OverlayManager.Instance.HideOverlays();
             })
         );

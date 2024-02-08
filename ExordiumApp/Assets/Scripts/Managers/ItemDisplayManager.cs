@@ -7,7 +7,7 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 {
     public static ItemDisplayManager Instance { get; private set; }
 
-    [SerializeField] private Transform _contentTransform;
+    [SerializeField] private Transform _itemsParent;
     [SerializeField] private GameObject _itemEntryPrefab;
     [SerializeField] private ScrollRect _scrollRect;
 
@@ -37,37 +37,37 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 
     private void FetchMoreItems()
     {
-        if (!_bCanFetchMore || _bIsFetching) return;
+        if (!_bCanFetchMore) return;
 
         _bIsFetching = true;
         StartCoroutine(
-            ItemService.Instance.FetchItemEntries(itemEntries =>
+            ItemService.Instance.FetchItemData(items =>
             {
-                if (itemEntries.Count == 0)
+                if (items.Count == 0)
                 {
                     _bCanFetchMore = false;
                 }
                 else
                 {
-                    UpdateItemDisplay(itemEntries);
+                    ApplicationData.Instance.UpdateItemData(items);
+                    UpdateItemDisplay(items);
                 }
                 _bIsFetching = false;
             })
         );
     }
 
-    public void UpdateItemDisplay(List<ItemEntry> itemEntries)
+    public void UpdateItemDisplay(List<Item> items)
     {
-        foreach (var itemEntry in itemEntries)
+        foreach (var item in items)
         {
-            GameObject itemObject = Instantiate(_itemEntryPrefab, _contentTransform);
+            GameObject itemObject = Instantiate(_itemEntryPrefab, _itemsParent);
 
-            float contentHeight = _contentTransform.GetComponent<RectTransform>().rect.height;
-            float height = (contentHeight - Screen.height * 0.035f * 5) / 5;
+            float height = _itemsParent.GetComponent<RectTransform>().rect.height / 5;
             var rect = itemObject.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, height);
 
-            itemObject.GetComponent<ItemDisplay>().Setup(itemEntry);
+            itemObject.GetComponent<ItemDisplay>().Setup(item);
         }
     }
 }

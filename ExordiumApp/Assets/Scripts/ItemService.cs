@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -82,6 +80,49 @@ public class ItemService : MonoBehaviour, IItemService
         }
     }
 
+    //public IEnumerator FetchItemData(Action<List<Item>> callback)
+    //{
+    //    var items = new List<Item>();
+    //    var pageNumber = 1;
+    //    var bMoreItemsAvailable = true;
+
+    //    while (bMoreItemsAvailable)
+    //    {
+    //        var url = $"{BASE_URL}getitems.php?pageNumber={pageNumber}";
+    //        using UnityWebRequest request = UnityWebRequest.Get(url);
+    //        yield return request.SendWebRequest();
+
+    //        if (request.result == UnityWebRequest.Result.Success)
+    //        {
+    //            string responseText = request.downloadHandler.text;
+    //            if (responseText.Contains("No records found") || string.IsNullOrEmpty(responseText))
+    //            {
+    //                bMoreItemsAvailable = false;
+    //            }
+    //            else
+    //            {
+    //                var json = "{\"items\":" + responseText + "}";
+    //                ItemsResponse response = JsonUtility.FromJson<ItemsResponse>(json);
+    //                if (response.items != null && response.items.Length > 0)
+    //                {
+    //                    items.AddRange(response.items);
+    //                    ++pageNumber;
+    //                }
+    //                else
+    //                {
+    //                    bMoreItemsAvailable = false;
+    //                }
+    //            }
+    //        }
+    //        else
+    //        {
+    //            bMoreItemsAvailable = false;
+    //        }
+    //    }
+
+    //    callback?.Invoke(items);
+    //}
+
     public IEnumerator FetchItemData(Action<List<Item>> callback)
     {
         if (_bAllItemsFetched) yield break;
@@ -146,36 +187,50 @@ public class ItemService : MonoBehaviour, IItemService
         callback?.Invoke(currentItemsFetched);
     }
 
-    public IEnumerator FetchItemEntries(Action<List<ItemEntry>> callback)
-    {
-        if (ApplicationData.Instance.Retailers.Count == 0 || ApplicationData.Instance.Categories.Count == 0)
-        {
-            yield return FetchRetailerData(retailers => ApplicationData.Instance.UpdateRetailerData(retailers));
-            yield return FetchCategoryData(categories => ApplicationData.Instance.UpdateCategoryData(categories));
-        }
 
-        if (ApplicationData.Instance.Items.Count == 0 || _fetchedItemsOnPage >= FETCH_COUNT)
-        {
-            yield return FetchItemData(items =>
+
+    public IEnumerator FetchData(Action onComplete = null)
+    {
+        yield return StartCoroutine(AttemptFetchRetailerData());
+        yield return StartCoroutine(AttemptFetchItemCategoryData());
+        yield return StartCoroutine(AttemptFetchItemData());
+
+        onComplete?.Invoke();
+    }
+
+    private IEnumerator AttemptFetchRetailerData()
+    {
+        yield return StartCoroutine(
+            FetchRetailerData(retailers =>
+            {
+                ApplicationData.Instance.UpdateRetailerData(retailers);
+            })
+        );
+    }
+
+    private IEnumerator AttemptFetchItemCategoryData()
+    {
+        yield return StartCoroutine(
+            FetchCategoryData(categories =>
+            {
+                ApplicationData.Instance.UpdateCategoryData(categories);
+            })
+        );
+    }
+
+    private IEnumerator AttemptFetchItemData()
+    {
+        yield return StartCoroutine(
+            FetchItemData(items =>
             {
                 ApplicationData.Instance.UpdateItemData(items);
-                _fetchedItemsOnPage = 0;
-                _pageNumber++; 
-            });
-        }
 
-        var itemEntries = (from item in ApplicationData.Instance.Items
-                           join retailer in ApplicationData.Instance.Retailers on item.retailer_id equals retailer.id
-                           join category in ApplicationData.Instance.Categories on item.item_category_id equals category.id
-                           select new ItemEntry
-                           {
-                               ItemName = item.name,
-                               Price = item.price,
-                               ItemImageUrl = item.image_url,
-                               RetailerImageUrl = retailer.image_url,
-                               CategoryName = category.name
-                           }).ToList();
+                Debug.Log(items.Count);
+                Debug.Log(items);
 
-        callback?.Invoke(itemEntries);
+                // Call UI logic to add the newly fetched 8 items to ScrollView
+                ItemDisplayManager.Instance.UpdateItemDisplay(items);
+            })
+        );
     }
 }
