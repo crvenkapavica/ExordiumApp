@@ -25,17 +25,6 @@ public class Application : MonoBehaviour
     private void Start()
     {
         InitialFetch();
-
-        StartCoroutine(TestFade());
-    }
-
-    private IEnumerator TestFade()
-    {
-        yield return new WaitForSeconds(2);
-        //OverlayManager.Instance.ShowOverlay(_overlayMessageBox);
-        OverlayManager.Instance.ShowOverlay(_overlayTheme);
-        yield return new WaitForSeconds(2);
-        OverlayManager.Instance.HideOverlays();
     }
 
     private void InitialFetch()
