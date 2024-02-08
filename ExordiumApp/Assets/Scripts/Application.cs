@@ -25,48 +25,6 @@ public class Application : MonoBehaviour
     private void Start()
     {
         InitialFetch();
-
-        StartCoroutine(TestOverlay());
-    }
-
-    private IEnumerator TestOverlay()
-    {
-        yield return new WaitForSeconds(2);
-
-        OverlayManager.Instance.ShowOverlay(_overlayMessageBox, OverlayManager.EMessageBoxResponse.Response_OK);
-        yield return new WaitForSeconds(5);
-        OverlayManager.Instance.HideOverlays();
-
-        yield return new WaitForSeconds(1);
-
-        OverlayManager.Instance.ShowOverlay(_overlayMessageBox, OverlayManager.EMessageBoxResponse.Response_Email);
-        yield return new WaitForSeconds(5);
-        OverlayManager.Instance.HideOverlays();
-
-        yield return new WaitForSeconds(1);
-
-        OverlayManager.Instance.ShowOverlay(_overlayMessageBox, OverlayManager.EMessageBoxResponse.Response_Credentials);
-        yield return new WaitForSeconds(5);
-        OverlayManager.Instance.HideOverlays();
-
-        yield return new WaitForSeconds(1);
-
-        OverlayManager.Instance.ShowOverlay(_overlayLanguage);
-        yield return new WaitForSeconds(5);
-        OverlayManager.Instance.HideOverlays();
-
-        yield return new WaitForSeconds(1);
-
-        OverlayManager.Instance.ShowOverlay(_overlayTheme);
-        yield return new WaitForSeconds(5);
-        OverlayManager.Instance.HideOverlays();
-
-        yield return new WaitForSeconds(1);
-
-        OverlayManager.Instance.ShowOverlay(_overlayFetching);
-        yield return new WaitForSeconds(5);
-        OverlayManager.Instance.HideOverlays();
-
     }
 
     private void InitialFetch()
@@ -81,3 +39,46 @@ public class Application : MonoBehaviour
         );
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//StartCoroutine(TestOverlay());
+
+
+
+//private IEnumerator TestOverlay()
+//{
+//    yield return new WaitForSeconds(2);
+
+//    OverlayManager.Instance.ShowOverlay(_overlayMessageBox, OverlayManager.EMessageBoxResponse.Response_Credentials);
+//    yield return new WaitForSeconds(5);
+//    OverlayManager.Instance.HideOverlays();
+
+//    yield return new WaitForSeconds(1);
+
+//    OverlayManager.Instance.ShowOverlay(_overlayLanguage);
+//    yield return new WaitForSeconds(5);
+//    OverlayManager.Instance.HideOverlays();
+
+//    yield return new WaitForSeconds(1);
+
+//    OverlayManager.Instance.ShowOverlay(_overlayTheme);
+//    yield return new WaitForSeconds(5);
+//    OverlayManager.Instance.HideOverlays();
+
+//    yield return new WaitForSeconds(1);
+
+//    OverlayManager.Instance.ShowOverlay(_overlayFetching);
+//    yield return new WaitForSeconds(5);
+//    OverlayManager.Instance.HideOverlays();
+//}

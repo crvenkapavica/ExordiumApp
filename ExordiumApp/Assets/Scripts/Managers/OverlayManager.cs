@@ -57,7 +57,7 @@ public class OverlayManager : MonoBehaviour
         if (messageText == null)
             messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Email");
         if (messageText == null)
-            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Email");
+            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Credentials");
 
         if (buttonText == null || messageText == null)
             Debug.Log(buttonText, messageText);

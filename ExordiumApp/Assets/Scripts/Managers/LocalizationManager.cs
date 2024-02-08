@@ -15,8 +15,11 @@ public class LocalizationManager : MonoBehaviour
         get => _language;
         set
         {
-            _language = value;
-            LocalizeTextRecursive(transform);
+            if (_language != value)
+            {
+                _language = value;
+                LocalizeTextRecursive(transform);
+            }
         } 
     }
 
