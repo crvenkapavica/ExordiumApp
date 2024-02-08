@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8072957533401617911}
   - component: {fileID: 1351471859428323286}
   - component: {fileID: 356685500656615509}
+  - component: {fileID: 8995348439963539572}
   m_Layer: 5
   m_Name: Overlay_Fetching
   m_TagString: Untagged
@@ -97,6 +98,18 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
+--- !u!225 &8995348439963539572
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090113229173134833}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3146226659475078766
 GameObject:
   m_ObjectHideFlags: 0

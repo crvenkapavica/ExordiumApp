@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,8 @@ public class OverlayManager : MonoBehaviour
     [SerializeField] private GameObject _outterOverlayPanel;
     [SerializeField] private GameObject _innerOverlayPanel;
     [SerializeField] private GameObject[] _overlays;
+
+    private const float FADE_TIME = 0.25f;
 
     private void Awake()
     {
@@ -23,10 +27,10 @@ public class OverlayManager : MonoBehaviour
 
     public void ShowOverlay(GameObject overlay)
     {
-        HideOverlays();
-
         _outterOverlayPanel.SetActive(true);
         var rect = _outterOverlayPanel.GetComponent<RectTransform>();
+
+        StartCoroutine(FadeIn(overlay.GetComponent<CanvasGroup>()));
 
         // MessageBox panel - smallest panel - 15%
         if (overlay.name.Contains("MessageBox"))
@@ -55,9 +59,47 @@ public class OverlayManager : MonoBehaviour
     {
         foreach (var overlay in _overlays)
         {
-            overlay.SetActive(false);
+            if (overlay.activeSelf)
+            {
+                StartCoroutine(
+                    FadeOut(overlay.GetComponent<CanvasGroup>(), () =>
+                    {
+                        overlay.SetActive(false);
+                        _innerOverlayPanel.SetActive(false);
+                        _outterOverlayPanel.SetActive(false);
+                    })
+                );
+                break;
+            }
         }
-        _innerOverlayPanel.SetActive(false);
-        _outterOverlayPanel.SetActive(false);
+    }
+
+    private IEnumerator FadeIn(CanvasGroup canvasGroup)
+    {
+        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, canvasGroup.alpha, 1, FADE_TIME));
+    }
+
+    private IEnumerator FadeOut(CanvasGroup canvasGroup, Action onComplete)
+    {
+        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, canvasGroup.alpha, 0, FADE_TIME));
+        onComplete?.Invoke();
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float start, float end, float lerpTime)
+    {
+        float timeStartedLerping = Time.time;
+        float timeSinceStarted;
+        float percentageComplete = 0f;
+
+        while (percentageComplete < 1f)
+        {
+            timeSinceStarted = Time.time - timeStartedLerping;
+            percentageComplete = timeSinceStarted / lerpTime;
+
+            float currentValue = Mathf.Lerp(start, end, percentageComplete);
+            canvasGroup.alpha = currentValue;
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
