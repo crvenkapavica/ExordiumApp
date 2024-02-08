@@ -37,8 +37,8 @@
     },
     {
       "name": "LanguageName",
-      "english": "Language Name",
-      "croatian": "Ime Jezika"
+      "english": "Language name",
+      "croatian": "Ime jezika"
     },
     {
       "name": "Theme",
@@ -47,8 +47,8 @@
     },
     {
       "name": "ThemeName",
-      "english": "Theme Name",
-      "croatian": "Ime Teme"
+      "english": "Theme name",
+      "croatian": "Ime teme"
     },
     {
       "name": "Email",
@@ -73,7 +73,12 @@
     {
       "name": "Retry",
       "english": "Retry",
-      "croatian": "Pokušaj Ponovo"
+      "croatian": "Pokušaj ponovo"
+    },
+    {
+      "name": "Continue",
+      "english": "Continue",
+      "croatian": "Naastavi"
     },
     {
       "name": "Confirm",
@@ -87,18 +92,33 @@
     },
     {
       "name": "DarkTheme",
-      "english": "Dark Theme",
+      "english": "Dark theme",
       "croatian": "Tamna tema"
     },
     {
       "name": "LightTeme",
-      "english": "Light Teme",
+      "english": "Light theme",
       "croatian": "Svijetla tema"
     },
     {
       "name": "Fetching...",
       "english": "Fetching data...",
       "croatian": "Dohvaćam podatke.."
+    },
+    {
+      "name": "Response_OK",
+      "english": "Account created",
+      "croatian": "Račun kreiran"
+    },
+    {
+      "name": "Response_Email",
+      "english": "Email taken",
+      "croatian": "Email zauzet"
+    },
+    {
+      "name": "Response_Credentials",
+      "english": "Invalid email or password",
+      "croatian": "Neispravno korisničko ime ili lozinka"
     }
   ]
 }

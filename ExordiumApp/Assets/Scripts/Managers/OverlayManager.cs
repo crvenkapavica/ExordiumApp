@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,21 @@ public class OverlayManager : MonoBehaviour
     [SerializeField] private GameObject _outterOverlayPanel;
     [SerializeField] private GameObject _innerOverlayPanel;
     [SerializeField] private GameObject[] _overlays;
+
+    public enum EMessageBoxResponse
+    {
+        Response_OK,
+        Response_Email,
+        Response_Credentials
+    }
+
+    private enum EOverlays
+    {
+        MessageBox = 0,
+        Language,
+        Theme,
+        Fetching
+    }
 
     private const float FADE_TIME = 0.25f;
 
@@ -23,6 +39,30 @@ public class OverlayManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    
+    public void ShowOverlay(GameObject messageBox, EMessageBoxResponse response)
+    {
+        //if (!messageBox.name.Contains("MessageBox")) return;
+
+        //var buttonText = messageBox.transform.Find("InnerPanelTransparent/Button/Retry");
+        //var messageText = messageBox.GetComponent<TextMeshProUGUI>();
+
+        //switch (response)
+        //{
+        //    case EMessageBoxResponse.Response_OK:
+        //        button.name = "Continue";
+        //        message.name = "Response_OK";
+        //        break;
+        //    case EMessageBoxResponse.Response_Email:
+        //        button.name = "Retry";
+        //        message.name = "Response_Email";
+        //        break;
+        //    case EMessageBoxResponse.Response_Credentials:
+        //        button.name = "Retry";
+        //        message.name = "Response_Credentials";
+        //        break;
+        //}
     }
 
     public void ShowOverlay(GameObject overlay)

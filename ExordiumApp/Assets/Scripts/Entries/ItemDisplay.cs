@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.EventSystems;
 
 public class ItemDisplay : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class ItemDisplay : MonoBehaviour
         _itemName.text = itemEntry.ItemName;
         _category.text = itemEntry.CategoryName;
 
-        //_favoritesToggle = 
+        //_favoritesToggle
     }
 
     private IEnumerator LoadImage(string imageUrl, Image targetImage)
