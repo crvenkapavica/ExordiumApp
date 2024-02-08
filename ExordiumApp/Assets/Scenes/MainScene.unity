@@ -2635,6 +2635,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783815c11f219a8429d2b7e39f859d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _panelMappings:
+  - panelType: 0
+    panelObject: {fileID: 739024346}
+  - panelType: 1
+    panelObject: {fileID: 500742756}
+  - panelType: 2
+    panelObject: {fileID: 1294864910}
+  - panelType: 3
+    panelObject: {fileID: 901555777}
+  - panelType: 4
+    panelObject: {fileID: 1982040100}
+  - panelType: 5
+    panelObject: {fileID: 1939133680}
+  - panelType: 6
+    panelObject: {fileID: 679698454}
+  - panelType: 7
+    panelObject: {fileID: 1879819341}
   _outterOverlayPanel: {fileID: 513153513}
   _innerOverlayPanel: {fileID: 1766586801}
   _overlays:

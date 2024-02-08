@@ -29,12 +29,12 @@ public class Application : MonoBehaviour
 
     private void InitialFetch()
     {
-        OverlayManager.Instance.ShowOverlay(_overlayFetching);
+        UIManager.Instance.ShowOverlay(_overlayFetching);
         StartCoroutine(
             ItemService.Instance.FetchItemEntries(itemEntries =>
             {
                 ItemDisplayManager.Instance.UpdateItemDisplay(itemEntries);
-                OverlayManager.Instance.HideOverlays();
+                UIManager.Instance.HideOverlays();
             })
         );
     }

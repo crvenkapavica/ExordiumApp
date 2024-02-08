@@ -1,12 +1,37 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OverlayManager : MonoBehaviour
+[Serializable]
+public class PanelMapiing
 {
-    public static OverlayManager Instance { get; private set; }
+    public PaneType panelType;
+    public GameObject panelObject;
+}
+
+public enum PaneType
+{
+    Navigation,
+    ScrollView,
+    Account,
+    Settings,
+    Fetching,
+    MessageBox,
+    Language,
+    Theme
+}
+
+public class UIManager : MonoBehaviour
+{
+    public static UIManager Instance { get; private set; }
+
+    public GameObject ActiveMainPanel { get; private set; }
+
+    [SerializeField] private List<PanelMapiing> _panelMappings = new();
+    public List<PanelMapiing> PanelMappings => _panelMappings;
 
     [SerializeField] private GameObject _outterOverlayPanel;
     [SerializeField] private GameObject _innerOverlayPanel;
@@ -105,6 +130,35 @@ public class OverlayManager : MonoBehaviour
 
         StartCoroutine(FadeIn(overlay.GetComponent<CanvasGroup>()));
     }
+        
+    public void HideOverlays()
+    {
+        foreach (var overlay in _overlays)
+        {
+            if (overlay.activeSelf)
+            {
+                StartCoroutine(
+                    FadeOut(overlay.GetComponent<CanvasGroup>(), () =>
+                    {
+                        overlay.SetActive(false);
+                        _innerOverlayPanel.SetActive(false);
+                        _outterOverlayPanel.SetActive(false);
+                    })
+                );
+                break;
+            }
+        }
+    }
+
+    public void ShowPanel(GameObject panel)
+    {
+        if (panel == ActiveMainPanel) return;
+
+        ActiveMainPanel.SetActive(false);
+        ActiveMainPanel = panel;
+        ActiveMainPanel.SetActive(true);
+    }
+
 
     private void AnchorOverlayMessageBox()
     {
@@ -125,25 +179,6 @@ public class OverlayManager : MonoBehaviour
         var rect = _outterOverlayPanel.GetComponent<RectTransform>();
         rect.anchorMin = new Vector2(0, 0.25f);
         rect.anchorMax = new Vector2(1, 0.75f);
-    }
-        
-    public void HideOverlays()
-    {
-        foreach (var overlay in _overlays)
-        {
-            if (overlay.activeSelf)
-            {
-                StartCoroutine(
-                    FadeOut(overlay.GetComponent<CanvasGroup>(), () =>
-                    {
-                        overlay.SetActive(false);
-                        _innerOverlayPanel.SetActive(false);
-                        _outterOverlayPanel.SetActive(false);
-                    })
-                );
-                break;
-            }
-        }
     }
 
     private IEnumerator FadeIn(CanvasGroup canvasGroup)
