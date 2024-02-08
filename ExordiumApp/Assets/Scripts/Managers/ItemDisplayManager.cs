@@ -62,6 +62,11 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
         foreach (var item in items)
         {
             GameObject itemObject = Instantiate(_itemEntryPrefab, _itemsParent);
+
+            float height = _itemsParent.GetComponent<RectTransform>().rect.height / 5;
+            var rect = itemObject.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(rect.sizeDelta.x, height);
+
             itemObject.GetComponent<ItemDisplay>().Setup(item);
         }
     }
