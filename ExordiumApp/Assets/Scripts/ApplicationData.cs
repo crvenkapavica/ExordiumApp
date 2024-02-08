@@ -14,6 +14,8 @@ public class ApplicationData
 {
     public static ApplicationData Instance { get; private set; } = new();
 
+    public float Spacing { get; set; };
+
     public List<Item> Items { get; private set; } = new();
     public List<Retailer> Retailers { get; private set; } = new();
     public List<ItemCategory> Categories { get; private set; } = new();

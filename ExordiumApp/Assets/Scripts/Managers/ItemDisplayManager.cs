@@ -67,7 +67,7 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
             if (_height == 0)
             {
                 float contentHeight = _itemsParent.GetComponent<RectTransform>().rect.height;
-                _height = (contentHeight - Screen.height * 0.035f * 5) / 5;
+                _height = (contentHeight - ApplicationData.Instance.Spacing * 5) / 5;
             }
             var rect = itemObject.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, _height);

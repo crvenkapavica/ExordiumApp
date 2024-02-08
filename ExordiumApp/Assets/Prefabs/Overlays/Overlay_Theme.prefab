@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 0.1273585, b: 0.1273585, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1171,6 +1171,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2526995046460294417, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_FlexibleWidth
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526995046460294417, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_FlexibleHeight
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526995046460294417, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_PreferredHeight
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2599076113129868327, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1444,7 +1456,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6560288091954691573, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560288091954691573, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560288091954691573, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6560288091954691573, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
@@ -1605,7 +1625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7931089137477300739, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8007870178968782453, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1641,6 +1661,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8011103206443023269, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791980703218118969, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8791980703218118969, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
