@@ -24,44 +24,18 @@ public class Application : MonoBehaviour
     
     private void Start()
     {
-        StartCoroutine(FetchData());
+        InitialFetch();
+        //StartCoroutine(PopulateItems());
     }
 
-    private IEnumerator FetchData()
+    private void InitialFetch()
     {
         OverlayManager.Instance.ShowOverlay(_overlayFetching);
-
-        yield return StartCoroutine(AttemptFetchRetailerData());
-        yield return StartCoroutine(AttemptFetchItemCategoryData());
-        yield return StartCoroutine(AttemptFetchItemData());
-
-        OverlayManager.Instance.HideOverlays();
-    }
-
-    private IEnumerator AttemptFetchRetailerData()
-    {
-        yield return StartCoroutine(ItemService.Instance.FetchRetailerData(retailers =>
-        {
-            ApplicationData.Instance.UpdateRetailerData(retailers);
-            Debug.Log(retailers);
-        }));
-    }
-
-    private IEnumerator AttemptFetchItemCategoryData()
-    {
-        yield return StartCoroutine(ItemService.Instance.FetchCategoryData(categories =>
-        {
-            ApplicationData.Instance.UpdateCategoryData(categories);
-            Debug.Log(categories);
-        }));
-    }
-
-    private IEnumerator AttemptFetchItemData()
-    {
-        yield return StartCoroutine(ItemService.Instance.FetchItemData(items =>
-        {
-            ApplicationData.Instance.UpdateItemData(items);
-            Debug.Log(items);
-        }));
+        StartCoroutine(
+            ItemService.Instance.FetchData(() =>
+            {
+                OverlayManager.Instance.HideOverlays();
+            })
+        );
     }
 }
