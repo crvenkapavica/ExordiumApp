@@ -45,7 +45,7 @@ public class LocalizationManager : MonoBehaviour
         Language = "croatian";
     }
 
-    private void LocalizeTextRecursive(Transform parent)
+    public void LocalizeTextRecursive(Transform parent)
     {
         if (parent.TryGetComponent(out TextMeshProUGUI text)
             && _translationDictionary.TryGetValue(text.name, out TranslationItem translation))

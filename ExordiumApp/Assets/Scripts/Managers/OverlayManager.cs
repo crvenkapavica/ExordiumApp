@@ -43,58 +43,90 @@ public class OverlayManager : MonoBehaviour
     
     public void ShowOverlay(GameObject messageBox, EMessageBoxResponse response)
     {
-        //if (!messageBox.name.Contains("MessageBox")) return;
+        if (!messageBox.name.Contains("MessageBox")) return;
 
-        //var buttonText = messageBox.transform.Find("InnerPanelTransparent/Button/Retry");
-        //var messageText = messageBox.GetComponent<TextMeshProUGUI>();
+        _outterOverlayPanel.SetActive(true);
 
-        //switch (response)
-        //{
-        //    case EMessageBoxResponse.Response_OK:
-        //        button.name = "Continue";
-        //        message.name = "Response_OK";
-        //        break;
-        //    case EMessageBoxResponse.Response_Email:
-        //        button.name = "Retry";
-        //        message.name = "Response_Email";
-        //        break;
-        //    case EMessageBoxResponse.Response_Credentials:
-        //        button.name = "Retry";
-        //        message.name = "Response_Credentials";
-        //        break;
-        //}
+        var buttonText = messageBox.transform.Find("InnerPanelTransparent/Button/Retry");
+        if (buttonText == null)
+            buttonText = messageBox.transform.Find("InnerPanelTransparent/Button/Continue");
+
+        var messageText = messageBox.transform.Find("InnerPanelTransparent/Message");
+        if (messageText == null)
+            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_OK");
+        if (messageText == null)
+            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Email");
+        if (messageText == null)
+            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Email");
+
+        if (buttonText == null || messageText == null)
+            Debug.Log(buttonText, messageText);
+
+
+        switch (response)
+        {
+            case EMessageBoxResponse.Response_OK:
+                buttonText.name = "Continue";
+                messageText.name = "Response_OK";
+                break;
+            case EMessageBoxResponse.Response_Email:
+                buttonText.name = "Retry";
+                messageText.name = "Response_Email";
+                break;
+            case EMessageBoxResponse.Response_Credentials:
+                buttonText.name = "Retry";
+                messageText.name = "Response_Credentials";
+                break;
+        }
+
+        LocalizationManager.Instance.LocalizeTextRecursive(messageBox.transform);
+
+        AnchorOverlayMessageBox();
+        _innerOverlayPanel.SetActive(true);
+        messageBox.SetActive(true);
+        StartCoroutine(FadeIn(messageBox.GetComponent<CanvasGroup>()));
     }
 
     public void ShowOverlay(GameObject overlay)
     {
-        _outterOverlayPanel.SetActive(true);
-        var rect = _outterOverlayPanel.GetComponent<RectTransform>();
+        _outterOverlayPanel.SetActive(true);      
 
-        StartCoroutine(FadeIn(overlay.GetComponent<CanvasGroup>()));
-
-        // MessageBox panel - smallest panel - 15%
-        if (overlay.name.Contains("MessageBox"))
+        if (overlay.name.Contains("Language") || overlay.name.Contains("Theme"))
         {
-            rect.anchorMin = new Vector2(0.075f, 0.425f);
-            rect.anchorMax = new Vector2(0.925f, 0.575f);
+            AnchorOverlayLanguageTheme();
         }
-        // Theme and Language panels - 40%
-        else if (overlay.name.Contains("Language") || overlay.name.Contains("Theme"))
-        {
-            rect.anchorMin = new Vector2(0, 0.3f);
-            rect.anchorMax = new Vector2(1, 0.7f);
-        }
-        // Fetching panel - 50%
         else if (overlay.name.Contains("Fetching"))
         {
-            rect.anchorMin = new Vector2(0, 0.25f);
-            rect.anchorMax = new Vector2(1, 0.75f);
+            AnchorOverlayFetching();
         }
 
         _innerOverlayPanel.SetActive(true);
         overlay.SetActive(true);
+
+        StartCoroutine(FadeIn(overlay.GetComponent<CanvasGroup>()));
     }
 
+    private void AnchorOverlayMessageBox()
+    {
+        var rect = _outterOverlayPanel.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.075f, 0.425f);
+        rect.anchorMax = new Vector2(0.925f, 0.575f);
+    }
+
+    private void AnchorOverlayLanguageTheme()
+    {
+        var rect = _outterOverlayPanel.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 0.3f);
+        rect.anchorMax = new Vector2(1, 0.7f);
+    }
+
+    private void AnchorOverlayFetching()
+    {
+        var rect = _outterOverlayPanel.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 0.25f);
+        rect.anchorMax = new Vector2(1, 0.75f);
+    }
+        
     public void HideOverlays()
     {
         foreach (var overlay in _overlays)

@@ -33,19 +33,31 @@ public class Application : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        OverlayManager.Instance.ShowOverlay(_overlayMessageBox);
+        OverlayManager.Instance.ShowOverlay(_overlayMessageBox, OverlayManager.EMessageBoxResponse.Response_OK);
         yield return new WaitForSeconds(5);
         OverlayManager.Instance.HideOverlays();
 
         yield return new WaitForSeconds(1);
 
-        OverlayManager.Instance.ShowOverlay(_overlayTheme);
+        OverlayManager.Instance.ShowOverlay(_overlayMessageBox, OverlayManager.EMessageBoxResponse.Response_Email);
+        yield return new WaitForSeconds(5);
+        OverlayManager.Instance.HideOverlays();
+
+        yield return new WaitForSeconds(1);
+
+        OverlayManager.Instance.ShowOverlay(_overlayMessageBox, OverlayManager.EMessageBoxResponse.Response_Credentials);
         yield return new WaitForSeconds(5);
         OverlayManager.Instance.HideOverlays();
 
         yield return new WaitForSeconds(1);
 
         OverlayManager.Instance.ShowOverlay(_overlayLanguage);
+        yield return new WaitForSeconds(5);
+        OverlayManager.Instance.HideOverlays();
+
+        yield return new WaitForSeconds(1);
+
+        OverlayManager.Instance.ShowOverlay(_overlayTheme);
         yield return new WaitForSeconds(5);
         OverlayManager.Instance.HideOverlays();
 
