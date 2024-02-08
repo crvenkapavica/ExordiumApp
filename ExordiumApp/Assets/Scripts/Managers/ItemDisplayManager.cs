@@ -7,6 +7,8 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 {
     public static ItemDisplayManager Instance { get; private set; }
 
+    private float _height;
+
     [SerializeField] private Transform _itemsParent;
     [SerializeField] private GameObject _itemEntryPrefab;
     [SerializeField] private ScrollRect _scrollRect;
@@ -28,9 +30,8 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log(_scrollRect.verticalNormalizedPosition);
         // Check if the scroll view is at the bottom
-        if (_scrollRect.verticalNormalizedPosition <= 0.1f/* && !_bIsFetching && _bCanFetchMore*/)
+        if (_scrollRect.verticalNormalizedPosition <= 0.05f && !_bIsFetching && _bCanFetchMore)
         {
             FetchMoreItems();
         }
@@ -63,10 +64,13 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
         {
             GameObject itemObject = Instantiate(_itemEntryPrefab, _itemsParent);
 
-            float contentHeight = _itemsParent.GetComponent<RectTransform>().rect.height;
-            float height = (contentHeight - Screen.height * 0.035f * 5) / 5;
+            if (_height == 0)
+            {
+                float contentHeight = _itemsParent.GetComponent<RectTransform>().rect.height;
+                _height = (contentHeight - Screen.height * 0.035f * 5) / 5;
+            }
             var rect = itemObject.GetComponent<RectTransform>();
-            rect.sizeDelta = new Vector2(rect.sizeDelta.x, height);
+            rect.sizeDelta = new Vector2(rect.sizeDelta.x, _height);
 
             itemObject.GetComponent<ItemDisplay>().Setup(itemEntry);
         }
