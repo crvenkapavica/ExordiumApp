@@ -60,6 +60,12 @@ public class ThemeManager : MonoBehaviour
         else if (parent.TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI text))
         {
             text.color = Theme.textColor;
+
+            // Adjusting for Input Field Text
+            if (text.name.Contains("Input"))
+            {
+                text.color = Theme == _darkTheme ? Color.white : Color.black;
+            }
         }
         else if (parent.TryGetComponent<Button>(out Button button)) 
         {

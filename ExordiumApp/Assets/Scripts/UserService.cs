@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 public class UserService : IUserService
 {
     private const string BASE_URL = "https://exordiumgames.com/unity_backend_assignment/";
+
     private static UserService s_instance;
 
     public static UserService Instance => s_instance ??= new UserService();
