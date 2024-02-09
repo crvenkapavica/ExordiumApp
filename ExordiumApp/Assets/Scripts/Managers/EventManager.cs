@@ -16,18 +16,74 @@ public class EventManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        SetButtonEvents();
+        AssignButtonEvents();
     }
 
-    public void AddEvent(GameObject go)
+    private void AssignButtonEvents()
     {
+        foreach (var panelMapping in UIManager.Instance.PanelMappings)
+        {
+            GameObject panel = panelMapping.panelObject;
+            panel.SetActive(true);
 
+            Button[] buttons = panel.GetComponentsInChildren<Button>();
+            foreach (var button in buttons)
+            {
+                switch (button.name)
+                {
+                    case "Items":
+                        button.onClick.AddListener(() => ButtonClicked_Items());        break;
+                    case "Category":
+                        button.onClick.AddListener(() => ButtonClicked_Category());     break;
+                    case "Account":
+                        button.onClick.AddListener(() => ButtonClicked_Account());      break;
+                    case "Retailer":
+                        button.onClick.AddListener(() => ButtonClicked_Retailer());     break;
+                    case "Favorites":
+                        button.onClick.AddListener(() => ButtonClicked_Favorites());    break;
+                    case "Settings":
+                        button.onClick.AddListener(() => ButtonClicked_Settings());     break;
+
+
+                    default:
+                        break;
+                }
+            }
+
+            if (panelMapping.panelType != PanelType.Navigation && panelMapping.panelType != PanelType.ScrollView)
+            {
+                panel.SetActive(false);
+            }
+        }
     }
 
-    private void SetButtonEvents()
+
+    // NAVIGATION
+    private void ButtonClicked_Items()
     {
-        Button[] buttons = FindObjectsOfType<Button>();
+        UIManager.Instance.ShowPanel(PanelType.ScrollView);
     }
+    private void ButtonClicked_Category()
+    {
+        UIManager.Instance.ShowPanel(PanelType.ScrollView);
+    }
+    private void ButtonClicked_Account()
+    {
+        UIManager.Instance.ShowPanel(PanelType.Account);
+    }
+    private void ButtonClicked_Retailer()
+    {
+        UIManager.Instance.ShowPanel(PanelType.ScrollView);
+    }
+    private void ButtonClicked_Favorites()
+    {
+        UIManager.Instance.ShowPanel(PanelType.ScrollView);
+    }
+    private void ButtonClicked_Settings()
+    {
+        UIManager.Instance.ShowPanel(PanelType.Settings);
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 

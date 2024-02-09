@@ -6,17 +6,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-public class PanelMapiing
+public class PanelMaping
 {
-    public PaneType panelType;
+    public PanelType panelType;
     public GameObject panelObject;
 }
 
-public enum PaneType
+public enum PanelType
 {
     Navigation,
-    ScrollView,
+    Items,
+    Category,
     Account,
+    Retailer,
+    Favorites,
     Settings,
     Fetching,
     MessageBox,
@@ -28,10 +31,20 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    public GameObject ActiveMainPanel { get; private set; }
+    [SerializeField] private GameObject _activeMainPanel;
+    public GameObject ActiveMainPanel
+    {
+        get => _activeMainPanel;
+        set
+        {
+            _activeMainPanel.SetActive(false);
+            _activeMainPanel = value;
+            _activeMainPanel.SetActive(true);
+        }
+    }
 
-    [SerializeField] private List<PanelMapiing> _panelMappings = new();
-    public List<PanelMapiing> PanelMappings => _panelMappings;
+    [SerializeField] private List<PanelMaping> _panelMappings = new();
+    public List<PanelMaping> PanelMappings => _panelMappings;
 
     [SerializeField] private GameObject _outterOverlayPanel;
     [SerializeField] private GameObject _innerOverlayPanel;
@@ -150,13 +163,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowPanel(GameObject panel)
+    public void ShowPanel(PanelType panelType)
     {
-        if (panel == ActiveMainPanel) return;
+        if (_panelMappings[(int)panelType].panelObject == ActiveMainPanel) return;
 
-        ActiveMainPanel.SetActive(false);
-        ActiveMainPanel = panel;
-        ActiveMainPanel.SetActive(true);
+        ActiveMainPanel = _panelMappings[(int)panelType].panelObject;
     }
 
 
