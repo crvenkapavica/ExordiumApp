@@ -24,7 +24,7 @@ public class ItemDisplay : MonoBehaviour
         _itemName.text = itemEntry.ItemName;
         _category.text = itemEntry.CategoryName;
 
-        //_favoritesToggle
+        //_favoritesToggle = OnClickEvent.
     }
 
     private IEnumerator LoadImage(string imageUrl, Image targetImage)
