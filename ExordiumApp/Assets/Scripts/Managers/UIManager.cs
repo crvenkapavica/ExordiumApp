@@ -83,9 +83,9 @@ public class UIManager : MonoBehaviour
 
         _outterOverlayPanel.SetActive(true);
 
-        var buttonText = messageBox.transform.Find("InnerPanelTransparent/Button/Retry");
+        var buttonText = messageBox.transform.Find("InnerPanelTransparent/Retry");
         if (buttonText == null)
-            buttonText = messageBox.transform.Find("InnerPanelTransparent/Button/Continue");
+            buttonText = messageBox.transform.Find("InnerPanelTransparent/Continue");
 
         var messageText = messageBox.transform.Find("InnerPanelTransparent/Message");
         if (messageText == null)

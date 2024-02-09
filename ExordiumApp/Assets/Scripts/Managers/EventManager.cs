@@ -48,8 +48,9 @@ public class EventManager : MonoBehaviour
                         button.onClick.AddListener(() => ButtonClicked_Register(button));   break;
                     case "Login":
                         button.onClick.AddListener(() => ButtonClicked_Login(button));      break;
+                    case "Retry":
+                        button.onClick.AddListener(() => MessageBoxClicked());              break;
 
-                        
                     default:
                         break;
                 }
@@ -119,6 +120,12 @@ public class EventManager : MonoBehaviour
         parent.Find("PasswordPanel/Input").GetComponent<TMP_InputField>().text = "";
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
+    private void MessageBoxClicked()
+    {
+        UIManager.Instance.HideOverlays();
+    }
 }
 
 
