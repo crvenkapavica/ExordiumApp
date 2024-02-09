@@ -50,7 +50,7 @@ public class EventManager : MonoBehaviour
                 }
             }
 
-            if (panelMapping.panelType != PanelType.Navigation && panelMapping.panelType != PanelType.ScrollView)
+            if (panelMapping.panelType != PanelType.Navigation && panelMapping.panelType != PanelType.Items)
             {
                 panel.SetActive(false);
             }
@@ -61,11 +61,11 @@ public class EventManager : MonoBehaviour
     // NAVIGATION
     private void ButtonClicked_Items()
     {
-        UIManager.Instance.ShowPanel(PanelType.ScrollView);
+        UIManager.Instance.ShowPanel(PanelType.Items);
     }
     private void ButtonClicked_Category()
     {
-        UIManager.Instance.ShowPanel(PanelType.ScrollView);
+        UIManager.Instance.ShowPanel(PanelType.Category);
     }
     private void ButtonClicked_Account()
     {
@@ -73,11 +73,11 @@ public class EventManager : MonoBehaviour
     }
     private void ButtonClicked_Retailer()
     {
-        UIManager.Instance.ShowPanel(PanelType.ScrollView);
+        UIManager.Instance.ShowPanel(PanelType.Retailer);
     }
     private void ButtonClicked_Favorites()
     {
-        UIManager.Instance.ShowPanel(PanelType.ScrollView);
+        UIManager.Instance.ShowPanel(PanelType.Favorites);
     }
     private void ButtonClicked_Settings()
     {
