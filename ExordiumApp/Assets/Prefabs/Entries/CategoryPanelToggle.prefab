@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 4025456627411034644}
   - component: {fileID: 8085372501971021228}
   m_Layer: 5
-  m_Name: CategoryToggle
+  m_Name: CategoryPanelToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

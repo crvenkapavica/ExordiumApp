@@ -46,6 +46,11 @@
       "croatian": "Tema"
     },
     {
+      "name": "Themes",
+      "english": "Themes",
+      "croatian": "Teme"
+    },
+    {
       "name": "ThemeName",
       "english": "Theme name",
       "croatian": "Ime teme"
@@ -101,7 +106,7 @@
       "croatian": "Tamna tema"
     },
     {
-      "name": "LightTeme",
+      "name": "LightTheme",
       "english": "Light theme",
       "croatian": "Svijetla tema"
     },
@@ -129,6 +134,16 @@
       "name": "Response_Welcome",
       "english": "Welcome!",
       "croatian": "Dobrodošli!"
+    },
+    {
+      "name": "Croatian",
+      "english": "Croatian",
+      "croatian": "Hrvatski"
+    },
+    {
+      "name": "English",
+      "english": "English",
+      "croatian": "Engleski"
     }
   ]
 }

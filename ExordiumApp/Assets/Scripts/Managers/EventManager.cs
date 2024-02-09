@@ -50,8 +50,16 @@ public class EventManager : MonoBehaviour
                         button.onClick.AddListener(() => ButtonClicked_Login(button));      break;
                     case "Logout":
                         button.onClick.AddListener(() => ButtonClicked_Logout());           break;
+                    case "Language":
+                        button.onClick.AddListener(() => ButtonClicked_Language());         break;
+                    case "Theme":
+                        button.onClick.AddListener(() => ButtonClicked_Theme());            break;
                     case "RetryContinue":
                         button.onClick.AddListener(() => MessageBoxClicked());              break;
+                    case "DarkTheme":
+                        button.onClick.AddListener(() => ButtonClicked_DarkTheme());        break;
+                    case "LightTheme":
+                        button.onClick.AddListener(() => ButtonClicked_LightTheme());       break;
 
 
                     default:
@@ -131,9 +139,36 @@ public class EventManager : MonoBehaviour
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     
+    // SETTINGS
+    private void ButtonClicked_Language()
+    {
+        UIManager.Instance.ShowOverlay(
+            UIManager.Instance.PanelMappings[(int)PanelType.Language].panelObject
+        );
+    }
 
+    private void ButtonClicked_Theme()
+    {
+        UIManager.Instance.ShowOverlay(
+            UIManager.Instance.PanelMappings[(int)PanelType.Theme].panelObject
+        );
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // OVERLAYS
     private void MessageBoxClicked()
     {
         UIManager.Instance.HideOverlays();
     }
+
+    private void ButtonClicked_DarkTheme()
+    {
+        ThemeManager.Instance.Theme = ThemeManager.Instance.DarkTheme;
+    }
+
+    private void ButtonClicked_LightTheme()
+    {
+        ThemeManager.Instance.Theme = ThemeManager.Instance.LightTheme;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 }

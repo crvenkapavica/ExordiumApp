@@ -9,6 +9,9 @@ public class ThemeManager : MonoBehaviour
     [SerializeField] private Theme _lightTheme;
     [SerializeField] private Theme _darkTheme;
 
+    public Theme LightTheme => _lightTheme;
+    public Theme DarkTheme => _darkTheme;
+
     private Theme _theme;
     public Theme Theme
     {
@@ -34,10 +37,7 @@ public class ThemeManager : MonoBehaviour
 
     private void Start()
     {
-        // check player prefs!
-
         Theme = _lightTheme;
-        //Theme = _darkTheme;
     }
 
     public void ApplyThemeRecursive(Transform parent)

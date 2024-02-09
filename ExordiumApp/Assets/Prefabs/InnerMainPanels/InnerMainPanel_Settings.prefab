@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 3914755922528621467}
   - component: {fileID: 6792734541737212987}
   m_Layer: 5
-  m_Name: ThemeButton
+  m_Name: Theme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,7 +885,7 @@ GameObject:
   - component: {fileID: 6934931265657259426}
   - component: {fileID: 50620880951026998}
   m_Layer: 5
-  m_Name: LanguageButton
+  m_Name: Language
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
