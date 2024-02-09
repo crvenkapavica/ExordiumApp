@@ -94,6 +94,8 @@ public class UIManager : MonoBehaviour
             messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Email");
         if (messageText == null)
             messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Credentials");
+        if (messageText == null)
+            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Welcome");
 
         switch (response)
         {
