@@ -23,11 +23,15 @@ public class LoginManager : MonoBehaviour
             {
                 if (success)
                 {
-                    Debug.Log("Login successful: " + message);
+                    UIManager.Instance.ShowOverlay(
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_OK
+                    );
                 }
                 else
                 {
-                    Debug.Log("Login failed: " + message);
+                    UIManager.Instance.ShowOverlay(
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_Credentials
+                    );
                 }
             })
         );

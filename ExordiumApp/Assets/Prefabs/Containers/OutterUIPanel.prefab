@@ -334,8 +334,6 @@ GameObject:
   - component: {fileID: 3690350855592541676}
   - component: {fileID: 1240686058302895497}
   - component: {fileID: 237544484361058667}
-  - component: {fileID: 2252370449397147809}
-  - component: {fileID: 2781873251056135586}
   m_Layer: 5
   m_Name: OutterUIPanel
   m_TagString: Untagged
@@ -428,30 +426,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2252370449397147809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8279810819933853209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f772c52a0aaabaa42a57be11c4c1a9f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2781873251056135586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8279810819933853209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e44fee38cdf6ce643aaceaf923685872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2960317953156759571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -460,6 +434,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 983759524169579490}
     m_Modifications:
+    - target: {fileID: 4456420201670632524, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456420201670632524, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456420201670632524, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456420201670632524, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6193837726492923739, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
       propertyPath: m_Name
       value: MainOuterPanel
@@ -542,6 +532,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6358058949075691117, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417251833557407018, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417251833557407018, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417251833557407018, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417251833557407018, guid: 4b5a0bf2ef5f6cc458008688ebc85c54, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

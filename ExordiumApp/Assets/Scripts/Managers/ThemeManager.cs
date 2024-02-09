@@ -34,9 +34,10 @@ public class ThemeManager : MonoBehaviour
 
     private void Start()
     {
-        // check playerPrefs, if exists use that one, if not use default - _darkTheme
-        //Theme = _lightTheme;
-        Theme = _darkTheme;
+        // check player prefs!
+
+        Theme = _lightTheme;
+        //Theme = _darkTheme;
     }
 
     public void ApplyThemeRecursive(Transform parent)

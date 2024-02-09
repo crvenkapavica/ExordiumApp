@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class PanelMaping
@@ -96,10 +94,6 @@ public class UIManager : MonoBehaviour
             messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Email");
         if (messageText == null)
             messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Credentials");
-
-        if (buttonText == null || messageText == null)
-            Debug.Log(buttonText, messageText);
-
 
         switch (response)
         {

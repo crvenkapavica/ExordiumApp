@@ -27,7 +27,9 @@ public class RegisterManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Registration failed: " + message);
+                    UIManager.Instance.ShowOverlay(
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_Email
+                    );
                 }
             })
         );
