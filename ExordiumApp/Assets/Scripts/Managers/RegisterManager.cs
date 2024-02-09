@@ -23,7 +23,9 @@ public class RegisterManager : MonoBehaviour
             {
                 if (success)
                 {
-                    Debug.Log("Registration successful: " + message);
+                    UIManager.Instance.ShowOverlay(
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_OK
+                    );
                 }
                 else
                 {

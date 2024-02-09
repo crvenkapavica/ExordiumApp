@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [Serializable]
@@ -52,7 +53,8 @@ public class UIManager : MonoBehaviour
     {
         Response_OK,
         Response_Email,
-        Response_Credentials
+        Response_Credentials,
+        Response_Welcome,
     }
 
     private enum EOverlays
@@ -83,7 +85,7 @@ public class UIManager : MonoBehaviour
 
         _outterOverlayPanel.SetActive(true);
 
-        var buttonText = messageBox.transform.Find("InnerPanelTransparent/Retry");
+        var buttonText = messageBox.transform.Find("InnerPanelTransparent/RetryContinue/Retry");
         if (buttonText == null)
             buttonText = messageBox.transform.Find("InnerPanelTransparent/Continue");
 
@@ -110,6 +112,12 @@ public class UIManager : MonoBehaviour
             case EMessageBoxResponse.Response_Credentials:
                 buttonText.name = "Retry";
                 messageText.name = "Response_Credentials";
+                break;
+            case EMessageBoxResponse.Response_Welcome:
+                buttonText.name = "Continue";
+                messageText.name = "Response_Welcome";
+                break;
+            default:
                 break;
         }
 
@@ -166,6 +174,18 @@ public class UIManager : MonoBehaviour
         ActiveMainPanel = _panelMappings[(int)panelType].panelObject;
     }
 
+    public void ToggleAccountPanel(bool bToggle, string username = "")
+    {
+        Transform panel = UIManager.Instance.ActiveMainPanel.transform;
+        panel.Find("EmailPanel").gameObject.SetActive(bToggle);
+        panel.Find("PasswordPanel").gameObject.SetActive(bToggle);
+        panel.Find("ButtonPanel").gameObject.SetActive(bToggle);
+
+        panel.Find("LoggedInPanelTransparent/Logout").gameObject.SetActive(!bToggle);
+        TextMeshProUGUI usernameText = panel.Find("LoggedInPanelTransparent/Username").GetComponent<TextMeshProUGUI>();
+        usernameText.text = username;
+        usernameText.gameObject.SetActive(!bToggle);
+    }
 
     private void AnchorOverlayMessageBox()
     {

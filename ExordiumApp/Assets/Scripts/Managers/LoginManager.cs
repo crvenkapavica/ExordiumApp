@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class LoginManager : MonoBehaviour
@@ -18,14 +19,19 @@ public class LoginManager : MonoBehaviour
 
     public void AttemptLogin(string username, string password)
     {
+        string _username = username;
+
         StartCoroutine(
             UserService.Instance.Login(username, password, (success, message) =>
             {
                 if (success)
                 {
                     UIManager.Instance.ShowOverlay(
-                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_OK
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_Welcome
                     );
+
+                    UIManager.Instance.ToggleAccountPanel(false, _username);
+                    UserData.Instance.UpdateLoginStatus(true, _username);
                 }
                 else
                 {

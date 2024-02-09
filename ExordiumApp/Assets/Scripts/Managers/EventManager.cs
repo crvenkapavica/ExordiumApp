@@ -48,8 +48,11 @@ public class EventManager : MonoBehaviour
                         button.onClick.AddListener(() => ButtonClicked_Register(button));   break;
                     case "Login":
                         button.onClick.AddListener(() => ButtonClicked_Login(button));      break;
-                    case "Retry":
+                    case "Logout":
+                        button.onClick.AddListener(() => ButtonClicked_Logout());           break;
+                    case "RetryContinue":
                         button.onClick.AddListener(() => MessageBoxClicked());              break;
+
 
                     default:
                         break;
@@ -108,6 +111,7 @@ public class EventManager : MonoBehaviour
         parent.Find("EmailPanel/Input").GetComponent<TMP_InputField>().text = "";
         parent.Find("PasswordPanel/Input").GetComponent<TMP_InputField>().text = "";
     }
+    
     private void ButtonClicked_Login(Button button)
     {
         Transform parent = button.transform.parent.parent.parent;
@@ -119,6 +123,12 @@ public class EventManager : MonoBehaviour
         parent.Find("EmailPanel/Input").GetComponent<TMP_InputField>().text = "";
         parent.Find("PasswordPanel/Input").GetComponent<TMP_InputField>().text = "";
     }
+
+    private void ButtonClicked_Logout()
+    {
+        UIManager.Instance.ToggleAccountPanel(true);
+        UserData.Instance.UpdateLoginStatus(false);
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     
 
@@ -127,65 +137,3 @@ public class EventManager : MonoBehaviour
         UIManager.Instance.HideOverlays();
     }
 }
-
-
-
-
-
-
-
-
-
-
-//public class EventManager : MonoBehaviour
-//{
-//    public static EventManager Instance { get; private set; }
-
-//    void Awake()
-//    {
-//        if (Instance == null)
-//        {
-//            Instance = this;
-//            DontDestroyOnLoad(gameObject); // Optional: Keep alive for the lifetime of the game
-//        }
-//        else
-//        {
-//            Destroy(gameObject);
-//        }
-
-//        AssignButtonListeners();
-//    }
-
-//    private void AssignButtonListeners()
-//    {
-//        Button[] buttons = FindObjectsOfType<Button>();
-//        foreach (var button in buttons)
-//        {
-//            button.onClick.AddListener(() => ButtonClicked(button));
-//        }
-//    }
-
-//    private void ButtonClicked(Button button)
-//    {
-//        switch (button.name)
-//        {
-//            case "NavButton1":
-//                ShowPanel(PanelType.Panel1);
-//                break;
-//            default:
-//                Debug.Log("Clicked on " + button.name);
-//                break;
-//        }
-//    }
-
-//    private void ShowPanel(PanelType panelType)
-//    {
-//    }
-//}
-
-//// Enum to identify panels - adjust based on your actual panels
-//public enum PanelType
-//{
-//    Panel1,
-//    Panel2,
-//}
