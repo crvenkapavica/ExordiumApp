@@ -145,8 +145,7 @@ public class EventManager : MonoBehaviour
 
     private void ButtonClicked_Logout()
     {
-        UIManager.Instance.ToggleAccountPanel(true);
-        UserData.Instance.UpdateLoginStatus(false);
+        LoginManager.Instance.Logout();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -185,9 +184,15 @@ public class EventManager : MonoBehaviour
     private void ButtonClicked_Confirm()
     {
         ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.Theme, true);
-        UIManager.Instance.HideOverlays();
+        UIManager.Instance.ThemeName.text = ThemeManager.Instance.Theme.ThemeName;
+        //UIManager.Instance.LanguageName.text = ....
 
-        // Save to PlayerPrefs
+        if (UserData.Instance.IsLoggedIn)
+        {
+            // Save to PlayerPrefs if logged in
+        }
+
+        UIManager.Instance.HideOverlays();
     }
 
     private void ButtonClicked_Cancel()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,11 +37,8 @@ public class ThemeManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    private void Start()
-    {
-        Theme = (_theme = _lightTheme);
+        Theme = (_theme = _darkTheme);
     }
 
     private void ApplyThemeRecursive(Transform parent, Theme theme)
@@ -48,7 +46,7 @@ public class ThemeManager : MonoBehaviour
         if ((parent.name.Contains("Panel") || parent.name.Contains("Overlay")) 
             && parent.TryGetComponent<Image>(out Image background))
         {
-            background.color = theme.panelBackgroundColor;
+            background.color = theme.PanelBackgroundColor;
 
             if (parent.name.Contains("Main") || parent.name.Contains("Transparent"))
             {
@@ -59,11 +57,11 @@ public class ThemeManager : MonoBehaviour
         }
         else if (parent.name.Contains("Checkmark"))
         {
-            parent.GetComponent<Image>().color = theme.textColor;
+            parent.GetComponent<Image>().color = theme.TextColor;
         }
         else if (parent.TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI text))
         {
-            text.color = theme.textColor;
+            text.color = theme.TextColor;
 
             // This might not be needed
             // Adjusting for Input Field Text
@@ -75,12 +73,12 @@ public class ThemeManager : MonoBehaviour
         else if (parent.TryGetComponent<Button>(out Button button)) 
         {
             ColorBlock colors = button.colors;  
-            colors.normalColor = theme.buttonBackgroundColor;
+            colors.normalColor = theme.ButtonBackgroundColor;
             button.colors = colors;
         }
         else if (parent.TryGetComponent<Toggle>(out Toggle toggle))
         {
-            toggle.image.color = theme.buttonBackgroundColor;
+            toggle.image.color = theme.ButtonBackgroundColor;
         }
         
         foreach(Transform child in parent)
@@ -91,10 +89,10 @@ public class ThemeManager : MonoBehaviour
 
     public void ApplyTheme(Theme theme, bool bPermanent)
     {
-        Theme = bPermanent 
-            ? _theme = (theme == null ? _theme : _previewTheme) 
+        Theme = bPermanent
+            ? _theme = (theme == null ? _theme : _previewTheme)
             : _previewTheme = theme;
-    }       
+    }
 
     public void ApplyThemeLocal(Transform parent)
     {

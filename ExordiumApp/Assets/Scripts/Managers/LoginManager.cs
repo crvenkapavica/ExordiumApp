@@ -42,4 +42,10 @@ public class LoginManager : MonoBehaviour
             })
         );
     }
+
+    public void Logout()
+    {
+        UIManager.Instance.ToggleAccountPanel(true);
+        UserData.Instance.UpdateLoginStatus(false);
+    }
 }

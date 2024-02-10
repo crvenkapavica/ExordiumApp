@@ -49,6 +49,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _innerOverlayPanel;
     [SerializeField] private GameObject[] _overlays;
 
+    [SerializeField] private TextMeshProUGUI _languageName;
+    public TextMeshProUGUI LanguageName
+    {
+        get => _languageName;
+        set => _languageName = value;
+    }
+
+    [SerializeField] private TextMeshProUGUI _themeName;
+    public TextMeshProUGUI ThemeName
+    {
+        get => _themeName;
+        set => _themeName = value;
+    }
+
     public enum EMessageBoxResponse
     {
         Response_OK,
