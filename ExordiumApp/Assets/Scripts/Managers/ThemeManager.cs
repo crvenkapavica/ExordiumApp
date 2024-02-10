@@ -26,7 +26,7 @@ public class ThemeManager : MonoBehaviour
     }
 
     public string ThemeName 
-        => LocalizationManager.Instance.Language == "english" 
+        => LocalizationManager.Instance.Language == Language.English 
         ? Theme.ThemeName
         : Theme == _lightTheme ? "Svijetla Tema" : "Tamna Tema";
 

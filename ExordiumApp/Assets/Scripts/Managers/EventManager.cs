@@ -20,6 +20,11 @@ public class EventManager : MonoBehaviour
         AssignButtonEvents();
     }
 
+    private void Start()
+    {
+        AssignLanguageToggleEvents();
+    }
+
     private void AssignButtonEvents()
     {
         foreach (var panelMapping in UIManager.Instance.PanelMappings)
@@ -34,30 +39,6 @@ public class EventManager : MonoBehaviour
                 logout.SetActive(true);
                 logout.GetComponent<Button>().onClick.AddListener(() => ButtonClicked_Logout());
                 logout.SetActive(false);
-            }
-
-            //Force only one checkbox at a time since ToggleGroup is not working
-            if (panelMapping.panelType == PanelType.Language)
-            {
-                Toggle[] toggles = panel.GetComponentsInChildren<Toggle>();
-                Debug.Log("TOGGLES" + toggles.Length);
-                foreach (Toggle toggle in toggles)
-                {
-                    Toggle selectedToggle = toggle;
-                    selectedToggle.onValueChanged.AddListener((isOn) =>
-                    {
-                        if (isOn)
-                        {
-                            foreach (Toggle toggle in toggles) {
-                                if (toggle != selectedToggle)
-                                {
-                                    toggle.isOn = false;
-                                }
-                            }
-                        }
-                    }
-                    );
-                }
             }
 
             Button[] buttons = panel.GetComponentsInChildren<Button>();
@@ -109,6 +90,20 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    private void AssignLanguageToggleEvents()
+    {
+        UIManager.Instance.LanguageToggles[(int)LanguageToggle.Croatian]
+            .onValueChanged.AddListener((isOn) =>
+            {
+                if (isOn) { LocalizationManager.Instance.ApplyLocalization(Language.Croatian, false); }
+            });
+
+        UIManager.Instance.LanguageToggles[(int)LanguageToggle.English]
+            .onValueChanged.AddListener((isOn) =>
+            {
+                if (isOn) { LocalizationManager.Instance.ApplyLocalization(Language.English, false); }
+            });
+    }
 
     // NAVIGATION
     private void ButtonClicked_Items()
@@ -207,34 +202,24 @@ public class EventManager : MonoBehaviour
 
     private void ButtonClicked_Confirm()
     {
+        LocalizationManager.Instance.ApplyLocalization(LocalizationManager.Instance.Language, true);
         ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.Theme, true);
         UIManager.Instance.ThemeName.text = ThemeManager.Instance.ThemeName;
-        UIManager.Instance.LanguageName.text = LocalizationManager.Instance.Language;
-
-        if (UserData.Instance.IsLoggedIn)
-        {
-            // Save to PlayerPrefs if logged in
-        }
 
         UIManager.Instance.HideOverlays();
     }
 
-    private void ButtonClicked_Cancel()
+private void ButtonClicked_Cancel()
     {
+        LocalizationManager.Instance.ApplyLocalization(Language.Null, true);
         ThemeManager.Instance.ApplyTheme(null, true);
         UIManager.Instance.HideOverlays();
     }
-
-    private void ToggleClicked_Language(Toggle selectedToggle)
-    {
-        foreach (Toggle toggle in UIManager.Instance.LanguageToggles)
-        {
-            if (toggle != selectedToggle)
-            {
-                Debug.Log(toggle.name + toggle.isOn);
-                toggle.isOn = false;
-            }
-        }
-    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+
+//    if (UserData.Instance.IsLoggedIn)
+//{
+//    // Save to PlayerPrefs if logged in
+//}

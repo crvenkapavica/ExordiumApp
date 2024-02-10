@@ -1,6 +1,15 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+
+public enum Language
+{
+    Null = -2,
+    None = -1,
+    Croatian,
+    English,
+}
 
 public class LocalizationManager : MonoBehaviour
 {
@@ -8,18 +17,16 @@ public class LocalizationManager : MonoBehaviour
 
     private readonly Dictionary<string, TranslationItem> _translationDictionary = new();
 
-    private string _language;
+    private Language _language = Language.None;
+    private Language _previewLanguge = Language.None;
 
-    public string Language 
+    public Language Language
     {
-        get => _language == "english" ? "English" : "Hrvatski";
+        get => _language;
         set
         {
-            if (_language != value)
-            {
-                _language = value;
-                LocalizeTextRecursive(transform);
-            }
+            _previewLanguge = value;
+            LocalizeTextRecursive(transform, _previewLanguge);
         } 
     }
 
@@ -45,20 +52,27 @@ public class LocalizationManager : MonoBehaviour
             _translationDictionary[item.name] = item;
         }
 
-        Language = "croatian";
+        Language = Language.Croatian;
     }
 
-    public void LocalizeTextRecursive(Transform parent)
+    public void LocalizeTextRecursive(Transform parent, Language language)
     {
         if (parent.TryGetComponent(out TextMeshProUGUI text)
             && _translationDictionary.TryGetValue(text.name, out TranslationItem translation))
         {
-            text.text = Language == "english" ? translation.english : translation.croatian;
+            text.text = language == Language.English ? translation.english : translation.croatian;
         }
 
         for (int i = 0; i < parent.childCount; i++)
         {
-            LocalizeTextRecursive(parent.GetChild(i));
+            LocalizeTextRecursive(parent.GetChild(i), language);
         }
+    }
+
+    public void ApplyLocalization(Language language, bool bPermanent)
+    {
+        Language = bPermanent
+            ? _language = (language == Language.Null ? _language : _previewLanguge)
+            : _previewLanguge = language;
     }
 }

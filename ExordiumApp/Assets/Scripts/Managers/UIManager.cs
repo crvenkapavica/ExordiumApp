@@ -27,6 +27,20 @@ public enum PanelType
     Theme
 }
 
+public enum EMessageBoxResponse
+{
+    Response_OK,
+    Response_Email,
+    Response_Credentials,
+    Response_Welcome,
+}
+
+public enum LanguageToggle
+{
+    Croatian,
+    English
+}
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
@@ -66,22 +80,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Toggle[] _languageToggles;
     public Toggle[] LanguageToggles => _languageToggles;
-
-    public enum EMessageBoxResponse
-    {
-        Response_OK,
-        Response_Email,
-        Response_Credentials,
-        Response_Welcome,
-    }
-
-    private enum EOverlays
-    {
-        MessageBox = 0,
-        Language,
-        Theme,
-        Fetching
-    }
 
     private const float FADE_TIME = 0.25f;
 
@@ -137,7 +135,9 @@ public class UIManager : MonoBehaviour
                 break;
         }
 
-        LocalizationManager.Instance.LocalizeTextRecursive(messageBox.transform);
+        LocalizationManager.Instance.LocalizeTextRecursive(
+            messageBox.transform, LocalizationManager.Instance.Language
+        );
 
         AnchorOverlayMessageBox();
         _innerOverlayPanel.SetActive(true);
@@ -192,17 +192,13 @@ public class UIManager : MonoBehaviour
 
     public void ToggleAccountPanel(bool bToggle, string username = "")
     {
-        Debug.Log("seeting to : " + bToggle);
-
         Transform panel = UIManager.Instance.ActiveMainPanel.transform;
         panel.Find("EmailPanel").gameObject.SetActive(bToggle);
         panel.Find("PasswordPanel").gameObject.SetActive(bToggle);
         panel.Find("ButtonPanel").gameObject.SetActive(bToggle);
 
-        Debug.Log(panel.Find("ButtonPanel").gameObject.activeSelf);
-
         panel.Find("LoggedInPanelTransparent/Logout").gameObject.SetActive(!bToggle);
-        TextMeshProUGUI usernameText = panel.Find("LoggedInPanelTransparent/Username").GetComponent<TextMeshProUGUI>();
+        var usernameText = panel.Find("LoggedInPanelTransparent/Username").GetComponent<TextMeshProUGUI>();
         usernameText.text = username;
         usernameText.gameObject.SetActive(!bToggle);
     }

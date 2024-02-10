@@ -27,7 +27,7 @@ public class LoginManager : MonoBehaviour
                 if (success)
                 {
                     UIManager.Instance.ShowOverlay(
-                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_Welcome
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_Welcome
                     );
 
                     UIManager.Instance.ToggleAccountPanel(false, _username);
@@ -36,7 +36,7 @@ public class LoginManager : MonoBehaviour
                 else
                 {
                     UIManager.Instance.ShowOverlay(
-                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_Credentials
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_Credentials
                     );
                 }
             })

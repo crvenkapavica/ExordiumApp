@@ -24,13 +24,13 @@ public class RegisterManager : MonoBehaviour
                 if (success)
                 {
                     UIManager.Instance.ShowOverlay(
-                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_OK
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_OK
                     );
                 }
                 else
                 {
                     UIManager.Instance.ShowOverlay(
-                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, UIManager.EMessageBoxResponse.Response_Email
+                        UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_Email
                     );
                 }
             })
