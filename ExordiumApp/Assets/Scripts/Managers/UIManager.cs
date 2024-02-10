@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class PanelMaping
@@ -62,6 +63,9 @@ public class UIManager : MonoBehaviour
         get => _themeName;
         set => _themeName = value;
     }
+
+    [SerializeField] private Toggle[] _languageToggles;
+    public Toggle[] LanguageToggles => _languageToggles;
 
     public enum EMessageBoxResponse
     {

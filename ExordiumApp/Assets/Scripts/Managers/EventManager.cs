@@ -36,6 +36,12 @@ public class EventManager : MonoBehaviour
                 logout.SetActive(false);
             }
 
+            // Force only one checkbox at a time
+            if (panelMapping.panelType == PanelType.Language)
+            {
+
+            }
+
             Button[] buttons = panel.GetComponentsInChildren<Button>();
             foreach (var button in buttons)
             {
