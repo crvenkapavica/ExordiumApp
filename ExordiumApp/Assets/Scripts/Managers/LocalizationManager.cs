@@ -5,7 +5,6 @@ using UnityEngine;
 
 public enum Language
 {
-    Null = -2,
     None = -1,
     Croatian,
     English,
@@ -52,7 +51,7 @@ public class LocalizationManager : MonoBehaviour
             _translationDictionary[item.name] = item;
         }
 
-        Language = Language.Croatian;
+        Language = (_language = Language.Croatian);
     }
 
     public void LocalizeTextRecursive(Transform parent, Language language)
@@ -72,7 +71,12 @@ public class LocalizationManager : MonoBehaviour
     public void ApplyLocalization(Language language, bool bPermanent)
     {
         Language = bPermanent
-            ? _language = (language == Language.Null ? _language : _previewLanguge)
+            ? _language = (language == Language.None ? _language : _previewLanguge)
             : _previewLanguge = language;
+
+        if (language == Language.None)
+        {
+            UIManager.Instance.LanguageToggles[(int)Language].isOn = true;
+        }
     }
 }

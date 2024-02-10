@@ -211,7 +211,7 @@ public class EventManager : MonoBehaviour
 
 private void ButtonClicked_Cancel()
     {
-        LocalizationManager.Instance.ApplyLocalization(Language.Null, true);
+        LocalizationManager.Instance.ApplyLocalization(Language.None, true);
         ThemeManager.Instance.ApplyTheme(null, true);
         UIManager.Instance.HideOverlays();
     }
