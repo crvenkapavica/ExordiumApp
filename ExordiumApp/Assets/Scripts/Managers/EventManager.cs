@@ -184,8 +184,8 @@ public class EventManager : MonoBehaviour
     private void ButtonClicked_Confirm()
     {
         ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.Theme, true);
-        UIManager.Instance.ThemeName.text = ThemeManager.Instance.Theme.ThemeName;
-        //UIManager.Instance.LanguageName.text = ....
+        UIManager.Instance.ThemeName.text = ThemeManager.Instance.ThemeName;
+        UIManager.Instance.LanguageName.text = LocalizationManager.Instance.Language;
 
         if (UserData.Instance.IsLoggedIn)
         {

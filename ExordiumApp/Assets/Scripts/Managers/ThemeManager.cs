@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +24,11 @@ public class ThemeManager : MonoBehaviour
             ApplyThemeRecursive(transform, _previewTheme);
         }
     }
+
+    public string ThemeName 
+        => LocalizationManager.Instance.Language == "english" 
+        ? Theme.ThemeName
+        : Theme == _lightTheme ? "Svijetla Tema" : "Tamna Tema";
 
     private void Awake()
     {
@@ -92,6 +95,10 @@ public class ThemeManager : MonoBehaviour
         Theme = bPermanent
             ? _theme = (theme == null ? _theme : _previewTheme)
             : _previewTheme = theme;
+
+        //Theme = bPermanent
+        //    ? _theme = _previewTheme = (theme == null ? _theme : _previewTheme)
+        //    : _previewTheme = (_previewTheme == theme ? null : theme);
     }
 
     public void ApplyThemeLocal(Transform parent)

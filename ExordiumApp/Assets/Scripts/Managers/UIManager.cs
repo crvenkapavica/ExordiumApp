@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     public void ShowOverlay(GameObject messageBox, EMessageBoxResponse response)
     {
         if (!messageBox.name.Contains("MessageBox")) return;

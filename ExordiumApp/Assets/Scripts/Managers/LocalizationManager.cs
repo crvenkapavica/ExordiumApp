@@ -12,7 +12,7 @@ public class LocalizationManager : MonoBehaviour
 
     public string Language 
     {
-        get => _language;
+        get => _language == "english" ? "English" : "Hrvatski";
         set
         {
             if (_language != value)
