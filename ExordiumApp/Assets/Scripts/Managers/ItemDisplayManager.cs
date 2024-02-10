@@ -63,7 +63,7 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
         foreach (var itemEntry in itemEntries)
         {
             GameObject itemObject = Instantiate(_itemEntryPrefab, _itemsParent);
-            ThemeManager.Instance.ApplyThemeRecursive(itemObject.transform);
+            ThemeManager.Instance.ApplyThemeLocal(itemObject.transform);
 
             if (_height == 0)
             {

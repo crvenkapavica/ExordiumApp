@@ -27,6 +27,15 @@ public class EventManager : MonoBehaviour
             GameObject panel = panelMapping.panelObject;
             panel.SetActive(true);
 
+            // Handle the disabled Logout button
+            if (panelMapping.panelType == PanelType.Account)
+            {
+                GameObject logout = panel.transform.Find("LoggedInPanelTransparent/Logout").gameObject;
+                logout.SetActive(true);
+                logout.GetComponent<Button>().onClick.AddListener(() => ButtonClicked_Logout());
+                logout.SetActive(false);
+            }
+
             Button[] buttons = panel.GetComponentsInChildren<Button>();
             foreach (var button in buttons)
             {
@@ -48,8 +57,6 @@ public class EventManager : MonoBehaviour
                         button.onClick.AddListener(() => ButtonClicked_Register(button));   break;
                     case "Login":
                         button.onClick.AddListener(() => ButtonClicked_Login(button));      break;
-                    case "Logout":
-                        button.onClick.AddListener(() => ButtonClicked_Logout());           break;
                     case "Language":
                         button.onClick.AddListener(() => ButtonClicked_Language());         break;
                     case "Theme":
@@ -60,6 +67,10 @@ public class EventManager : MonoBehaviour
                         button.onClick.AddListener(() => ButtonClicked_DarkTheme());        break;
                     case "LightTheme":
                         button.onClick.AddListener(() => ButtonClicked_LightTheme());       break;
+                    case "Confirm":
+                        button.onClick.AddListener(() => ButtonClicked_Confirm());          break;
+                    case "Cancel":
+                        button.onClick.AddListener(() => ButtonClicked_Cancel());           break;
 
 
                     default:
@@ -163,12 +174,26 @@ public class EventManager : MonoBehaviour
 
     private void ButtonClicked_DarkTheme()
     {
-        ThemeManager.Instance.Theme = ThemeManager.Instance.DarkTheme;
+        ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.DarkTheme, false);
     }
 
     private void ButtonClicked_LightTheme()
     {
-        ThemeManager.Instance.Theme = ThemeManager.Instance.LightTheme;
+        ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.LightTheme, false);
+    }
+
+    private void ButtonClicked_Confirm()
+    {
+        ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.Theme, true);
+        UIManager.Instance.HideOverlays();
+
+        // Save to PlayerPrefs
+    }
+
+    private void ButtonClicked_Cancel()
+    {
+        ThemeManager.Instance.ApplyTheme(null, true);
+        UIManager.Instance.HideOverlays();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 }

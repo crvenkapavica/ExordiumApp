@@ -85,38 +85,36 @@ public class UIManager : MonoBehaviour
 
         _outterOverlayPanel.SetActive(true);
 
-        var buttonText = messageBox.transform.Find("InnerPanelTransparent/RetryContinue/Retry");
-        if (buttonText == null)
-            buttonText = messageBox.transform.Find("InnerPanelTransparent/Continue");
-
-        var messageText = messageBox.transform.Find("InnerPanelTransparent/Message");
-        if (messageText == null)
-            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_OK");
-        if (messageText == null)
-            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Email");
-        if (messageText == null)
-            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Credentials");
-        if (messageText == null)
-            messageText = messageBox.transform.Find("InnerPanelTransparent/Response_Welcome");
+        Transform button;
+        if (!(button = messageBox.transform.Find("InnerPanelTransparent/RetryContinue/Retry")))
+            button = messageBox.transform.Find("InnerPanelTransparent/RetryContinue/Continue");
+            
+        Transform message;
+        if (!(message = messageBox.transform.Find("InnerPanelTransparent/Message")))
+            if (!(message = messageBox.transform.Find("InnerPanelTransparent/Response_OK")))
+                if (!(message = messageBox.transform.Find("InnerPanelTransparent/Response_Email")))
+                    if (!(message = messageBox.transform.Find("InnerPanelTransparent/Response_Credentials")))
+                        message = messageBox.transform.Find("InnerPanelTransparent/Response_Welcome");
 
         switch (response)
         {
             case EMessageBoxResponse.Response_OK:
-                buttonText.name = "Continue";
-                messageText.name = "Response_OK";
+                button.name = "Continue";
+                message.name = "Response_OK";
                 break;
             case EMessageBoxResponse.Response_Email:
-                buttonText.name = "Retry";
-                messageText.name = "Response_Email";
+                button.name = "Retry";
+                message.name = "Response_Email";
                 break;
             case EMessageBoxResponse.Response_Credentials:
-                buttonText.name = "Retry";
-                messageText.name = "Response_Credentials";
+                button.name = "Retry";
+                message.name = "Response_Credentials";
                 break;
             case EMessageBoxResponse.Response_Welcome:
-                buttonText.name = "Continue";
-                messageText.name = "Response_Welcome";
+                button.name = "Continue";
+                message.name = "Response_Welcome";
                 break;
+
             default:
                 break;
         }
@@ -176,10 +174,14 @@ public class UIManager : MonoBehaviour
 
     public void ToggleAccountPanel(bool bToggle, string username = "")
     {
+        Debug.Log("seeting to : " + bToggle);
+
         Transform panel = UIManager.Instance.ActiveMainPanel.transform;
         panel.Find("EmailPanel").gameObject.SetActive(bToggle);
         panel.Find("PasswordPanel").gameObject.SetActive(bToggle);
         panel.Find("ButtonPanel").gameObject.SetActive(bToggle);
+
+        Debug.Log(panel.Find("ButtonPanel").gameObject.activeSelf);
 
         panel.Find("LoggedInPanelTransparent/Logout").gameObject.SetActive(!bToggle);
         TextMeshProUGUI usernameText = panel.Find("LoggedInPanelTransparent/Username").GetComponent<TextMeshProUGUI>();

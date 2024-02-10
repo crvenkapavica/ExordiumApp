@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,13 +14,15 @@ public class ThemeManager : MonoBehaviour
     public Theme DarkTheme => _darkTheme;
 
     private Theme _theme;
+    private Theme _previewTheme;
+
     public Theme Theme
     {
         get => _theme;
         set
         {
-            _theme = value;
-            ApplyThemeRecursive(transform);
+            _previewTheme = value;
+            ApplyThemeRecursive(transform, _previewTheme);
         }
     }
 
@@ -37,15 +40,15 @@ public class ThemeManager : MonoBehaviour
 
     private void Start()
     {
-        Theme = _lightTheme;
+        Theme = (_theme = _lightTheme);
     }
 
-    public void ApplyThemeRecursive(Transform parent)
+    private void ApplyThemeRecursive(Transform parent, Theme theme)
     {
         if ((parent.name.Contains("Panel") || parent.name.Contains("Overlay")) 
             && parent.TryGetComponent<Image>(out Image background))
         {
-            background.color = Theme.panelBackgroundColor;
+            background.color = theme.panelBackgroundColor;
 
             if (parent.name.Contains("Main") || parent.name.Contains("Transparent"))
             {
@@ -56,32 +59,45 @@ public class ThemeManager : MonoBehaviour
         }
         else if (parent.name.Contains("Checkmark"))
         {
-            parent.GetComponent<Image>().color = Theme.textColor;
+            parent.GetComponent<Image>().color = theme.textColor;
         }
         else if (parent.TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI text))
         {
-            text.color = Theme.textColor;
+            text.color = theme.textColor;
 
+            // This might not be needed
             // Adjusting for Input Field Text
             if (text.name.Contains("Input"))
             {
-                text.color = Theme == _darkTheme ? Color.white : Color.black;
+                text.color = theme == DarkTheme ? Color.white : Color.black;
             }
         }
         else if (parent.TryGetComponent<Button>(out Button button)) 
         {
             ColorBlock colors = button.colors;  
-            colors.normalColor = Theme.buttonBackgroundColor;
+            colors.normalColor = theme.buttonBackgroundColor;
             button.colors = colors;
         }
         else if (parent.TryGetComponent<Toggle>(out Toggle toggle))
         {
-            toggle.image.color = Theme.buttonBackgroundColor;
+            toggle.image.color = theme.buttonBackgroundColor;
         }
         
         foreach(Transform child in parent)
         {
-            ApplyThemeRecursive(child);
+            ApplyThemeRecursive(child, theme);
         }
+    }
+
+    public void ApplyTheme(Theme theme, bool bPermanent)
+    {
+        Theme = bPermanent 
+            ? _theme = (theme == null ? _theme : _previewTheme) 
+            : _previewTheme = theme;
+    }       
+
+    public void ApplyThemeLocal(Transform parent)
+    {
+        ApplyThemeRecursive(parent, Theme);
     }
 }
