@@ -60,6 +60,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<PanelMaping> _panelMappings = new();
     public List<PanelMaping> PanelMappings => _panelMappings;
 
+    // these can ve private
+    public bool IsCategoriesInitialized {  get; private set; }
+    public bool IsRetailersInitialzed { get; private set; }
+    //============================================================
+
     [SerializeField] private GameObject _outterOverlayPanel;
     [SerializeField] private GameObject _innerOverlayPanel;
     [SerializeField] private GameObject[] _overlays;

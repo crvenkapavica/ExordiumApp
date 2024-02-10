@@ -163,75 +163,19 @@ public class ItemService : MonoBehaviour, IItemService
             });
         }
 
-        var itemEntries = (from item in ApplicationData.Instance.Items
-                           join retailer in ApplicationData.Instance.Retailers on item.retailer_id equals retailer.id
-                           join category in ApplicationData.Instance.Categories on item.item_category_id equals category.id
-                           select new ItemEntry
-                           {
-                               ItemName = item.name,
-                               Price = item.price,
-                               ItemImageUrl = item.image_url,
-                               RetailerImageUrl = retailer.image_url,
-                               CategoryName = category.name
-                           }).ToList();
+        var itemEntries = 
+            (from item in ApplicationData.Instance.Items
+             join retailer in ApplicationData.Instance.Retailers on item.retailer_id equals retailer.id
+             join category in ApplicationData.Instance.Categories on item.item_category_id equals category.id
+             select new ItemEntry
+             {
+                 ItemName = item.name,
+                 Price = item.price,
+                 ItemImageUrl = item.image_url,
+                 RetailerImageUrl = retailer.image_url,
+                 CategoryName = category.name
+             }).ToList();
 
         callback?.Invoke(itemEntries);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//public IEnumerator FetchData(Action onComplete = null)
-//{
-//    yield return StartCoroutine(AttemptFetchRetailerData());
-//    yield return StartCoroutine(AttemptFetchItemCategoryData());
-//    yield return StartCoroutine(AttemptFetchItemData());
-
-//    onComplete?.Invoke();
-//}
-
-//private IEnumerator AttemptFetchRetailerData()
-//{
-//    yield return StartCoroutine(
-//        FetchRetailerData(retailers =>
-//        {
-//            ApplicationData.Instance.UpdateRetailerData(retailers);
-//        })
-//    );
-//}
-
-//private IEnumerator AttemptFetchItemCategoryData()
-//{
-//    yield return StartCoroutine(
-//        FetchCategoryData(categories =>
-//        {
-//            ApplicationData.Instance.UpdateCategoryData(categories);
-//        })
-//    );
-//}
-
-//private IEnumerator AttemptFetchItemData()
-//{
-//    yield return StartCoroutine(
-//        FetchItemData(items =>
-//        {
-//            ApplicationData.Instance.UpdateItemData(items);
-
-//            // Join the needed details  
-//            ApplicationData.Instance.GenerateItemEntries();
-
-//            // Call UI logic to add the newly fetched 8 items to ScrollView
-//            //ItemDisplayManager.Instance.UpdateItemDisplay(items);
-//        })
-//    );
-//}

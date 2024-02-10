@@ -17,25 +17,17 @@ public class ItemDisplay : MonoBehaviour
 
     public void Setup(ItemEntry itemEntry)
     {
-        StartCoroutine(LoadImage(itemEntry.ItemImageUrl, _itemImage));
-        StartCoroutine(LoadImage(itemEntry.RetailerImageUrl, _retailerImage));
+        StartCoroutine(
+            ItemDisplayManager.Instance.LoadImage(itemEntry.ItemImageUrl, _itemImage)
+        );
+        StartCoroutine(
+            ItemDisplayManager.Instance.LoadImage(itemEntry.RetailerImageUrl, _retailerImage)
+        );
 
         _price.text = itemEntry.Price.ToString("C");
         _itemName.text = itemEntry.ItemName;
         _category.text = itemEntry.CategoryName;
 
         //_favoritesToggle = OnClickEvent.
-    }
-
-    private IEnumerator LoadImage(string imageUrl, Image targetImage)
-    {
-        using UnityWebRequest request = UnityWebRequestTexture.GetTexture(imageUrl);
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            Texture2D texture = DownloadHandlerTexture.GetContent(request);
-            targetImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-        }
     }
 }
