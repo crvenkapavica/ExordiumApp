@@ -44,7 +44,19 @@ public class EventManager : MonoBehaviour
                 foreach (Toggle toggle in toggles)
                 {
                     Toggle selectedToggle = toggle;
-                    selectedToggle.onValueChanged.AddListener((isOn) => ToggleClicked_Language(selectedToggle));
+                    selectedToggle.onValueChanged.AddListener((isOn) =>
+                    {
+                        if (isOn)
+                        {
+                            foreach (Toggle toggle in toggles) {
+                                if (toggle != selectedToggle)
+                                {
+                                    toggle.isOn = false;
+                                }
+                            }
+                        }
+                    }
+                    );
                 }
             }
 
@@ -215,15 +227,12 @@ public class EventManager : MonoBehaviour
 
     private void ToggleClicked_Language(Toggle selectedToggle)
     {
-        if (selectedToggle.isOn)
+        foreach (Toggle toggle in UIManager.Instance.LanguageToggles)
         {
-            foreach (Toggle toggle in UIManager.Instance.LanguageToggles)
+            if (toggle != selectedToggle)
             {
-                if (toggle != selectedToggle)
-                {
-                    Debug.Log(toggle.name + toggle.isOn);
-                    toggle.isOn = false;
-                }
+                Debug.Log(toggle.name + toggle.isOn);
+                toggle.isOn = false;
             }
         }
     }
