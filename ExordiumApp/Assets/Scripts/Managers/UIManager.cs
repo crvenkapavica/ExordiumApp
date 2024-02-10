@@ -54,6 +54,25 @@ public class UIManager : MonoBehaviour
             _activeMainPanel.SetActive(false);
             _activeMainPanel = value;
             _activeMainPanel.SetActive(true);
+
+            if (!_bIsRetailersInitialzed 
+                && _activeMainPanel == _panelMappings[(int)PanelType.Retailer].panelObject)
+            {
+                ItemDisplayManager.Instance.UpdateRetailerDisplay(
+                    ApplicationData.Instance.Retailers
+                );
+
+                _bIsRetailersInitialzed = true;
+            }
+            else if (!_bIsCategoriesInitialized
+                && _activeMainPanel == _panelMappings[(int)PanelType.Category].panelObject)
+            {
+                ItemDisplayManager.Instance.UpdateCategoryDisplay(
+                    ApplicationData.Instance.Categories
+                );
+
+                _bIsCategoriesInitialized = true;
+            }
         }
     }
 
@@ -61,8 +80,8 @@ public class UIManager : MonoBehaviour
     public List<PanelMaping> PanelMappings => _panelMappings;
 
     // these can ve private
-    public bool IsCategoriesInitialized {  get; private set; }
-    public bool IsRetailersInitialzed { get; private set; }
+    private bool _bIsCategoriesInitialized;
+    private bool _bIsRetailersInitialzed;
     //============================================================
 
     [SerializeField] private GameObject _outterOverlayPanel;

@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toggle: {fileID: 112134791449947707}
-  _categry: {fileID: 0}
+  _categry: {fileID: 5947582301528002564}
 --- !u!1 &8336055266732441032
 GameObject:
   m_ObjectHideFlags: 0
