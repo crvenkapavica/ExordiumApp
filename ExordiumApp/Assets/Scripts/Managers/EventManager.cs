@@ -36,10 +36,16 @@ public class EventManager : MonoBehaviour
                 logout.SetActive(false);
             }
 
-            // Force only one checkbox at a time
+            //Force only one checkbox at a time since ToggleGroup is not working
             if (panelMapping.panelType == PanelType.Language)
             {
-
+                Toggle[] toggles = panel.GetComponentsInChildren<Toggle>();
+                Debug.Log("TOGGLES" + toggles.Length);
+                foreach (Toggle toggle in toggles)
+                {
+                    Toggle selectedToggle = toggle;
+                    selectedToggle.onValueChanged.AddListener((isOn) => ToggleClicked_Language(selectedToggle));
+                }
             }
 
             Button[] buttons = panel.GetComponentsInChildren<Button>();
@@ -205,6 +211,21 @@ public class EventManager : MonoBehaviour
     {
         ThemeManager.Instance.ApplyTheme(null, true);
         UIManager.Instance.HideOverlays();
+    }
+
+    private void ToggleClicked_Language(Toggle selectedToggle)
+    {
+        if (selectedToggle.isOn)
+        {
+            foreach (Toggle toggle in UIManager.Instance.LanguageToggles)
+            {
+                if (toggle != selectedToggle)
+                {
+                    Debug.Log(toggle.name + toggle.isOn);
+                    toggle.isOn = false;
+                }
+            }
+        }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 }
