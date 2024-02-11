@@ -211,6 +211,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1885414481055915991, guid: b8d939ed5989fe2448f6e16366d50916, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1885414481055915991, guid: b8d939ed5989fe2448f6e16366d50916, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 2391582038929613854, guid: b8d939ed5989fe2448f6e16366d50916, type: 3}
       propertyPath: m_Name
       value: DarkTheme
@@ -606,6 +614,14 @@ PrefabInstance:
     - target: {fileID: 7110498846690505251, guid: b8d939ed5989fe2448f6e16366d50916, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7167945736718606389, guid: b8d939ed5989fe2448f6e16366d50916, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7167945736718606389, guid: b8d939ed5989fe2448f6e16366d50916, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7430689861277751582, guid: b8d939ed5989fe2448f6e16366d50916, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1572,6 +1588,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 1749539550027251683, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749539550027251683, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 1759927337823508759, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_Name
       value: Language
@@ -1687,6 +1711,14 @@ PrefabInstance:
     - target: {fileID: 3262684727874795721, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151040498131458759, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4151040498131458759, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4307618042453634439, guid: b90a8430cbd0a8a4a866af613c03c278, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2263,7 +2295,9 @@ PrefabInstance:
       value: CroatianToggle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2289175396717297001, guid: df865b4b8c806004bb4b1b26a44641b4, type: 3}
+    - {fileID: 8456095763795626057, guid: df865b4b8c806004bb4b1b26a44641b4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df865b4b8c806004bb4b1b26a44641b4, type: 3}
@@ -2817,7 +2851,9 @@ PrefabInstance:
       value: EnglishToggle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2289175396717297001, guid: df865b4b8c806004bb4b1b26a44641b4, type: 3}
+    - {fileID: 8456095763795626057, guid: df865b4b8c806004bb4b1b26a44641b4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df865b4b8c806004bb4b1b26a44641b4, type: 3}
