@@ -3,6 +3,7 @@ using System.Linq;
 
 public class ItemEntry
 {
+    public int Id { get; set; }
     public string ItemName { get; set; }
     public float Price { get; set; }
     public string ItemImageUrl { get; set; }
@@ -36,6 +37,11 @@ public class ApplicationData
         Categories = categories;
     }
 
+    public void UpdateItemEntryData(List<ItemEntry> itemEntries)
+    {
+        ItemEntries.AddRange(itemEntries);
+    }
+
     public void GenerateItemEntries()
     {
         ItemEntries = 
@@ -44,7 +50,7 @@ public class ApplicationData
              join category in Categories on item.item_category_id equals category.id
              select new ItemEntry
              {
-
+                 Id = item.id,
                  ItemName = item.name,
                  Price = item.price,
                  ItemImageUrl = item.image_url,

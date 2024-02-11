@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -167,7 +168,27 @@ public class EventManager : MonoBehaviour
         LoginManager.Instance.Logout();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
+    // FAVORITES
+    public void ToggleValueChanged_Favorite(int id, bool bIsFavorite)
+    {
+        HashSet<int> favorites = UserData.Instance.GetFavorites();
+
+        if (bIsFavorite)
+        {
+            favorites.Add(id);
+        }
+        else
+        {
+            favorites.Remove(id);
+            DisplayManager.Instance.RemoveFromFavoritesById(id);
+        }
+
+        UserData.Instance.SaveFavorites(favorites);
+        UIManager.Instance.Favorites = favorites;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     // SETTINGS
     private void ButtonClicked_Language()
     {

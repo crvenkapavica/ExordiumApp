@@ -16,11 +16,13 @@ public class DisplayManager : MonoBehaviour
 {
     public static DisplayManager Instance { get; private set; }
 
-    private float _height;
-
     [SerializeField] private Transform[] _contentTransforms;
     [SerializeField] private GameObject[] _entryPrefabs;
     [SerializeField] private ScrollRect[] _scrollRects;
+
+    private List<GameObject> _favoriteEntries = new();
+
+    private float _height;
 
     private bool _bIsFetching = false;
     private bool _bCanFetchMore = true;
@@ -55,6 +57,7 @@ public class DisplayManager : MonoBehaviour
             {
                 if (itemEntries.Count > 0)
                 {
+                    ApplicationData.Instance.UpdateItemEntryData(itemEntries);
                     UpdateItemDisplay(itemEntries);
                 }
                 else
@@ -110,7 +113,7 @@ public class DisplayManager : MonoBehaviour
             categoryObject.GetComponent<CategoryDisplay>().Setup(categoryEntry);
         }
 
-        _contentTransforms[(int)Entry.Item].GetComponent<ContentSizeFitter>()
+        _contentTransforms[(int)Entry.Category].GetComponent<ContentSizeFitter>()
             .verticalFit = ContentSizeFitter.FitMode.PreferredSize;
     }
 
@@ -128,8 +131,40 @@ public class DisplayManager : MonoBehaviour
             retailerObject.GetComponent<RetailerDisplay>().Setup(retailerEntry);
         }
 
-        _contentTransforms[(int)Entry.Item].GetComponent<ContentSizeFitter>()
+        _contentTransforms[(int)Entry.Retailer].GetComponent<ContentSizeFitter>()
             .verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+    }
+
+    public void UpdateFavoritesDisplay()
+    {
+        foreach (var favorite in UIManager.Instance.Favorites)
+        {
+            foreach (var itemEntry in ApplicationData.Instance.ItemEntries)
+            {
+                if (itemEntry.Id == favorite)
+                {
+                    _favoriteEntries.Add(
+                        Instantiate(
+                            _entryPrefabs[(int)(Entry.Item)], _contentTransforms[(int)Entry.Favorite]
+                        )
+                    );
+
+                    ThemeManager.Instance.ApplyThemeLocal(_favoriteEntries[^1].transform);
+
+                    _favoriteEntries[^1].GetComponent<ItemDisplay>().Setup(itemEntry, true);
+                }
+            }
+        }
+
+        _contentTransforms[(int)Entry.Favorite].GetComponent<ContentSizeFitter>()
+            .verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+    }
+
+    public void RemoveFromFavoritesById(int id)
+    {
+        GameObject entry = _favoriteEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id);
+        _favoriteEntries.Remove(entry);
+        Destroy(entry);
     }
 
     public IEnumerator LoadImage(string imageUrl, Image targetImage)

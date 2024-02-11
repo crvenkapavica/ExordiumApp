@@ -19,6 +19,7 @@ public class Application : MonoBehaviour
             ItemService.Instance.FetchItemEntries(itemEntries =>
             {
                 DisplayManager.Instance.UpdateItemDisplay(itemEntries);
+                ApplicationData.Instance.UpdateItemEntryData(itemEntries);
                 UIManager.Instance.HideOverlays();
             })
         );

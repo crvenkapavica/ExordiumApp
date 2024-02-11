@@ -13,9 +13,12 @@ public class ItemDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _category;
     [SerializeField] private Image _retailerImage;
     [SerializeField] private Toggle _favoritesToggle;
-    
 
-    public void Setup(ItemEntry itemEntry)
+    public Toggle FavoritesToggle => _favoritesToggle;
+
+    public int Id { get; private set; }
+
+    public void Setup(ItemEntry itemEntry, bool bIsOn = false)
     {
         StartCoroutine(
             DisplayManager.Instance.LoadImage(itemEntry.ItemImageUrl, _itemImage)
@@ -24,10 +27,15 @@ public class ItemDisplay : MonoBehaviour
             DisplayManager.Instance.LoadImage(itemEntry.RetailerImageUrl, _retailerImage)
         );
 
+        Id = itemEntry.Id;
+
         _price.text = itemEntry.Price.ToString("C");
         _itemName.text = itemEntry.ItemName;
         _category.text = itemEntry.CategoryName;
 
-        //_favoritesToggle = OnClickEvent.
+        _favoritesToggle.isOn = bIsOn;
+        _favoritesToggle.onValueChanged.AddListener(
+            (IsOn) => EventManager.Instance.ToggleValueChanged_Favorite(Id, IsOn)
+        );
     }
 }

@@ -73,16 +73,26 @@ public class UIManager : MonoBehaviour
 
                 _bIsCategoriesInitialized = true;
             }
+
+            if (_activeMainPanel == _panelMappings[(int)PanelType.Favorites].panelObject)
+            {
+                DisplayManager.Instance.UpdateFavoritesDisplay();
+            }
         }
     }
 
+    //private HashSet<int> _favorites;
+    public HashSet<int> Favorites { get; set; } = new();
+    //{
+    //    get => _favorites;
+    //    set
+    //    {
+    //        _favorites = value;
+    //    }
+    //}
+
     [SerializeField] private List<PanelMaping> _panelMappings = new();
     public List<PanelMaping> PanelMappings => _panelMappings;
-
-    // these can ve private
-    private bool _bIsCategoriesInitialized;
-    private bool _bIsRetailersInitialzed;
-    //============================================================
 
     [SerializeField] private GameObject _outterOverlayPanel;
     [SerializeField] private GameObject _innerOverlayPanel;
@@ -106,6 +116,9 @@ public class UIManager : MonoBehaviour
     public Toggle[] LanguageToggles => _languageToggles;
 
     private const float FADE_TIME = 0.25f;
+
+    private bool _bIsCategoriesInitialized;
+    private bool _bIsRetailersInitialzed;
 
     private void Awake()
     {

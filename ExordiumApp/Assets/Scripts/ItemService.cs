@@ -170,6 +170,7 @@ public class ItemService : MonoBehaviour, IItemService
              join category in ApplicationData.Instance.Categories on item.item_category_id equals category.id
              select new ItemEntry
              {
+                 Id = item.id,
                  ItemName = item.name,
                  Price = item.price,
                  ItemImageUrl = item.image_url,

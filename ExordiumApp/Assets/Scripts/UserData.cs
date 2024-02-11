@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UserData
@@ -11,6 +13,27 @@ public class UserData
     {
         IsLoggedIn = bIsLoggedIn;
         Username = username;
+    }
+
+    public HashSet<int> GetFavorites()
+    {
+        var userFavorites = PlayerPrefs.GetString("Favorites", "");
+        var favorites = new HashSet<int>(
+            userFavorites.Split(',')
+            .Where(id => !string.IsNullOrEmpty(id))
+            .Select(int.Parse)
+        );
+        return favorites;
+    }
+
+    public void SaveFavorites(HashSet<int> favorites)
+    {
+        if (IsLoggedIn)
+        {
+            var favoritesString = string.Join(",", favorites.Select(id => id.ToString()).ToArray());
+            PlayerPrefs.SetString(Username + "_Favorites", favoritesString);
+            PlayerPrefs.Save();
+        }
     }
 
     public void SavePlayerPrefs()
@@ -47,13 +70,7 @@ public class UserData
             LocalizationManager.Instance.Language, true
         );
 
-        //var favorites = new List<int>();
-
-        //string favoritesString = PlayerPrefs.GetString(userName + "_Favorites", "");
-        //if (!string.IsNullOrEmpty(favoritesString))
-        //{
-        //    favorites = favoritesString.Split(',').Select(int.Parse).ToList();
-        //}
+        HashSet<int> favorites = GetFavorites();
 
         //bool toggle1 = PlayerPrefs.GetInt(userName + "_Toggle1", 0) == 1;
         //bool toggle2 = PlayerPrefs.GetInt(userName + "_Toggle2", 0) == 1;
