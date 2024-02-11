@@ -16,7 +16,7 @@ public class LocalizationManager : MonoBehaviour
 
     private readonly Dictionary<string, TranslationItem> _translationDictionary = new();
 
-    private Language _language = Language.Croatian;
+    private Language _language = Language.None;
     private Language _previewLanguge = Language.None;
 
     public Language Language
@@ -50,6 +50,8 @@ public class LocalizationManager : MonoBehaviour
         {
             _translationDictionary[item.name] = item;
         }
+
+        Language = (_language = Language.Croatian);
     }
 
     public void LocalizeTextRecursive(Transform parent, Language language)

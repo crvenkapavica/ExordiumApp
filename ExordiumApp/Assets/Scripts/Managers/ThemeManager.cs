@@ -41,7 +41,7 @@ public class ThemeManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        _theme = _darkTheme;
+        Theme = (_theme = _darkTheme);
     }
 
     private void ApplyThemeRecursive(Transform parent, Theme theme)
@@ -88,10 +88,6 @@ public class ThemeManager : MonoBehaviour
         Theme = bPermanent
             ? _theme = (theme == null ? _theme : _previewTheme)
             : _previewTheme = theme;
-
-        //Theme = bPermanent
-        //    ? _theme = _previewTheme = (theme == null ? _theme : _previewTheme)
-        //    : _previewTheme = (_previewTheme == theme ? null : theme);
     }
 
     public void ApplyThemeLocal(Transform parent)

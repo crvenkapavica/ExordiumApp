@@ -6,7 +6,6 @@ public class Application : MonoBehaviour
 { 
     private void Start()
     {
-        ApplicationData.Instance.LoadDefaultPrefs();
         InitialFetch();
     }
 

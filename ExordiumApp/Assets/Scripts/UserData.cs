@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System;
 using UnityEngine;
 
 public class UserData
@@ -8,77 +5,47 @@ public class UserData
     public static UserData Instance { get; private set; } = new UserData();
     public string Username { get; set; }
 
-    private bool _bIsLoggedIn;
-    public bool IsLoggedIn
-    {
-        get => _bIsLoggedIn;
-        set
-        {
-            _bIsLoggedIn = value;
-            if (_bIsLoggedIn)
-            {
-                LoadPlayerPrefs(Username);
-            }
-            else
-            {
-                SavePlayerPrefs();
-                ApplicationData.Instance.LoadDefaultPrefs();
-                Username = string.Empty;
-            }
-        }
-    }
+    public bool IsLoggedIn { get; private set; }
 
     public void UpdateLoginStatus(bool bIsLoggedIn, string username)
     {
-        Username = username;
         IsLoggedIn = bIsLoggedIn;
+        Username = username;
     }
 
     public void SavePlayerPrefs()
     {
-        if (_bIsLoggedIn)
+        if (IsLoggedIn)
         {
-            Debug.Log("SAVING USERNAME: " + Username);
-
             PlayerPrefs.SetString(Username, Username);
 
             string theme = ThemeManager.Instance.Theme.ThemeName;
             PlayerPrefs.SetString(Username + "_Theme", theme);
 
-            Debug.Log("SAVING theme " + theme);
-
             string language = LocalizationManager.Instance.Language.ToString();
             PlayerPrefs.SetString(Username + "_Language", language);
-
-            Debug.Log("Saving lang" + language);
 
             PlayerPrefs.Save();
         }
     }
 
-    private void LoadPlayerPrefs(string username)
+    public void LoadPlayerPrefs()
     {
-        string userName = PlayerPrefs.GetString(username);
-
-        Debug.Log("loaded username: " + userName);
-
-        string theme = PlayerPrefs.GetString(userName + "_Theme");
-        ThemeManager.Instance.ApplyTheme(
-            theme == string.Empty || theme == "DarkTheme" 
+        string theme = PlayerPrefs.GetString(Username + "_Theme");
+        ThemeManager.Instance.Theme =
+            theme == string.Empty || theme == "Dark Theme"
             ? ThemeManager.Instance.DarkTheme
-            : ThemeManager.Instance.LightTheme, true);
+            : ThemeManager.Instance.LightTheme;
+        ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.Theme, true);
 
-        Debug.Log("loaded theme" + theme);
-        Debug.Log("loaded Instance.Theme" + ThemeManager.Instance.Theme.ToString());
-
-        string lanuage = PlayerPrefs.GetString(userName + "_Language");
+        string lanuage = PlayerPrefs.GetString(Username + "_Language");
         LocalizationManager.Instance.Language =
             lanuage == string.Empty || lanuage == Language.Croatian.ToString()
             ? Language.Croatian
             : Language.English;
-
-        Debug.Log("loaded lang" + lanuage);
-        Debug.Log("loaded Instance.lan" + LocalizationManager.Instance.Language);
+        LocalizationManager.Instance.ApplyLocalization(
+            LocalizationManager.Instance.Language, true
+        );
 
         //var favorites = new List<int>();
 
