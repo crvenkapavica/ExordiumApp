@@ -19,8 +19,6 @@ public class LoginManager : MonoBehaviour
 
     public void AttemptLogin(string username, string password)
     {
-        string _username = username;
-
         StartCoroutine(
             UserService.Instance.Login(username, password, (success, message) =>
             {
@@ -30,14 +28,16 @@ public class LoginManager : MonoBehaviour
                         UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_Welcome
                     );
 
-                    UIManager.Instance.ToggleAccountPanel(false, _username);
-                    UserData.Instance.UpdateLoginStatus(true, _username);
+                    UIManager.Instance.ToggleAccountPanel(false, username);
+                    UserData.Instance.UpdateLoginStatus(true, username);
                 }
                 else
                 {
                     UIManager.Instance.ShowOverlay(
                         UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_Credentials
                     );
+
+                    UserData.Instance.Username = string.Empty;
                 }
             })
         );
@@ -46,6 +46,6 @@ public class LoginManager : MonoBehaviour
     public void Logout()
     {
         UIManager.Instance.ToggleAccountPanel(true);
-        UserData.Instance.UpdateLoginStatus(false);
+        UserData.Instance.UpdateLoginStatus(false, string.Empty);
     }
 }
