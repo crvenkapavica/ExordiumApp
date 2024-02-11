@@ -30,6 +30,7 @@ public class LoginManager : MonoBehaviour
 
                     UIManager.Instance.ToggleAccountPanel(false, username);
                     UserData.Instance.UpdateLoginStatus(true, username);
+                    ApplicationData.Instance.SetDefaultPrefs();
                     UserData.Instance.LoadPlayerPrefs();
                 }
                 else

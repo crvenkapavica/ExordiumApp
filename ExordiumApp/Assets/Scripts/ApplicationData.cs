@@ -59,10 +59,11 @@ public class ApplicationData
              }).ToList();
     }
 
-    public void LoadDefaultPrefs()
+    public void SetDefaultPrefs()
     {
         ThemeManager.Instance.Theme = ThemeManager.Instance.DarkTheme;
         LocalizationManager.Instance.Language = Language.Croatian;
         DisplayManager.Instance.ResetValues();
+        UserData.Instance.Favorites.Clear();
     }
 }

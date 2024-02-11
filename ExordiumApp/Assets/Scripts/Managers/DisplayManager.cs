@@ -22,8 +22,8 @@ public class DisplayManager : MonoBehaviour
     [SerializeField] private ScrollRect[] _scrollRects;
 
     private readonly List<GameObject> _itemEntries = new();
-    private List<GameObject> _favoriteEntries = new();
-    private List<int> _favoriteIds = new();
+    private readonly List<GameObject> _favoriteEntries = new();
+    private readonly HashSet<int> _instantiatedFavoritesIds = new();
 
     private float _height;
 
@@ -140,12 +140,11 @@ public class DisplayManager : MonoBehaviour
 
     public void UpdateFavoritesDisplay()
     {
-        Debug.Log(UIManager.Instance.Favorites.Count);
-        foreach (var favorite in UIManager.Instance.Favorites)
+        foreach (var favorite in UserData.Instance.Favorites)
         {
             foreach (var itemEntry in ApplicationData.Instance.ItemEntries)
             {
-                if (itemEntry.Id == favorite && !_favoriteIds.Contains(itemEntry.Id))
+                if (itemEntry.Id == favorite && !_instantiatedFavoritesIds.Contains(itemEntry.Id))
                 {
                     _favoriteEntries.Add(
                         Instantiate(
@@ -153,7 +152,7 @@ public class DisplayManager : MonoBehaviour
                         )
                     );
 
-                    _favoriteIds.Add(itemEntry.Id);
+                    _instantiatedFavoritesIds.Add(itemEntry.Id);
 
                     ThemeManager.Instance.ApplyThemeLocal(_favoriteEntries[^1].transform);
 
@@ -176,7 +175,7 @@ public class DisplayManager : MonoBehaviour
         _favoriteEntries.Remove(entry);
         Destroy(entry);
 
-        _favoriteIds.Remove(id);
+        _instantiatedFavoritesIds.Remove(id);
 
         _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
             .ConvertTo<ItemDisplay>().IsOn(false);
@@ -198,18 +197,26 @@ public class DisplayManager : MonoBehaviour
 
     public void ResetValues()
     {
-        //foreach (var entry in _favoriteEntries)
-        //{
-        //    Destroy(entry);
-        //}
-        //foreach (var id in _favoriteIds)
-        //{
-        //    _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
-        //        .ConvertTo<ItemDisplay>().IsOn(false);
-        //}
-        //_favoriteIds.Clear();
+        foreach (var id in _instantiatedFavoritesIds)
+        {
+            _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
+                .ConvertTo<ItemDisplay>().IsOn(false);
+        }
+        _instantiatedFavoritesIds.Clear();
 
-        _favoriteEntries = new();
-        _favoriteIds = new();
+        foreach (var favorite in _favoriteEntries)
+        {
+            Destroy(favorite);
+        }
+        _favoriteEntries.Clear();
+    }
+
+    public void ToggleSavedFavorites()
+    {
+        foreach (var id in UserData.Instance.Favorites)
+        {
+            _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
+                .ConvertTo<ItemDisplay>().IsOn(true);
+        }
     }
 }

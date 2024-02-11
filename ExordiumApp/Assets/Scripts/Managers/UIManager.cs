@@ -81,8 +81,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public HashSet<int> Favorites { get; set; } = new();
-
     [SerializeField] private List<PanelMaping> _panelMappings;
     public List<PanelMaping> PanelMappings => _panelMappings;
 

@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UserData
 {
     public static UserData Instance { get; private set; } = new UserData();
+
     public string Username { get; set; }
 
     public bool IsLoggedIn { get; private set; }
+
+    public HashSet<int> Favorites { get; set; } = new();
+
+    public HashSet<string> DiabledCategories { get; set; } = new();
+    public HashSet<string> DisabledRetailers { get; set; } = new();
 
     public void UpdateLoginStatus(bool bIsLoggedIn, string username)
     {
@@ -17,12 +24,15 @@ public class UserData
 
     public HashSet<int> GetFavorites()
     {
-        var userFavorites = PlayerPrefs.GetString(Username + "_Favorites", "");
+        var favoritesString = PlayerPrefs.GetString(Username + "_Favorites", "");
         var favorites = new HashSet<int>(
-            userFavorites.Split(',')
+            favoritesString.Split(',')
             .Where(id => !string.IsNullOrEmpty(id))
             .Select(int.Parse)
         );
+
+        Debug.Log("[GETFAVORITES] (favoritesString) = " + favoritesString);
+        Debug.Log("[GETFAVORITES} (favorites) = " +  favorites);
         return favorites;
     }
 
@@ -33,6 +43,8 @@ public class UserData
             var favoritesString = string.Join(",", favorites.Select(id => id.ToString()).ToArray());
             PlayerPrefs.SetString(Username + "_Favorites", favoritesString);
             PlayerPrefs.Save();
+
+            Debug.Log("Saving Favorites : " + favoritesString);
         }
     }
 
@@ -59,7 +71,9 @@ public class UserData
             theme == string.Empty || theme == "Dark Theme"
             ? ThemeManager.Instance.DarkTheme
             : ThemeManager.Instance.LightTheme;
-        ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.Theme, true);
+        ThemeManager.Instance.ApplyTheme(
+            ThemeManager.Instance.Theme, true
+        );
 
         string lanuage = PlayerPrefs.GetString(Username + "_Language");
         LocalizationManager.Instance.Language =
@@ -70,7 +84,8 @@ public class UserData
             LocalizationManager.Instance.Language, true
         );
 
-        UIManager.Instance.Favorites = GetFavorites();
+        Favorites = GetFavorites();
+        DisplayManager.Instance.ToggleSavedFavorites();
 
         //bool toggle1 = PlayerPrefs.GetInt(userName + "_Toggle1", 0) == 1;
         //bool toggle2 = PlayerPrefs.GetInt(userName + "_Toggle2", 0) == 1;

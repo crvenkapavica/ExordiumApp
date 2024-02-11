@@ -179,7 +179,7 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            favorites = UIManager.Instance.Favorites;
+            favorites = UserData.Instance.Favorites;
         }
 
         if (bIsFavorite)
@@ -189,11 +189,18 @@ public class EventManager : MonoBehaviour
         else
         {
             favorites.Remove(id);
-            DisplayManager.Instance.RemoveFromFavoritesById(id);
+
+            if (UIManager.Instance.ActiveMainPanel
+                == UIManager.Instance.PanelMappings[(int)PanelType.Favorites].panelObject 
+                || UIManager.Instance.ActiveMainPanel 
+                == UIManager.Instance.PanelMappings[(int)PanelType.Items].panelObject)
+            {
+                DisplayManager.Instance.RemoveFromFavoritesById(id);
+            }
         }
 
         UserData.Instance.SaveFavorites(favorites);
-        UIManager.Instance.Favorites = favorites;
+        UserData.Instance.Favorites = favorites;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
