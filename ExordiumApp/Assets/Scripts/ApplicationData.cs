@@ -52,4 +52,10 @@ public class ApplicationData
                  CategoryName = category.name
              }).ToList();
     }
+
+    public void LoadDefaultPrefs()
+    {
+        ThemeManager.Instance.Theme = ThemeManager.Instance.DarkTheme;
+        LocalizationManager.Instance.Language = Language.Croatian;
+    }
 }

@@ -205,7 +205,7 @@ public class EventManager : MonoBehaviour
         LocalizationManager.Instance.ApplyLocalization(LocalizationManager.Instance.Language, true);
         ThemeManager.Instance.ApplyTheme(ThemeManager.Instance.Theme, true);
         UIManager.Instance.ThemeName.text = ThemeManager.Instance.ThemeName;
-
+        UserData.Instance.SavePlayerPrefs();
         UIManager.Instance.HideOverlays();
     }
 
@@ -217,9 +217,3 @@ private void ButtonClicked_Cancel()
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-
-//    if (UserData.Instance.IsLoggedIn)
-//{
-//    // Save to PlayerPrefs if logged in
-//}

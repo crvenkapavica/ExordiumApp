@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ThemeManager : MonoBehaviour
 {
-    public static ThemeManager Instance;
+    public static ThemeManager Instance { get; private set; }
 
     [SerializeField] private Theme _lightTheme;
     [SerializeField] private Theme _darkTheme;
@@ -41,7 +41,7 @@ public class ThemeManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Theme = (_theme = _darkTheme);
+        _theme = _darkTheme;
     }
 
     private void ApplyThemeRecursive(Transform parent, Theme theme)
@@ -65,13 +65,6 @@ public class ThemeManager : MonoBehaviour
         else if (parent.TryGetComponent<TextMeshProUGUI>(out TextMeshProUGUI text))
         {
             text.color = theme.TextColor;
-
-            // This might not be needed
-            // Adjusting for Input Field Text
-            if (text.name.Contains("Input"))
-            {
-                text.color = theme == DarkTheme ? Color.white : Color.black;
-            }
         }
         else if (parent.TryGetComponent<Button>(out Button button)) 
         {
