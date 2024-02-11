@@ -1,9 +1,7 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
-using UnityEngine.EventSystems;
+using System.Globalization;
 
 public class ItemDisplay : MonoBehaviour
 {
@@ -29,7 +27,7 @@ public class ItemDisplay : MonoBehaviour
 
         Id = itemEntry.Id;
 
-        _price.text = itemEntry.Price.ToString("C");
+        _price.text = itemEntry.Price.ToString("C", CultureInfo.CreateSpecificCulture("nl-NL"));
         _itemName.text = itemEntry.ItemName;
         _category.text = itemEntry.CategoryName;
 
@@ -37,5 +35,10 @@ public class ItemDisplay : MonoBehaviour
         _favoritesToggle.onValueChanged.AddListener(
             (IsOn) => EventManager.Instance.ToggleValueChanged_Favorite(Id, IsOn)
         );
+    }
+
+    public void IsOn(bool bIsOn)
+    {
+        _favoritesToggle.isOn = bIsOn;
     }
 }

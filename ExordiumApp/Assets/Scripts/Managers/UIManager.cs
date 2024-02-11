@@ -81,17 +81,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //private HashSet<int> _favorites;
     public HashSet<int> Favorites { get; set; } = new();
-    //{
-    //    get => _favorites;
-    //    set
-    //    {
-    //        _favorites = value;
-    //    }
-    //}
 
-    [SerializeField] private List<PanelMaping> _panelMappings = new();
+    [SerializeField] private List<PanelMaping> _panelMappings;
     public List<PanelMaping> PanelMappings => _panelMappings;
 
     [SerializeField] private GameObject _outterOverlayPanel;

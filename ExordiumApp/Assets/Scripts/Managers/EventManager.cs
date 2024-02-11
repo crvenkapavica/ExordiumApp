@@ -172,7 +172,15 @@ public class EventManager : MonoBehaviour
     // FAVORITES
     public void ToggleValueChanged_Favorite(int id, bool bIsFavorite)
     {
-        HashSet<int> favorites = UserData.Instance.GetFavorites();
+        HashSet<int> favorites;
+        if (UserData.Instance.IsLoggedIn)
+        {
+             favorites = UserData.Instance.GetFavorites();
+        }
+        else
+        {
+            favorites = UIManager.Instance.Favorites;
+        }
 
         if (bIsFavorite)
         {

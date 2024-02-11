@@ -59,4 +59,13 @@ public class UserService : IUserService
             callback(false, request.error);
         }
     }
+
+    public void Logout()
+    {
+        UserData.Instance.SavePlayerPrefs();
+        UIManager.Instance.ToggleAccountPanel(true);
+        UserData.Instance.UpdateLoginStatus(false, string.Empty);
+        ApplicationData.Instance.LoadDefaultPrefs();
+        UIManager.Instance.Favorites = new();
+    }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using Unity.VisualScripting;
 
 public enum Entry
 {
@@ -20,7 +21,9 @@ public class DisplayManager : MonoBehaviour
     [SerializeField] private GameObject[] _entryPrefabs;
     [SerializeField] private ScrollRect[] _scrollRects;
 
+    private readonly List<GameObject> _itemEntries = new();
     private List<GameObject> _favoriteEntries = new();
+    private List<int> _favoriteIds = new();
 
     private float _height;
 
@@ -73,12 +76,12 @@ public class DisplayManager : MonoBehaviour
     {
         foreach (var itemEntry in itemEntries)
         {
-            GameObject itemObject = 
+            _itemEntries.Add(
                 Instantiate(
                     _entryPrefabs[(int)Entry.Item], _contentTransforms[(int)Entry.Item]
-                );
+                ));
 
-            ThemeManager.Instance.ApplyThemeLocal(itemObject.transform);
+            ThemeManager.Instance.ApplyThemeLocal(_itemEntries[^1].transform);
 
             if (_height == 0)
             {
@@ -89,10 +92,10 @@ public class DisplayManager : MonoBehaviour
                 _height = (contentHeight - ApplicationData.Instance.Spacing * 5) / 5;
             }
 
-            var rect = itemObject.GetComponent<RectTransform>();
+            var rect = _itemEntries[^1].GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, _height);
 
-            itemObject.GetComponent<ItemDisplay>().Setup(itemEntry);
+            _itemEntries[^1].GetComponent<ItemDisplay>().Setup(itemEntry);
         }
 
         _contentTransforms[(int)Entry.Item].GetComponent<ContentSizeFitter>()
@@ -137,11 +140,12 @@ public class DisplayManager : MonoBehaviour
 
     public void UpdateFavoritesDisplay()
     {
+        Debug.Log(UIManager.Instance.Favorites.Count);
         foreach (var favorite in UIManager.Instance.Favorites)
         {
             foreach (var itemEntry in ApplicationData.Instance.ItemEntries)
             {
-                if (itemEntry.Id == favorite)
+                if (itemEntry.Id == favorite && !_favoriteIds.Contains(itemEntry.Id))
                 {
                     _favoriteEntries.Add(
                         Instantiate(
@@ -149,9 +153,13 @@ public class DisplayManager : MonoBehaviour
                         )
                     );
 
+                    _favoriteIds.Add(itemEntry.Id);
+
                     ThemeManager.Instance.ApplyThemeLocal(_favoriteEntries[^1].transform);
 
                     _favoriteEntries[^1].GetComponent<ItemDisplay>().Setup(itemEntry, true);
+                    
+                    break;
                 }
             }
         }
@@ -162,9 +170,16 @@ public class DisplayManager : MonoBehaviour
 
     public void RemoveFromFavoritesById(int id)
     {
-        GameObject entry = _favoriteEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id);
+        GameObject entry = _favoriteEntries.Find(
+            entry => entry.GetComponent<ItemDisplay>()?.Id == id
+        );
         _favoriteEntries.Remove(entry);
         Destroy(entry);
+
+        _favoriteIds.Remove(id);
+
+        _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
+            .ConvertTo<ItemDisplay>().IsOn(false);
     }
 
     public IEnumerator LoadImage(string imageUrl, Image targetImage)
@@ -179,5 +194,22 @@ public class DisplayManager : MonoBehaviour
                 texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)
             );
         }
+    }
+
+    public void ResetValues()
+    {
+        //foreach (var entry in _favoriteEntries)
+        //{
+        //    Destroy(entry);
+        //}
+        //foreach (var id in _favoriteIds)
+        //{
+        //    _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
+        //        .ConvertTo<ItemDisplay>().IsOn(false);
+        //}
+        //_favoriteIds.Clear();
+
+        _favoriteEntries = new();
+        _favoriteIds = new();
     }
 }

@@ -21,6 +21,11 @@ public interface IUserService
     /// <param name="callback">Saves the user data into UserData and shows overlays using UIManager.</param>
     /// <returns></returns>
     IEnumerator Login(string username, string password, Action<bool, string> callback);
+
+    /// <summary>
+    /// Log out of current session, save user settings, and reset ApplicationData to default.
+    /// </summary>
+    void Logout();
 }
 
 public interface IItemService

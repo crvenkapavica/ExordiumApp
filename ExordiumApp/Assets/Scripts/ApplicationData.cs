@@ -63,5 +63,6 @@ public class ApplicationData
     {
         ThemeManager.Instance.Theme = ThemeManager.Instance.DarkTheme;
         LocalizationManager.Instance.Language = Language.Croatian;
+        DisplayManager.Instance.ResetValues();
     }
 }

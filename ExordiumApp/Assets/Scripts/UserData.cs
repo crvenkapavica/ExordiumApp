@@ -17,7 +17,7 @@ public class UserData
 
     public HashSet<int> GetFavorites()
     {
-        var userFavorites = PlayerPrefs.GetString("Favorites", "");
+        var userFavorites = PlayerPrefs.GetString(Username + "_Favorites", "");
         var favorites = new HashSet<int>(
             userFavorites.Split(',')
             .Where(id => !string.IsNullOrEmpty(id))
@@ -70,7 +70,7 @@ public class UserData
             LocalizationManager.Instance.Language, true
         );
 
-        HashSet<int> favorites = GetFavorites();
+        UIManager.Instance.Favorites = GetFavorites();
 
         //bool toggle1 = PlayerPrefs.GetInt(userName + "_Toggle1", 0) == 1;
         //bool toggle2 = PlayerPrefs.GetInt(userName + "_Toggle2", 0) == 1;

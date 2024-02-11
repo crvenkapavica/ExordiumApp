@@ -46,9 +46,6 @@ public class LoginManager : MonoBehaviour
 
     public void Logout()
     {
-        UserData.Instance.SavePlayerPrefs();
-        UIManager.Instance.ToggleAccountPanel(true);
-        UserData.Instance.UpdateLoginStatus(false, string.Empty);
-        ApplicationData.Instance.LoadDefaultPrefs();
+        UserService.Instance.Logout();
     }
 }
