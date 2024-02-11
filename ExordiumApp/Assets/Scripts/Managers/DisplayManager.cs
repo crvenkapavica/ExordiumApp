@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 
 public enum Entry
@@ -13,9 +12,9 @@ public enum Entry
     Favorite
 }
 
-public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
+public class DisplayManager : MonoBehaviour
 {
-    public static ItemDisplayManager Instance { get; private set; }
+    public static DisplayManager Instance { get; private set; }
 
     private float _height;
 
@@ -38,9 +37,8 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag()
     {
-        // Check if the scroll view is at the bottom
         if (_scrollRects[(int)Entry.Item].verticalNormalizedPosition <= 0.05f && !_bIsFetching && _bCanFetchMore)
         {
             FetchMoreItems();
@@ -81,7 +79,8 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 
             if (_height == 0)
             {
-                float contentHeight = _contentTransforms[(int)Entry.Item]
+                float contentHeight = 
+                    _contentTransforms[(int)Entry.Item]
                     .GetComponent<RectTransform>().rect.height;
 
                 _height = (contentHeight - ApplicationData.Instance.Spacing * 5) / 5;
@@ -110,6 +109,9 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 
             categoryObject.GetComponent<CategoryDisplay>().Setup(categoryEntry);
         }
+
+        _contentTransforms[(int)Entry.Item].GetComponent<ContentSizeFitter>()
+            .verticalFit = ContentSizeFitter.FitMode.PreferredSize;
     }
 
     public void UpdateRetailerDisplay(List<Retailer> retailerEntries)
@@ -125,6 +127,9 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
 
             retailerObject.GetComponent<RetailerDisplay>().Setup(retailerEntry);
         }
+
+        _contentTransforms[(int)Entry.Item].GetComponent<ContentSizeFitter>()
+            .verticalFit = ContentSizeFitter.FitMode.PreferredSize;
     }
 
     public IEnumerator LoadImage(string imageUrl, Image targetImage)
@@ -135,7 +140,9 @@ public class ItemDisplayManager : MonoBehaviour, IEndDragHandler
         if (request.result == UnityWebRequest.Result.Success)
         {
             Texture2D texture = DownloadHandlerTexture.GetContent(request);
-            targetImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            targetImage.sprite = Sprite.Create(
+                texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)
+            );
         }
     }
 }

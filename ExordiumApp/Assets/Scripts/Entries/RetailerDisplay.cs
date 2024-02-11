@@ -11,7 +11,7 @@ public class RetailerDisplay : MonoBehaviour
     public void Setup(Retailer retailerEntry)
     {
         StartCoroutine(
-            ItemDisplayManager.Instance.LoadImage(retailerEntry.image_url, _retailerImage)
+            DisplayManager.Instance.LoadImage(retailerEntry.image_url, _retailerImage)
         );
         _retailer.text = retailerEntry.name;
 

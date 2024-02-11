@@ -96,6 +96,12 @@ public class ItemService : MonoBehaviour, IItemService
 
             if (request.result == UnityWebRequest.Result.Success)
             {
+                if (request.downloadHandler.text == "No records found")
+                {
+                    _bAllItemsFetched = true;
+                    break;
+                }
+
                 var json = "{\"items\":" + request.downloadHandler.text + "}";
                 ItemsResponse response = JsonUtility.FromJson<ItemsResponse>(json);
 
@@ -112,31 +118,26 @@ public class ItemService : MonoBehaviour, IItemService
 
                     if (currentItemsFetched.Count < FETCH_COUNT)
                     {
+                        // If we fetched fewer items than expected, move to the next page
                         if (itemsToFetch < FETCH_COUNT)
                         {
-                            // If we fetched fewer items than expected, move to the next page
                             _pageNumber++;
-                            _fetchedItemsOnPage = 0; // Reset counter since we're moving to a new page
+                            _fetchedItemsOnPage = 0;
                         }
-                        // If itemsToFetch is 8 or more but currentItemsFetched is still less than 8,
-                        // it means we've reached the end of available items on this page.
                     }
                     else
                     {
-                        // We've fetched enough items.
                         bIsFetchingComplete = true; 
                     }
                 }
                 else
                 {
-                    // No more items to fetch
                     _bAllItemsFetched = true;
                     bIsFetchingComplete = true;
                 }
             }
             else
             {
-                // Request failed, stop fetching
                 _bAllItemsFetched = true;
                 bIsFetchingComplete = true;
             }
@@ -147,21 +148,21 @@ public class ItemService : MonoBehaviour, IItemService
 
     public IEnumerator FetchItemEntries(Action<List<ItemEntry>> callback)
     {
+        if (_bAllItemsFetched) yield break;
+
         if (ApplicationData.Instance.Retailers.Count == 0 || ApplicationData.Instance.Categories.Count == 0)
         {
-            yield return FetchRetailerData(retailers => ApplicationData.Instance.UpdateRetailerData(retailers));
-            yield return FetchCategoryData(categories => ApplicationData.Instance.UpdateCategoryData(categories));
+            yield return FetchRetailerData(
+                retailers => ApplicationData.Instance.UpdateRetailerData(retailers)
+            );
+            yield return FetchCategoryData(
+                categories => ApplicationData.Instance.UpdateCategoryData(categories)
+            );
         }
 
-        if (ApplicationData.Instance.Items.Count == 0 || _fetchedItemsOnPage >= FETCH_COUNT)
-        {
-            yield return FetchItemData(items =>
-            {
-                ApplicationData.Instance.UpdateItemData(items);
-                _fetchedItemsOnPage = 0;
-                _pageNumber++; 
-            });
-        }
+        yield return FetchItemData(
+            items => { ApplicationData.Instance.UpdateItemData(items); }
+        );
 
         var itemEntries = 
             (from item in ApplicationData.Instance.Items

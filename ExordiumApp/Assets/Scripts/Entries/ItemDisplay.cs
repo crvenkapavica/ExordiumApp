@@ -18,10 +18,10 @@ public class ItemDisplay : MonoBehaviour
     public void Setup(ItemEntry itemEntry)
     {
         StartCoroutine(
-            ItemDisplayManager.Instance.LoadImage(itemEntry.ItemImageUrl, _itemImage)
+            DisplayManager.Instance.LoadImage(itemEntry.ItemImageUrl, _itemImage)
         );
         StartCoroutine(
-            ItemDisplayManager.Instance.LoadImage(itemEntry.RetailerImageUrl, _retailerImage)
+            DisplayManager.Instance.LoadImage(itemEntry.RetailerImageUrl, _retailerImage)
         );
 
         _price.text = itemEntry.Price.ToString("C");

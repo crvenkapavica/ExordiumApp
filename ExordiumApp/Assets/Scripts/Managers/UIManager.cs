@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
             if (!_bIsRetailersInitialzed 
                 && _activeMainPanel == _panelMappings[(int)PanelType.Retailer].panelObject)
             {
-                ItemDisplayManager.Instance.UpdateRetailerDisplay(
+                DisplayManager.Instance.UpdateRetailerDisplay(
                     ApplicationData.Instance.Retailers
                 );
 
@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
             else if (!_bIsCategoriesInitialized
                 && _activeMainPanel == _panelMappings[(int)PanelType.Category].panelObject)
             {
-                ItemDisplayManager.Instance.UpdateCategoryDisplay(
+                DisplayManager.Instance.UpdateCategoryDisplay(
                     ApplicationData.Instance.Categories
                 );
 

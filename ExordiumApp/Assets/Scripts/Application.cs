@@ -18,7 +18,7 @@ public class Application : MonoBehaviour
         StartCoroutine(
             ItemService.Instance.FetchItemEntries(itemEntries =>
             {
-                ItemDisplayManager.Instance.UpdateItemDisplay(itemEntries);
+                DisplayManager.Instance.UpdateItemDisplay(itemEntries);
                 UIManager.Instance.HideOverlays();
             })
         );
