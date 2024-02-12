@@ -171,6 +171,40 @@ public class EventManager : MonoBehaviour
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // RETAILER & CATEGORY
+    public void ToggleValueChanged_Category(bool bIsOn, string category)
+    {
+        if (!bIsOn) 
+        {
+            UserData.Instance.CategoryFilter.Add(category);
+            DisplayManager.Instance.AddItemFilter(category, true);
+        }
+        else
+        {
+            UserData.Instance.CategoryFilter.Remove(category);
+            DisplayManager.Instance.RemoveItemFilter(category, true);
+        }
+
+        UserData.Instance.SaveFilters();
+    }
+
+    public void ToggleValueChanged_Retailer(bool bIsOn, string retailer)
+    {
+        if (!bIsOn)
+        {
+            UserData.Instance.CategoryFilter.Add(retailer);
+            DisplayManager.Instance.AddItemFilter(retailer, false);
+        }
+        else
+        {
+            UserData.Instance.CategoryFilter.Remove(retailer);
+            DisplayManager.Instance.RemoveItemFilter(retailer, false);
+        }
+
+        UserData.Instance.SaveFilters();
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     // FAVORITES
     public void ToggleValueChanged_Favorite(int id, bool bIsFavorite)
     {

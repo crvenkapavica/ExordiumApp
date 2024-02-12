@@ -13,8 +13,8 @@ public class UserData
 
     public HashSet<int> Favorites { get; set; } = new();
 
-    public HashSet<string> DiabledCategories { get; set; } = new();
-    public HashSet<string> DisabledRetailers { get; set; } = new();
+    public HashSet<string> CategoryFilter { get; set; } = new();
+    public HashSet<string> RetailerFilter { get; set; } = new();
 
     public void UpdateLoginStatus(bool bIsLoggedIn, string username)
     {
@@ -39,6 +39,18 @@ public class UserData
         {
             var favoritesString = string.Join(",", favorites.Select(id => id.ToString()).ToArray());
             PlayerPrefs.SetString(Username + "_Favorites", favoritesString);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public void SaveFilters()
+    {
+        if (IsLoggedIn)
+        {
+            var filtersString = string.Join(",", RetailerFilter.ToArray());
+            PlayerPrefs.SetString(Username + "_RetailerFilter", filtersString);
+            filtersString = string.Join(",", CategoryFilter.ToArray());
+            PlayerPrefs.SetString(Username + "_CategoryFilter", filtersString);
             PlayerPrefs.Save();
         }
     }
@@ -82,7 +94,19 @@ public class UserData
         Favorites = GetFavorites();
         DisplayManager.Instance.ToggleSavedFavorites();
 
-        //bool toggle1 = PlayerPrefs.GetInt(userName + "_Toggle1", 0) == 1;
-        //bool toggle2 = PlayerPrefs.GetInt(userName + "_Toggle2", 0) == 1;
+
+        var retailerFiltersString = PlayerPrefs.GetString(Username + "_RetailerFilter", "");
+        RetailerFilter = new HashSet<string>(
+            retailerFiltersString.Split(',')
+            .Where(id => !string.IsNullOrEmpty(id))
+        );
+
+        var categoryFiltersString = PlayerPrefs.GetString(Username + "_CategoryFilter", "");
+        CategoryFilter = new HashSet<string>(
+            categoryFiltersString.Split(',')
+            .Where(id => !string.IsNullOrEmpty(id))
+        );
+
+        DisplayManager.Instance.ApplyAllItemFilters();
     }
 }

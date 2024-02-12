@@ -14,6 +14,10 @@ public class ItemDisplay : MonoBehaviour
 
     public Toggle FavoritesToggle => _favoritesToggle;
 
+    public string Category => _category.text;
+
+    public string Retailer { get; private set; }
+
     public int Id { get; private set; }
 
     public void Setup(ItemEntry itemEntry, bool bIsOn = false)
@@ -26,6 +30,7 @@ public class ItemDisplay : MonoBehaviour
         );
 
         Id = itemEntry.Id;
+        Retailer = itemEntry.RetailerName;
 
         _price.text = itemEntry.Price.ToString("C", CultureInfo.CreateSpecificCulture("nl-NL"));
         _itemName.text = itemEntry.ItemName;

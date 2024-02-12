@@ -15,6 +15,6 @@ public class RetailerDisplay : MonoBehaviour
         );
         _retailer.text = retailerEntry.name;
 
-        //_toggle.onValueChanged = ...
+        _toggle.onValueChanged.AddListener((IsOn) => EventManager.Instance.ToggleValueChanged_Retailer(IsOn, _retailer.text));
     }
 }

@@ -167,6 +167,69 @@ public class DisplayManager : MonoBehaviour
             .verticalFit = ContentSizeFitter.FitMode.PreferredSize;
     }
 
+    public void ApplyAllItemFilters()
+    {
+        foreach(var item in _itemEntries)
+        {
+            foreach (var retailer in UserData.Instance.RetailerFilter)
+            {
+                if (item.GetComponent<ItemDisplay>().Retailer == retailer)
+                {
+                    item.SetActive(false);
+                }
+            }
+            foreach (var category in UserData.Instance.CategoryFilter)
+            {
+                if (item.GetComponent<ItemDisplay>().Category == category)
+                {
+                    item.SetActive(false);
+                }
+            }
+        }
+    }
+    
+    public void AddItemFilter(string filter, bool bIsCategory)
+    {
+        foreach(var item in _itemEntries)
+        {
+            if (bIsCategory)
+            {
+                if (item.GetComponent<ItemDisplay>().Category == filter)
+                {
+                    item.SetActive(false);
+                }
+            }
+            else
+            {
+                if (item.GetComponent <ItemDisplay>().Retailer == filter)
+                {
+                    item.SetActive(false);
+                }
+            }
+        }
+    }
+
+    public void RemoveItemFilter(string filter, bool bIsCategory)
+    {
+        foreach (var item in _itemEntries)
+        {
+            if (bIsCategory)
+            {
+                if (item.GetComponent<ItemDisplay>().Category == filter)
+                {
+                    item.SetActive(true);
+                }
+            }
+            else
+            {
+                if (item.GetComponent<ItemDisplay>().Retailer == filter)
+                {
+                    item.SetActive(true);
+                }
+            }
+        }
+    }
+
     public void RemoveFromFavoritesById(int id)
     {
         GameObject entry = _favoriteEntries.Find(

@@ -175,6 +175,7 @@ public class ItemService : MonoBehaviour, IItemService
                  Price = item.price,
                  ItemImageUrl = item.image_url,
                  RetailerImageUrl = retailer.image_url,
+                 RetailerName = retailer.name,
                  CategoryName = category.name
              }).ToList();
 

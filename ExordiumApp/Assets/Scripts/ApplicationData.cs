@@ -4,10 +4,17 @@ using System.Linq;
 public class ItemEntry
 {
     public int Id { get; set; }
+
     public string ItemName { get; set; }
+
     public float Price { get; set; }
+
     public string ItemImageUrl { get; set; }
+
     public string RetailerImageUrl { get; set; }
+
+    public string RetailerName { get; set; }
+
     public string CategoryName { get; set; }
 }
 
@@ -65,5 +72,7 @@ public class ApplicationData
         LocalizationManager.Instance.Language = Language.Croatian;
         DisplayManager.Instance.ResetValues();
         UserData.Instance.Favorites.Clear();
+        UserData.Instance.RetailerFilter.Clear();
+        UserData.Instance.CategoryFilter.Clear();
     }
 }
