@@ -79,9 +79,8 @@ public class UserService : IUserService
 
     public void Logout()
     {
-        UserData.Instance.SavePlayerPrefs();
         UserData.Instance.UpdateLoginStatus(false, string.Empty);
-        ApplicationData.Instance.SetDefaultPrefs();
         UIManager.Instance.ToggleAccountPanel(true);
+        ApplicationData.Instance.SetDefaultPrefs();
     }
 }

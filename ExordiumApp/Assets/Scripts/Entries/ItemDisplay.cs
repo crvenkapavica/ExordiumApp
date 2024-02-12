@@ -35,6 +35,7 @@ public class ItemDisplay : MonoBehaviour
         _price.text = itemEntry.Price.ToString("C", CultureInfo.CreateSpecificCulture("nl-NL"));
         _itemName.text = itemEntry.ItemName;
         _category.text = itemEntry.CategoryName;
+        _category.name = itemEntry.CategoryName;
 
         _favoritesToggle.isOn = bIsOn;
         _favoritesToggle.onValueChanged.AddListener(

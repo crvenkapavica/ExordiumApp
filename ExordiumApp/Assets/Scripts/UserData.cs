@@ -73,37 +73,32 @@ public class UserData
 
     public void LoadPlayerPrefs()
     {
-        //string theme = PlayerPrefs.GetString(Username + "_Theme");
-        //ThemeManager.Instance.Theme =
-        //    theme == string.Empty || theme == "Dark Theme"
-        //    ? ThemeManager.Instance.DarkTheme
-        //    : ThemeManager.Instance.LightTheme;
-        //ThemeManager.Instance.ApplyTheme(
-        //    ThemeManager.Instance.Theme, true
-        //);
+        string theme = PlayerPrefs.GetString(Username + "_Theme");
+        ThemeManager.Instance.Theme =
+            theme == string.Empty || theme == "Dark Theme"
+            ? ThemeManager.Instance.DarkTheme
+            : ThemeManager.Instance.LightTheme;
+        ThemeManager.Instance.ApplyTheme(
+            ThemeManager.Instance.Theme, true
+        );
 
-        //string lanuage = PlayerPrefs.GetString(Username + "_Language");
-        //LocalizationManager.Instance.Language =
-        //    lanuage == string.Empty || lanuage == Language.Croatian.ToString()
-        //    ? Language.Croatian
-        //    : Language.English;
-        //LocalizationManager.Instance.ApplyLocalization(
-        //    LocalizationManager.Instance.Language, true
-        //);
+        string lanuage = PlayerPrefs.GetString(Username + "_Language");
+        LocalizationManager.Instance.Language =
+            lanuage == string.Empty || lanuage == Language.Croatian.ToString()
+            ? Language.Croatian
+            : Language.English;
+        LocalizationManager.Instance.ApplyLocalization(
+            LocalizationManager.Instance.Language, true
+        );
 
         Favorites = GetFavorites();
         DisplayManager.Instance.ToggleSavedFavorites();
 
-
         var retailerFiltersString = PlayerPrefs.GetString(Username + "_RetailerFilter", "");
         RetailerFilter = new HashSet<string>(retailerFiltersString.Split(','));
 
-        Debug.Log("loade retailers cnt" + RetailerFilter.Count);
-
         var categoryFiltersString = PlayerPrefs.GetString(Username + "_CategoryFilter", "");
         CategoryFilter = new HashSet<string>(categoryFiltersString.Split(','));
-
-        Debug.Log("loade cat cnt" + CategoryFilter.Count);
 
         DisplayManager.Instance.ApplyAllItemFilters();
     }

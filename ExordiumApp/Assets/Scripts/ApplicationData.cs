@@ -55,7 +55,7 @@ public class ApplicationData
         LocalizationManager.Instance.Language = Language.Croatian;
         DisplayManager.Instance.ResetValues();
         UserData.Instance.Favorites.Clear();
-        //UserData.Instance.RetailerFilter.Clear();
-        //UserData.Instance.CategoryFilter.Clear();
+        UserData.Instance.RetailerFilter.Clear();
+        UserData.Instance.CategoryFilter.Clear();
     }
 }
