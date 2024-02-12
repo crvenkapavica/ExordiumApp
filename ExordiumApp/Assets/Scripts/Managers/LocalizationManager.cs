@@ -58,7 +58,10 @@ public class LocalizationManager : MonoBehaviour
         if (parent.TryGetComponent(out TextMeshProUGUI text)
             && _translationDictionary.TryGetValue(text.name, out TranslationItem translation))
         {
-            text.text = language == Language.English ? translation.english : translation.croatian;
+            if (!string.IsNullOrEmpty(text.name))
+            {
+                text.text = language == Language.English ? translation.english : translation.croatian;
+            }
         }
 
         for (int i = 0; i < parent.childCount; i++)
