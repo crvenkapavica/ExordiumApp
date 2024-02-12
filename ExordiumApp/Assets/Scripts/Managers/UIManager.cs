@@ -182,9 +182,13 @@ public class UIManager : MonoBehaviour
     {
         _outterOverlayPanel.SetActive(true);      
 
-        if (overlay.name.Contains("Language") || overlay.name.Contains("Theme"))
+        if (overlay.name.Contains("Language"))
         {
-            AnchorOverlayLanguageTheme();
+            AnchorOverlayLanguage();
+        }
+        else if (overlay.name.Contains("Theme"))
+        {
+            AnchorOverlayTheme();
         }
         else if (overlay.name.Contains("Fetching"))
         {
@@ -243,11 +247,18 @@ public class UIManager : MonoBehaviour
         rect.anchorMax = new Vector2(0.925f, 0.575f);
     }
 
-    private void AnchorOverlayLanguageTheme()
+    private void AnchorOverlayLanguage()
     {
         var rect = _outterOverlayPanel.GetComponent<RectTransform>();
         rect.anchorMin = new Vector2(0, 0.3f);
         rect.anchorMax = new Vector2(1, 0.7f);
+    }
+
+    private void AnchorOverlayTheme()
+    {
+        var rect = _outterOverlayPanel.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0, 0.35f);
+        rect.anchorMax = new Vector2(1, 0.65f);
     }
 
     private void AnchorOverlayFetching()
