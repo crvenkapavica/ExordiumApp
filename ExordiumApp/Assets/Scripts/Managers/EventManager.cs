@@ -174,6 +174,10 @@ public class EventManager : MonoBehaviour
     // RETAILER & CATEGORY
     public void ToggleValueChanged_Category(bool bIsOn, string category)
     {
+        //if (!(UIManager.Instance.ActiveMainPanel ==
+        //    UIManager.Instance.PanelMappings[(int)PanelType.Category].panelObject
+        //)) return;
+
         if (!bIsOn) 
         {
             UserData.Instance.CategoryFilter.Add(category);
@@ -190,15 +194,23 @@ public class EventManager : MonoBehaviour
 
     public void ToggleValueChanged_Retailer(bool bIsOn, string retailer)
     {
+        //if (!(UIManager.Instance.ActiveMainPanel ==
+        //    UIManager.Instance.PanelMappings[(int)PanelType.Retailer].panelObject
+        //)) return;
+
+        Debug.Log("Toggling " + retailer + " to " + bIsOn);
+
         if (!bIsOn)
         {
-            UserData.Instance.CategoryFilter.Add(retailer);
+            UserData.Instance.RetailerFilter.Add(retailer);
             DisplayManager.Instance.AddItemFilter(retailer, false);
+            Debug.Log("Retailer f count : " + UserData.Instance.RetailerFilter.Count);
         }
         else
         {
-            UserData.Instance.CategoryFilter.Remove(retailer);
+            UserData.Instance.RetailerFilter.Remove(retailer);
             DisplayManager.Instance.RemoveItemFilter(retailer, false);
+            Debug.Log("Retailer f count : " + UserData.Instance.RetailerFilter.Count);
         }
 
         UserData.Instance.SaveFilters();

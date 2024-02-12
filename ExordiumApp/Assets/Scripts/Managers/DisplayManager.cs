@@ -286,6 +286,8 @@ public class DisplayManager : MonoBehaviour
         }
         _favoriteEntries.Clear();
 
+        RemoveAllFilters();
+
         foreach (var retailer in _retailerEntries)
         {
             retailer.GetComponent<RetailerDisplay>().Toggle.isOn = true;
@@ -294,7 +296,6 @@ public class DisplayManager : MonoBehaviour
         {
             category.GetComponent<CategoryDisplay>().Toggle.isOn = true;
         }
-        RemoveAllFilters();
     }
 
     public void ToggleSavedFavorites()

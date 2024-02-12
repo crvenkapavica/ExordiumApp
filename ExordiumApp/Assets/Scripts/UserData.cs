@@ -96,16 +96,14 @@ public class UserData
 
 
         var retailerFiltersString = PlayerPrefs.GetString(Username + "_RetailerFilter", "");
-        RetailerFilter = new HashSet<string>(
-            retailerFiltersString.Split(',')
-            //.Where(id => !string.IsNullOrEmpty(id))
-        );
+        RetailerFilter = new HashSet<string>(retailerFiltersString.Split(','));
+
+        Debug.Log("loade retailers cnt" + RetailerFilter.Count);
 
         var categoryFiltersString = PlayerPrefs.GetString(Username + "_CategoryFilter", "");
-        CategoryFilter = new HashSet<string>(
-            categoryFiltersString.Split(',')
-            //.Where(id => !string.IsNullOrEmpty(id))
-        );
+        CategoryFilter = new HashSet<string>(categoryFiltersString.Split(','));
+
+        Debug.Log("loade cat cnt" + CategoryFilter.Count);
 
         DisplayManager.Instance.ApplyAllItemFilters();
     }
