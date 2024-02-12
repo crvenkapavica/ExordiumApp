@@ -49,30 +49,13 @@ public class ApplicationData
         ItemEntries.AddRange(itemEntries);
     }
 
-    public void GenerateItemEntries()
-    {
-        ItemEntries = 
-            (from item in Items
-             join retailer in Retailers on item.retailer_id equals retailer.id
-             join category in Categories on item.item_category_id equals category.id
-             select new ItemEntry
-             {
-                 Id = item.id,
-                 ItemName = item.name,
-                 Price = item.price,
-                 ItemImageUrl = item.image_url,
-                 RetailerImageUrl = retailer.image_url,
-                 CategoryName = category.name
-             }).ToList();
-    }
-
     public void SetDefaultPrefs()
     {
         ThemeManager.Instance.Theme = ThemeManager.Instance.DarkTheme;
         LocalizationManager.Instance.Language = Language.Croatian;
         DisplayManager.Instance.ResetValues();
         UserData.Instance.Favorites.Clear();
-        UserData.Instance.RetailerFilter.Clear();
-        UserData.Instance.CategoryFilter.Clear();
+        //UserData.Instance.RetailerFilter.Clear();
+        //UserData.Instance.CategoryFilter.Clear();
     }
 }

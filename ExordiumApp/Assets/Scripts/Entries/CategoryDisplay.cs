@@ -12,6 +12,11 @@ public class CategoryDisplay : MonoBehaviour
     public void Setup(ItemCategory categoryEntry)
     {
         _categry.text = categoryEntry.name;
-        _toggle.onValueChanged.AddListener((IsOn) => EventManager.Instance.ToggleValueChanged_Category(IsOn, _categry.text));
+
+        Debug.Log(_categry.text);
+
+        _toggle.onValueChanged.AddListener(
+            (IsOn) => EventManager.Instance.ToggleValueChanged_Category(IsOn, _categry.text)
+        );
     }
 }

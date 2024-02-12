@@ -292,7 +292,7 @@ public class DisplayManager : MonoBehaviour
         {
             retailer.GetComponent<RetailerDisplay>().Toggle.isOn = true;
         }
-        foreach(var category in _categoryEntries)
+        foreach (var category in _categoryEntries)
         {
             category.GetComponent<CategoryDisplay>().Toggle.isOn = true;
         }

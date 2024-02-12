@@ -73,23 +73,23 @@ public class UserData
 
     public void LoadPlayerPrefs()
     {
-        string theme = PlayerPrefs.GetString(Username + "_Theme");
-        ThemeManager.Instance.Theme =
-            theme == string.Empty || theme == "Dark Theme"
-            ? ThemeManager.Instance.DarkTheme
-            : ThemeManager.Instance.LightTheme;
-        ThemeManager.Instance.ApplyTheme(
-            ThemeManager.Instance.Theme, true
-        );
+        //string theme = PlayerPrefs.GetString(Username + "_Theme");
+        //ThemeManager.Instance.Theme =
+        //    theme == string.Empty || theme == "Dark Theme"
+        //    ? ThemeManager.Instance.DarkTheme
+        //    : ThemeManager.Instance.LightTheme;
+        //ThemeManager.Instance.ApplyTheme(
+        //    ThemeManager.Instance.Theme, true
+        //);
 
-        string lanuage = PlayerPrefs.GetString(Username + "_Language");
-        LocalizationManager.Instance.Language =
-            lanuage == string.Empty || lanuage == Language.Croatian.ToString()
-            ? Language.Croatian
-            : Language.English;
-        LocalizationManager.Instance.ApplyLocalization(
-            LocalizationManager.Instance.Language, true
-        );
+        //string lanuage = PlayerPrefs.GetString(Username + "_Language");
+        //LocalizationManager.Instance.Language =
+        //    lanuage == string.Empty || lanuage == Language.Croatian.ToString()
+        //    ? Language.Croatian
+        //    : Language.English;
+        //LocalizationManager.Instance.ApplyLocalization(
+        //    LocalizationManager.Instance.Language, true
+        //);
 
         Favorites = GetFavorites();
         DisplayManager.Instance.ToggleSavedFavorites();

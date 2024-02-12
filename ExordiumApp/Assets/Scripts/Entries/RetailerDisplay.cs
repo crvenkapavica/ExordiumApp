@@ -15,8 +15,11 @@ public class RetailerDisplay : MonoBehaviour
         StartCoroutine(
             DisplayManager.Instance.LoadImage(retailerEntry.image_url, _retailerImage)
         );
+
         _retailer.text = retailerEntry.name;
 
-        _toggle.onValueChanged.AddListener((IsOn) => EventManager.Instance.ToggleValueChanged_Retailer(IsOn, _retailer.text));
+        _toggle.onValueChanged.AddListener(
+            (IsOn) => EventManager.Instance.ToggleValueChanged_Retailer(IsOn, _retailer.text)
+        );
     }
 }
