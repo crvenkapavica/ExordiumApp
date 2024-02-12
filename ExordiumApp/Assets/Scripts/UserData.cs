@@ -80,6 +80,8 @@ public class UserData
         );
 
         Favorites = GetFavorites();
+        Debug.Log(Favorites.ToArray());
+        Debug.Log(Favorites.Count);
         DisplayManager.Instance.ToggleSavedFavorites();
 
         //bool toggle1 = PlayerPrefs.GetInt(userName + "_Toggle1", 0) == 1;

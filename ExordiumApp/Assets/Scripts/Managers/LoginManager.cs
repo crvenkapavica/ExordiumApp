@@ -30,9 +30,12 @@ public class LoginManager : MonoBehaviour
                         UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_Welcome
                     );
 
+                    DisplayManager.Instance.ResetValues();
+
                     UIManager.Instance.ToggleAccountPanel(false, username);
                     UserData.Instance.UpdateLoginStatus(true, username);
-                    ApplicationData.Instance.SetDefaultPrefs();
+
+                    //ApplicationData.Instance.SetDefaultPrefs();
                     UserData.Instance.LoadPlayerPrefs();
                 }
                 else
