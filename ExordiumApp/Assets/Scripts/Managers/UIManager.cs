@@ -257,8 +257,8 @@ public class UIManager : MonoBehaviour
     private void AnchorOverlayTheme()
     {
         var rect = _outterOverlayPanel.GetComponent<RectTransform>();
-        rect.anchorMin = new Vector2(0, 0.35f);
-        rect.anchorMax = new Vector2(1, 0.65f);
+        rect.anchorMin = new Vector2(0, 0.375f);
+        rect.anchorMax = new Vector2(1, 0.625f);
     }
 
     private void AnchorOverlayFetching()
