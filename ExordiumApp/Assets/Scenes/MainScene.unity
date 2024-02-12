@@ -5387,6 +5387,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6481818250762419846, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
+      propertyPath: m_FlexibleHeight
+      value: 0.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481818250762419846, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
+      propertyPath: m_PreferredHeight
+      value: 1622.392
+      objectReference: {fileID: 0}
     - target: {fileID: 6678214559762408510, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
       propertyPath: m_Name
       value: TitleBarBackgroundPanel
@@ -5782,6 +5790,14 @@ PrefabInstance:
     - target: {fileID: 8154177878657377918, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166424495096536567, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
+      propertyPath: m_FlexibleHeight
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166424495096536567, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
+      propertyPath: m_PreferredHeight
+      value: 159.08023
       objectReference: {fileID: 0}
     - target: {fileID: 8193530208540508665, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
       propertyPath: m_AnchorMax.y
