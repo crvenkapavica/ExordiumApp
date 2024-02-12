@@ -22,6 +22,8 @@ public class DisplayManager : MonoBehaviour
     [SerializeField] private ScrollRect[] _scrollRects;
 
     private readonly List<GameObject> _itemEntries = new();
+    private readonly List<GameObject> _categoryEntries = new();
+    private readonly List<GameObject> _retailerEntries = new();
     private readonly List<GameObject> _favoriteEntries = new();
     private readonly HashSet<int> _instantiatedFavoritesIds = new();
 
@@ -62,6 +64,7 @@ public class DisplayManager : MonoBehaviour
                 {
                     ApplicationData.Instance.UpdateItemEntryData(itemEntries);
                     UpdateItemDisplay(itemEntries);
+                    ApplyAllItemFilters();
                 }
                 else
                 {
@@ -106,14 +109,15 @@ public class DisplayManager : MonoBehaviour
     {
         foreach(var categoryEntry in categoryEntries)
         {
-            GameObject categoryObject =
+            _categoryEntries.Add(
                 Instantiate(
                     _entryPrefabs[(int)Entry.Category], _contentTransforms[(int)Entry.Category]
-                );
+                )
+            );
 
-            ThemeManager.Instance.ApplyThemeLocal(categoryObject.transform);
+            ThemeManager.Instance.ApplyThemeLocal(_categoryEntries[^1].transform);
 
-            categoryObject.GetComponent<CategoryDisplay>().Setup(categoryEntry);
+            _categoryEntries[^1].GetComponent<CategoryDisplay>().Setup(categoryEntry);
         }
 
         _contentTransforms[(int)Entry.Category].GetComponent<ContentSizeFitter>()
@@ -124,14 +128,15 @@ public class DisplayManager : MonoBehaviour
     {
         foreach (var retailerEntry in retailerEntries)
         {
-            GameObject retailerObject = 
+            _retailerEntries.Add( 
                 Instantiate(
                     _entryPrefabs[(int)(Entry.Retailer)], _contentTransforms[(int)Entry.Retailer]
-                );
+                )
+            );
 
-            ThemeManager.Instance.ApplyThemeLocal(retailerObject.transform);
+            ThemeManager.Instance.ApplyThemeLocal(_retailerEntries[^1].transform);
 
-            retailerObject.GetComponent<RetailerDisplay>().Setup(retailerEntry);
+            _retailerEntries[^1].GetComponent<RetailerDisplay>().Setup(retailerEntry);
         }
 
         _contentTransforms[(int)Entry.Retailer].GetComponent<ContentSizeFitter>()
@@ -185,6 +190,14 @@ public class DisplayManager : MonoBehaviour
                     item.SetActive(false);
                 }
             }
+        }
+    }
+
+    public void RemoveAllFilters()
+    {
+        foreach (var item in _itemEntries)
+        {
+            item.SetActive(true);
         }
     }
     
@@ -272,6 +285,16 @@ public class DisplayManager : MonoBehaviour
             Destroy(favorite);
         }
         _favoriteEntries.Clear();
+
+        foreach (var retailer in _retailerEntries)
+        {
+            retailer.GetComponent<RetailerDisplay>().Toggle.isOn = true;
+        }
+        foreach(var category in _categoryEntries)
+        {
+            category.GetComponent<CategoryDisplay>().Toggle.isOn = true;
+        }
+        RemoveAllFilters();
     }
 
     public void ToggleSavedFavorites()

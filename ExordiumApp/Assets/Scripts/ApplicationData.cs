@@ -74,5 +74,6 @@ public class ApplicationData
         UserData.Instance.Favorites.Clear();
         UserData.Instance.RetailerFilter.Clear();
         UserData.Instance.CategoryFilter.Clear();
+       // DisplayManager.Instance.RemoveAllFilters();
     }
 }

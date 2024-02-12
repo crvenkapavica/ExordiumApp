@@ -20,6 +20,7 @@ public class Application : MonoBehaviour
             {
                 DisplayManager.Instance.UpdateItemDisplay(itemEntries);
                 ApplicationData.Instance.UpdateItemEntryData(itemEntries);
+                DisplayManager.Instance.ApplyAllItemFilters();
                 UIManager.Instance.HideOverlays();
             })
         );

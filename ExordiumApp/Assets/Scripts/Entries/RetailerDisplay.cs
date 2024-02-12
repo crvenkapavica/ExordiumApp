@@ -8,6 +8,8 @@ public class RetailerDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _retailer;
     [SerializeField] private Image _retailerImage;
 
+    public Toggle Toggle => _toggle;
+
     public void Setup(Retailer retailerEntry)
     {
         StartCoroutine(

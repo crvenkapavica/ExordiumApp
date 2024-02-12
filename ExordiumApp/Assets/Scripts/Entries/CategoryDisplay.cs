@@ -7,6 +7,8 @@ public class CategoryDisplay : MonoBehaviour
     [SerializeField] private Toggle _toggle;
     [SerializeField] private TextMeshProUGUI _categry;
 
+    public Toggle Toggle => _toggle;
+
     public void Setup(ItemCategory categoryEntry)
     {
         _categry.text = categoryEntry.name;
