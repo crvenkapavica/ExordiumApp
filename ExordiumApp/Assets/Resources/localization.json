@@ -117,23 +117,28 @@
     },
     {
       "name": "Response_OK",
-      "english": "Account created",
-      "croatian": "Račun kreiran"
+      "english": "Account created!",
+      "croatian": "Račun kreiran!"
     },
     {
       "name": "Response_Email",
-      "english": "Email taken",
-      "croatian": "E-pošta zauzeta"
+      "english": "Email taken.",
+      "croatian": "E-pošta zauzeta."
     },
     {
       "name": "Response_Credentials",
-      "english": "Invalid email or password",
-      "croatian": "Neispravno korisničko ime ili lozinka"
+      "english": "Invalid username or password!",
+      "croatian": "Neispravno korisničko ime ili lozinka!"
     },
     {
       "name": "Response_Welcome",
       "english": "Welcome!",
       "croatian": "Dobrodošli!"
+    },
+    {
+      "name": "Response_Input",
+      "english": "Enter a valid email and password!",
+      "croatian": "Unesite ispravnu e-poštu i korisničko ime!"
     },
     {
       "name": "Croatian",

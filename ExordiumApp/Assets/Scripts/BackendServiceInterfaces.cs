@@ -23,6 +23,15 @@ public interface IUserService
     IEnumerator Login(string username, string password, Action<bool, string> callback);
 
     /// <summary>
+    /// Validates user input for a valid e-mail and password.
+    /// Returns true if input is valid, or false if invalid.
+    /// </summary>
+    /// <param name="username">User's e-mail.</param>
+    /// <param name="password">User's password.</param>
+    /// <returns></returns>
+    bool ValidateUserInput(string username, string password);
+
+    /// <summary>
     /// Log out of current session, save user settings, and reset ApplicationData to default.
     /// </summary>
     void Logout();

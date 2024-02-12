@@ -18,6 +18,8 @@ public class RegisterManager : MonoBehaviour
 
     public void AttemptRegister(string username, string password)
     {
+        if (!UserService.Instance.ValidateUserInput(username, password)) return;
+
         StartCoroutine(
             UserService.Instance.Register(username, password, (success, message) =>
             {

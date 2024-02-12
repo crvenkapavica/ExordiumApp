@@ -142,25 +142,27 @@ public class EventManager : MonoBehaviour
     private void ButtonClicked_Register(Button button)
     {
         Transform parent = button.transform.parent.parent.parent;
-        TextMeshProUGUI emailInput = parent.Find("EmailPanel/Input/TextArea/EmailInput").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI passwordInput = parent.Find("PasswordPanel/Input/TextArea/PasswordInput").GetComponent<TextMeshProUGUI>();
 
-        RegisterManager.Instance.AttemptRegister(emailInput.text, passwordInput.text);
+        var email = parent.Find("EmailPanel/Input").GetComponent<TMP_InputField>();
+        var password = parent.Find("PasswordPanel/Input").GetComponent<TMP_InputField>();
 
-        parent.Find("EmailPanel/Input").GetComponent<TMP_InputField>().text = "";
-        parent.Find("PasswordPanel/Input").GetComponent<TMP_InputField>().text = "";
+        RegisterManager.Instance.AttemptRegister(email.text, password.text);
+
+        email.text = "";
+        password.text = "";
     }
     
     private void ButtonClicked_Login(Button button)
     {
         Transform parent = button.transform.parent.parent.parent;
-        TextMeshProUGUI emailInput = parent.Find("EmailPanel/Input/TextArea/EmailInput").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI passwordInput = parent.Find("PasswordPanel/Input/TextArea/PasswordInput").GetComponent<TextMeshProUGUI>();
 
-        LoginManager.Instance.AttemptLogin(emailInput.text, passwordInput.text);
+        var email = parent.Find("EmailPanel/Input").GetComponent<TMP_InputField>();
+        var password = parent.Find("PasswordPanel/Input").GetComponent<TMP_InputField>();
 
-        parent.Find("EmailPanel/Input").GetComponent<TMP_InputField>().text = "";
-        parent.Find("PasswordPanel/Input").GetComponent<TMP_InputField>().text = "";
+        LoginManager.Instance.AttemptLogin(email.text, password.text);
+
+        email.text = "";
+        password.text = "";
     }
 
     private void ButtonClicked_Logout()

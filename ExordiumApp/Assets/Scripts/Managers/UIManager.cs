@@ -33,6 +33,7 @@ public enum EMessageBoxResponse
     Response_Email,
     Response_Credentials,
     Response_Welcome,
+    Response_Input
 }
 
 public enum LanguageToggle
@@ -137,7 +138,8 @@ public class UIManager : MonoBehaviour
             if (!(message = messageBox.transform.Find("InnerPanelTransparent/Response_OK")))
                 if (!(message = messageBox.transform.Find("InnerPanelTransparent/Response_Email")))
                     if (!(message = messageBox.transform.Find("InnerPanelTransparent/Response_Credentials")))
-                        message = messageBox.transform.Find("InnerPanelTransparent/Response_Welcome");
+                        if (!(message = messageBox.transform.Find("InnerPanelTransparent/Response_Welcome")))
+                            message = messageBox.transform.Find("InnerPanelTransparent/Response_Input");
 
         switch (response)
         {
@@ -156,6 +158,10 @@ public class UIManager : MonoBehaviour
             case EMessageBoxResponse.Response_Welcome:
                 button.name = "Continue";
                 message.name = "Response_Welcome";
+                break;
+            case EMessageBoxResponse.Response_Input:
+                button.name = "Retry";
+                message.name = "Response_Input";
                 break;
 
             default:

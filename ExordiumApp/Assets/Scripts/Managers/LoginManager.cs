@@ -19,6 +19,8 @@ public class LoginManager : MonoBehaviour
 
     public void AttemptLogin(string username, string password)
     {
+        if (!UserService.Instance.ValidateUserInput(username, password)) return;
+
         StartCoroutine(
             UserService.Instance.Login(username, password, (success, message) =>
             {

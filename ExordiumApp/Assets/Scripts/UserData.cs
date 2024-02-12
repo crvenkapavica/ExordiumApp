@@ -30,9 +30,6 @@ public class UserData
             .Where(id => !string.IsNullOrEmpty(id))
             .Select(int.Parse)
         );
-
-        Debug.Log("[GETFAVORITES] (favoritesString) = " + favoritesString);
-        Debug.Log("[GETFAVORITES} (favorites) = " +  favorites);
         return favorites;
     }
 
@@ -43,8 +40,6 @@ public class UserData
             var favoritesString = string.Join(",", favorites.Select(id => id.ToString()).ToArray());
             PlayerPrefs.SetString(Username + "_Favorites", favoritesString);
             PlayerPrefs.Save();
-
-            Debug.Log("Saving Favorites : " + favoritesString);
         }
     }
 

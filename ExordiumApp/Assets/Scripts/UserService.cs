@@ -60,6 +60,23 @@ public class UserService : IUserService
         }
     }
 
+    public bool ValidateUserInput(string username, string password)
+    {
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)
+            || !username.Contains("@") || !username.Contains(".")
+            || username.Contains("@.") || username.Contains(".@")
+            || username[0] == '.' || username[0] == '@'
+            || username[^1] == '@' || username[^1] == '.')
+        {
+            UIManager.Instance.ShowOverlay(
+                UIManager.Instance.PanelMappings[(int)PanelType.MessageBox].panelObject, EMessageBoxResponse.Response_Input
+            );
+            return false;
+        }
+
+        return true;
+    }
+
     public void Logout()
     {
         UserData.Instance.SavePlayerPrefs();
