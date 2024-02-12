@@ -5198,6 +5198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Input
       objectReference: {fileID: 0}
+    - target: {fileID: 4863263995491601087, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
+      propertyPath: m_FlexibleHeight
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5137932994414529962, guid: da4c98add8e764a4b8efb27325fe936c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
