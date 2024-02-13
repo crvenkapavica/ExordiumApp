@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Application : MonoBehaviour
 { 
@@ -20,7 +18,6 @@ public class Application : MonoBehaviour
             {
                 DisplayManager.Instance.UpdateItemDisplay(itemEntries);
                 ApplicationData.Instance.UpdateItemEntryData(itemEntries);
-                DisplayManager.Instance.ApplyAllItemFilters();
                 UIManager.Instance.HideOverlays();
             })
         );

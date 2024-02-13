@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
@@ -234,7 +235,7 @@ public class DisplayManager : MonoBehaviour
             .ConvertTo<ItemDisplay>().FavoritesToggle.isOn = false;
     }
 
-    public IEnumerator LoadImage(string imageUrl, Image targetImage)
+    public IEnumerator LoadImage(string imageUrl, Image targetImage, Action OnLoaded = null)
     {
         using UnityWebRequest request = UnityWebRequestTexture.GetTexture(imageUrl);
         yield return request.SendWebRequest();
@@ -246,6 +247,8 @@ public class DisplayManager : MonoBehaviour
                 texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)
             );
         }
+
+        OnLoaded?.Invoke();
     }
 
     public void ResetValues()
