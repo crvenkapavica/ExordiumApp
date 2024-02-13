@@ -192,14 +192,6 @@ public class DisplayManager : MonoBehaviour
             }
         }
     }
-
-    public void RemoveAllFilters()
-    {
-        foreach (var item in _itemEntries)
-        {
-            item.SetActive(true);
-        }
-    }
     
     public void AddItemFilter(string filter, bool bIsCategory)
     {
@@ -226,19 +218,18 @@ public class DisplayManager : MonoBehaviour
     {
         foreach (var item in _itemEntries)
         {
+            var itemDisplay = item.GetComponent<ItemDisplay>(); 
+
+            bool retailerActive = !UserData.Instance.RetailerFilter.Contains(itemDisplay.Retailer);
+            bool categoryActive = !UserData.Instance.CategoryFilter.Contains(itemDisplay.Category);
+
             if (bIsCategory)
             {
-                if (item.GetComponent<ItemDisplay>().Category == filter)
-                {
-                    item.SetActive(true);
-                }
+                item.SetActive(categoryActive && retailerActive);
             }
             else
             {
-                if (item.GetComponent<ItemDisplay>().Retailer == filter)
-                {
-                    item.SetActive(true);
-                }
+                item.SetActive(retailerActive && categoryActive);
             }
         }
     }
@@ -246,15 +237,15 @@ public class DisplayManager : MonoBehaviour
     public void RemoveFromFavoritesById(int id)
     {
         GameObject entry = _favoriteEntries.Find(
-            entry => entry.GetComponent<ItemDisplay>()?.Id == id
+            entry => entry.GetComponent<ItemDisplay>().Id == id
         );
         _favoriteEntries.Remove(entry);
         Destroy(entry);
 
         _instantiatedFavoritesIds.Remove(id);
 
-        _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
-            .ConvertTo<ItemDisplay>().IsOn(false);
+        _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>().Id == id)
+            .ConvertTo<ItemDisplay>().FavoritesToggle.isOn = false;
     }
 
     public IEnumerator LoadImage(string imageUrl, Image targetImage)
@@ -275,8 +266,8 @@ public class DisplayManager : MonoBehaviour
     {
         foreach (var id in _instantiatedFavoritesIds)
         {
-            _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
-                .ConvertTo<ItemDisplay>().IsOn(false);
+            _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>().Id == id)
+                .ConvertTo<ItemDisplay>().FavoritesToggle.isOn = false;
         }
         _instantiatedFavoritesIds.Clear();
 
@@ -286,12 +277,16 @@ public class DisplayManager : MonoBehaviour
         }
         _favoriteEntries.Clear();
 
-        RemoveAllFilters();
+        foreach (var item in _itemEntries)
+        {
+            item.SetActive(true);
+        }
 
         foreach (var retailer in _retailerEntries)
         {
             retailer.GetComponent<RetailerDisplay>().Toggle.isOn = true;
         }
+
         foreach (var category in _categoryEntries)
         {
             category.GetComponent<CategoryDisplay>().Toggle.isOn = true;
@@ -302,8 +297,36 @@ public class DisplayManager : MonoBehaviour
     {
         foreach (var id in UserData.Instance.Favorites)
         {
-            _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>()?.Id == id)
-                .ConvertTo<ItemDisplay>().IsOn(true);
+            _itemEntries.Find(entry => entry.GetComponent<ItemDisplay>().Id == id)
+                .ConvertTo<ItemDisplay>().FavoritesToggle.isOn = true;
+        }
+    }
+
+    public void ToggleSavedCategories()
+    {
+        foreach (var category in UserData.Instance.CategoryFilter)
+        {
+            var component = _categoryEntries.Find(
+                entry => entry.GetComponent<CategoryDisplay>().Category == category
+            );
+
+            if (component)
+                component.ConvertTo<CategoryDisplay>().Toggle.isOn = false;
+        }
+    }
+
+    public void ToggleSavedRetailers()
+    {
+        Debug.Log(UserData.Instance.RetailerFilter.Count);
+
+        foreach (var retailer in UserData.Instance.RetailerFilter)
+        {
+            var component = _retailerEntries.Find(
+                entry => entry.GetComponent<RetailerDisplay>().Retailer == retailer
+            );
+
+            if (component)
+                component.ConvertTo<RetailerDisplay>().Toggle.isOn = false;
         }
     }
 }

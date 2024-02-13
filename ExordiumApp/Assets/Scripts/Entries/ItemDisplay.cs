@@ -41,9 +41,4 @@ public class ItemDisplay : MonoBehaviour
             (IsOn) => EventManager.Instance.ToggleValueChanged_Favorite(Id, IsOn)
         );
     }
-
-    public void IsOn(bool bIsOn)
-    {
-        _favoritesToggle.isOn = bIsOn;
-    }
 }

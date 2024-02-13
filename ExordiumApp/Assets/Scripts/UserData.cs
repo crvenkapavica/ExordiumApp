@@ -94,11 +94,13 @@ public class UserData
         Favorites = GetFavorites();
         DisplayManager.Instance.ToggleSavedFavorites();
 
-        var retailerFiltersString = PlayerPrefs.GetString(Username + "_RetailerFilter", "");
-        RetailerFilter = new HashSet<string>(retailerFiltersString.Split(','));
-
         var categoryFiltersString = PlayerPrefs.GetString(Username + "_CategoryFilter", "");
         CategoryFilter = new HashSet<string>(categoryFiltersString.Split(','));
+        DisplayManager.Instance.ToggleSavedCategories();
+
+        var retailerFiltersString = PlayerPrefs.GetString(Username + "_RetailerFilter", "");
+        RetailerFilter = new HashSet<string>(retailerFiltersString.Split(','));
+        DisplayManager.Instance.ToggleSavedRetailers();
 
         DisplayManager.Instance.ApplyAllItemFilters();
     }

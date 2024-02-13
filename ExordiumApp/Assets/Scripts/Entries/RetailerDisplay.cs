@@ -10,6 +10,8 @@ public class RetailerDisplay : MonoBehaviour
 
     public Toggle Toggle => _toggle;
 
+    public string Retailer => _retailer.text;
+
     public void Setup(Retailer retailerEntry)
     {
         StartCoroutine(
@@ -17,7 +19,7 @@ public class RetailerDisplay : MonoBehaviour
         );
 
         _retailer.text = _retailer.name = retailerEntry.name;
-        
+   
         _toggle.onValueChanged.AddListener(
             (IsOn) => EventManager.Instance.ToggleValueChanged_Retailer(IsOn, _retailer.text)
         );
