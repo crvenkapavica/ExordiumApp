@@ -174,21 +174,14 @@ public class DisplayManager : MonoBehaviour
 
     public void ApplyAllItemFilters()
     {
-        foreach(var item in _itemEntries)
+        foreach (var item in _itemEntries)
         {
-            foreach (var retailer in UserData.Instance.RetailerFilter)
+            var itemDisplay = item.GetComponent<ItemDisplay>();
+
+            if (UserData.Instance.RetailerFilter.Contains(itemDisplay.Retailer)
+                || UserData.Instance.CategoryFilter.Contains(itemDisplay.Category))
             {
-                if (item.GetComponent<ItemDisplay>().Retailer == retailer)
-                {
-                    item.SetActive(false);
-                }
-            }
-            foreach (var category in UserData.Instance.CategoryFilter)
-            {
-                if (item.GetComponent<ItemDisplay>().Category == category)
-                {
-                    item.SetActive(false);
-                }
+                item.SetActive(false);
             }
         }
     }
@@ -214,23 +207,16 @@ public class DisplayManager : MonoBehaviour
         }
     }
 
-    public void RemoveItemFilter(string filter, bool bIsCategory)
+    public void RemoveItemFilter()
     {
         foreach (var item in _itemEntries)
         {
-            var itemDisplay = item.GetComponent<ItemDisplay>(); 
+            var itemDisplay = item.GetComponent<ItemDisplay>();
 
             bool retailerActive = !UserData.Instance.RetailerFilter.Contains(itemDisplay.Retailer);
             bool categoryActive = !UserData.Instance.CategoryFilter.Contains(itemDisplay.Category);
 
-            if (bIsCategory)
-            {
-                item.SetActive(categoryActive && retailerActive);
-            }
-            else
-            {
-                item.SetActive(retailerActive && categoryActive);
-            }
+            item.SetActive(retailerActive && categoryActive);
         }
     }
 

@@ -186,7 +186,7 @@ public class EventManager : MonoBehaviour
         else
         {
             UserData.Instance.CategoryFilter.Remove(category);
-            DisplayManager.Instance.RemoveItemFilter(category, true);
+            DisplayManager.Instance.RemoveItemFilter();
         }
 
         UserData.Instance.SaveFilters();
@@ -206,7 +206,7 @@ public class EventManager : MonoBehaviour
         else
         {
             UserData.Instance.RetailerFilter.Remove(retailer);
-            DisplayManager.Instance.RemoveItemFilter(retailer, false);
+            DisplayManager.Instance.RemoveItemFilter();
         }
 
         UserData.Instance.SaveFilters();
